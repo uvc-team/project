@@ -10,7 +10,14 @@ dotenv.config();
 const { sequelize } = require("./models/index");
 const passportConfig = require("./passport/passport");
 const authRouter = require("./router/authRouter");
+const cors = require("cors");
 const app = express();
+
+app.use(
+  cors({
+    origin: "*", // 모든 출처 허용 옵션. true 를 써도 된다.
+  })
+);
 
 passportConfig();
 
