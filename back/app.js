@@ -1,9 +1,19 @@
 const express = require("express");
+const cookieParser = require("cookie-parser");
+const session = require("express-session");
 const morgan = require("morgan");
+const dotenv = require("dotenv");
+const passport = require("passport");
+
+dotenv.config();
 
 const { sequelize } = require("./models/index");
-
+const passportConfig = require("./passport/passport");
+const authRouter = require("./router/authRouter");
 const app = express();
+
+passportConfig();
+
 // port 설정
 app.set("port", process.env.PORT || 3000);
 
@@ -19,11 +29,24 @@ sequelize
 
 app.use(morgan("dev"));
 app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+app.use(cookieParser(process.env.COOKIE_SECRET));
+app.use(
+  session({
+    resave: false,
+    saveUninitialized: false,
+    secret: process.env.COOKIE_SECRET,
+    cookie: {
+      httpOnly: true,
+      secure: false,
+    },
+  })
+);
+app.use(passport.initialize());
+app.use(passport.session());
 
 // 라우터
-app.get("/", (req, res) => {
-  res.send("Hello, Express");
-});
+app.use("/auth", authRouter);
 
 // 에러 핸들링
 app.use((req, res, next) => {
