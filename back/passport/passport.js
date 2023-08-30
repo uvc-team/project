@@ -9,7 +9,8 @@ module.exports = () => {
   });
 
   passport.deserializeUser((user, done) => {
-    User.findOne({ where: { email } })
+    // User.findOne({ where: { email } })
+    User.findOne({ email: user.email })
       .then((user) => done(null, user))
       .catch((err) => done(err));
   });
