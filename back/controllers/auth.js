@@ -44,7 +44,12 @@ exports.login = (req, res, next) => {
 };
 
 exports.logout = (req, res) => {
-  req.logout();
-  req.session.destroy(); // 세션도 삭제
-  res.redirect("/");
+  req.logout((err) => {
+    if (err) {
+      return next(err);
+    } else {
+      req.session.destroy(); // 세션도 삭제
+      res.json({ message: "로그아웃하엿습니다" });
+    }
+  });
 };
