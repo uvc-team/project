@@ -38,7 +38,10 @@ exports.login = (req, res, next) => {
         console.error(loginError);
         return next(loginError);
       }
-      return res.status(200).json({ message: "로그인성공" });
+
+      // res.cookie("user", user);
+      // console.log(res.cookie);
+      return res.json({ message: "로그인성공" });
     });
   })(req, res, next); //미들웨어 내의 미들웨어에 붙힘
 };

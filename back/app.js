@@ -43,24 +43,28 @@ app.use(
     },
   })
 );
+
 app.use(passport.initialize());
 app.use(passport.session());
 
-//cors설정
+const allowedOrigins = [
+  "http://192.168.0.124:3000",
+  "http://192.168.0.28:3000",
+  "http://192.168.0.28:3001",
+];
+
 app.use(
   cors({
-    origin: "http://192.168.0.124:3000",
-    // origin: true, //전체허용
+    origin: function (origin, callback) {
+      if (!origin || allowedOrigins.indexOf(origin) !== -1) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
     credentials: true,
   })
 );
-
-//모든요청의 응답헤더에 cors정책 설정
-app.use((req, res, next) => {
-  res.header("Access-Control-Allow-Origin", "http://192.168.0.124:3000");
-  res.header("Access-Control-Allow-Credentials", true);
-  next();
-});
 
 // 라우터
 app.use("/auth", authRouter);
