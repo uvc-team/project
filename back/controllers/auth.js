@@ -7,7 +7,7 @@ exports.signup = async (req, res, next) => {
   try {
     const exUser = await User.findOne({ where: { email } });
     if (exUser) {
-      return res.json({ message: "이미 존재하는 이메일 입니다" });
+      return res.status(404).json({ message: "이미 존재하는 이메일 입니다" });
     }
 
     const hash = await bcrypt.hash(password, 12);
@@ -16,7 +16,7 @@ exports.signup = async (req, res, next) => {
       nick,
       password: hash,
     });
-    return res.json({ message: "회원가입 성공" });
+    return res.status(200).json({ message: "회원가입 성공" });
   } catch (error) {
     console.error(error);
     return next(error);
@@ -31,14 +31,17 @@ exports.login = (req, res, next) => {
     }
 
     if (!user) {
-      return res.json(`message: ${info.message}`);
+      return res.status(404).json(`message: ${info.message}`);
     }
     return req.login(user, (loginError) => {
       if (loginError) {
         console.error(loginError);
         return next(loginError);
       }
-      return res.json({ message: "로그인성공" });
+      return res
+        .status(200)
+        .json({ message: "로그인성공" })
+        .header("Access-Control-Allow-Credentials", true);
     });
   })(req, res, next); //미들웨어 내의 미들웨어에 붙힘
 };
@@ -49,7 +52,7 @@ exports.logout = (req, res) => {
       return next(err);
     } else {
       req.session.destroy(); // 세션도 삭제
-      res.json({ message: "로그아웃하엿습니다" });
+      res.status(200).json({ message: "로그아웃하엿습니다" });
     }
   });
 };

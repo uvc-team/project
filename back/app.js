@@ -15,9 +15,15 @@ const app = express();
 
 app.use(
   cors({
-    origin: "*", // 모든 출처 허용 옵션. true 를 써도 된다.
+    origin: "http://102.168.0.88:3001", // React 앱의 도메인
+    credentials: true, // 쿠키 공유를 위한 옵션
   })
 );
+// app.use(
+//   cors({
+//     origin: true, // 모든 출처 허용 옵션. true 를 써도 된다.
+//   })
+// );
 
 passportConfig();
 
