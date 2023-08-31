@@ -38,10 +38,7 @@ exports.login = (req, res, next) => {
         console.error(loginError);
         return next(loginError);
       }
-      return res
-        .status(200)
-        .json({ message: "로그인성공" })
-        .header("Access-Control-Allow-Credentials", true);
+      return res.status(200).json({ message: "로그인성공" });
     });
   })(req, res, next); //미들웨어 내의 미들웨어에 붙힘
 };

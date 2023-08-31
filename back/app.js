@@ -13,22 +13,10 @@ const authRouter = require("./router/authRouter");
 const cors = require("cors");
 const app = express();
 
-app.use(
-  cors({
-    origin: "http://102.168.0.88:3001", // React 앱의 도메인
-    credentials: true, // 쿠키 공유를 위한 옵션
-  })
-);
-// app.use(
-//   cors({
-//     origin: true, // 모든 출처 허용 옵션. true 를 써도 된다.
-//   })
-// );
-
 passportConfig();
 
 // port 설정
-app.set("port", process.env.PORT || 3000);
+app.set("port", process.env.PORT || 8080);
 
 // DB연결
 sequelize
@@ -58,6 +46,22 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
+//cors설정
+app.use(
+  cors({
+    origin: "http://192.168.0.124:3000",
+    // origin: true, //전체허용
+    credentials: true,
+  })
+);
+
+//모든요청의 응답헤더에 cors정책 설정
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "http://192.168.0.124:3000");
+  res.header("Access-Control-Allow-Credentials", true);
+  next();
+});
+
 // 라우터
 app.use("/auth", authRouter);
 
@@ -76,5 +80,4 @@ app.use((err, req, res, next) => {
 
 app.listen(app.get("port"), () => {
   console.log(app.get("port"), "번 포트에서 대기 중");
-  console.log(`http://localhost:3000`);
 });
