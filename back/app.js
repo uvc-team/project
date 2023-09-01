@@ -22,7 +22,7 @@ app.set("port", process.env.PORT || 8080);
 sequelize
   .sync({ force: false })
   .then(() => {
-    console.log("DB 연결 성공");
+    console.log("MYSQL_DB 연결 성공");
   })
   .catch((err) => {
     console.error(err);
@@ -40,6 +40,8 @@ app.use(
     cookie: {
       httpOnly: true,
       secure: false,
+      domin: "192.168",
+      sameSite: "none",
     },
   })
 );
@@ -49,8 +51,11 @@ app.use(passport.session());
 
 const allowedOrigins = [
   "http://192.168.0.124:3000",
+  "http://localhost:3000",
+  "http://192.168.0.88:3000",
   "http://192.168.0.28:3000",
   "http://192.168.0.28:3001",
+  "http://192.168.0.43:3000",
 ];
 
 app.use(
