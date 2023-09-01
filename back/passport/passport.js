@@ -1,18 +1,19 @@
 const passport = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
+const KakaoStrategy = require("passport-kakao").Strategy;
 const bcrypt = require("bcrypt");
 const User = require("../models/user");
 
 module.exports = () => {
   //로그인시 실행, req.session 객체에 데이터 저장
   passport.serializeUser((user, done) => {
-    done(null, user.email);
+    done(null, user.id);
   });
 
   //각 요청마다 실행 passport.session 미들웨어가 호출
   //조회한 정보를 req.user에 저장 -> 로그인한 사용자의 정보를 조회
-  passport.deserializeUser((email, done) => {
-    User.findOne({ where: { email } })
+  passport.deserializeUser((id, done) => {
+    User.findOne({ where: { id } })
       .then((user) => done(null, user))
       .catch((err) => done(err));
   });
@@ -37,6 +38,36 @@ module.exports = () => {
             }
           } else {
             done(null, false, { message: "가입되지 않은 회원입니다." });
+          }
+        } catch (error) {
+          console.error(error);
+          done(error);
+        }
+      }
+    )
+  );
+  passport.use(
+    new KakaoStrategy(
+      {
+        clientID: process.env.KAKAO_ID,
+        callbackURL: "/auth/kakao/callback",
+      },
+      async (accessToken, refreshToken, profile, done) => {
+        console.log("kakao profile", profile);
+        try {
+          const exUser = await User.findOne({
+            where: { snsId: profile.id, provider: "kakao" },
+          });
+          if (exUser) {
+            done(null, exUser);
+          } else {
+            const newUser = await User.create({
+              email: profile._join?.kakao_account?.email,
+              nick: profile.displayName,
+              snsId: profile.id,
+              provider: "kakao",
+            });
+            done(null, newUser);
           }
         } catch (error) {
           console.error(error);
