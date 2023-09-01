@@ -1,17 +1,16 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
-const API_URL = 'http://192.168.0.124:3000'
+const API_URL = "http://192.168.0.124:8080";
 
 const Home = (props) => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
-    email: '',
-    nick: '',
-    password: '',
+    email: "",
+    nick: "",
+    password: "",
   });
-
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -26,19 +25,17 @@ const Home = (props) => {
     try {
       // 이메일과 비밀번호를 서버로 보내는 POST 요청
       const response = await axios.post(`${API_URL}/auth/signup`, formData);
-        console.log(formData)
-        console.log(`response: ${response}`)
-
-      
+      console.log(formData);
+      console.log(`response: ${response}`);
 
       // 서버에서 응답을 받으면 원하는 동작을 수행할 수 있습니다.
-      console.log('회원 가입 성공:', response.data);
+      console.log("회원 가입 성공:", response.data);
 
       // 예를 들어, 회원 가입이 성공했을 때 MyPage로 이동할 수 있습니다.
-      navigate('/mypage');
+      navigate("/mypage");
     } catch (error) {
       // 오류 처리
-      console.error('회원 가입 오류:', error);
+      console.error("회원 가입 오류:", error);
     }
   };
 
@@ -72,7 +69,7 @@ const Home = (props) => {
       <button type="submit">전송</button>
       <button
         onClick={() => {
-          navigate('/mypage');
+          navigate("/mypage");
         }}
       >
         Go to MyPage
