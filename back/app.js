@@ -10,18 +10,19 @@ dotenv.config();
 const { sequelize } = require("./models/index");
 const passportConfig = require("./passport/passport");
 const authRouter = require("./router/authRouter");
+const cors = require("cors");
 const app = express();
 
 passportConfig();
 
 // port 설정
-app.set("port", process.env.PORT || 3000);
+app.set("port", process.env.PORT || 8080);
 
 // DB연결
 sequelize
   .sync({ force: false })
   .then(() => {
-    console.log("DB 연결 성공");
+    console.log("MYSQL_DB 연결 성공");
   })
   .catch((err) => {
     console.error(err);
@@ -42,8 +43,31 @@ app.use(
     },
   })
 );
+
 app.use(passport.initialize());
 app.use(passport.session());
+
+const allowedOrigins = [
+  "http://192.168.0.124:3000",
+  "http://localhost:3000",
+  "http://192.168.0.88:3000",
+  "http://192.168.0.28:3000",
+  "http://192.168.0.28:3001",
+  "http://192.168.0.43:3000",
+];
+
+app.use(
+  cors({
+    origin: function (origin, callback) {
+      if (!origin || allowedOrigins.indexOf(origin) !== -1) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
+    credentials: true,
+  })
+);
 
 // 라우터
 app.use("/auth", authRouter);
@@ -63,5 +87,4 @@ app.use((err, req, res, next) => {
 
 app.listen(app.get("port"), () => {
   console.log(app.get("port"), "번 포트에서 대기 중");
-  console.log(`http://localhost:3000`);
 });
