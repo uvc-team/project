@@ -60,47 +60,16 @@ function WebGL() {
     renderer.setSize(window.innerWidth, window.innerHeight);
     renderer.shadowMap.enabled = true;
 
+    renderer.setClearColor(0x333333);
+
     window.addEventListener("resize", () => {
       camera.aspect = window.innerWidth / window.innerHeight;
       camera.updateProjectionMatrix();
       renderer.setSize(window.innerWidth, window.innerHeight);
     });
 
-    const ambientLight = new THREE.AmbientLight(0xffffff, 1);
+    const ambientLight = new THREE.AmbientLight(0xffffff, 10);
     scene.add(ambientLight);
-
-    // const standardMaterial = new THREE.MeshStandardMaterial({
-    //   color: 0xffff00,
-    // });
-    // standardMaterial.transparent = true;
-    // standardMaterial.opacity = 0.6;
-    // standardMaterial.wireframe = true;
-
-    // const standardMaterial2 = new THREE.MeshStandardMaterial({
-    //   color: 0xffff00,
-    // });
-    // standardMaterial2.wireframe = true;
-
-    // const boxGeometry = new THREE.BoxGeometry(1, 1, 1, 10, 10, 10);
-
-    // const group = new THREE.Group();
-
-    // const mesh = new THREE.Mesh(boxGeometry, standardMaterial);
-    // mesh.name = "background-color";
-    // mesh.scale.set(0.1, 0.1, 0.1);
-    // mesh.position.y = 0.5;
-    // group.add(mesh);
-
-    // const mesh2 = new THREE.Mesh(boxGeometry.clone(), standardMaterial2);
-    // group.add(mesh2);
-    // mesh2.name = "redirect";
-
-    // scene.add(group);
-
-    // group.position.x = 0.5;
-
-    // console.log(group)
-    // edukit.actionX(THREE.MathUtils.degToRad(90));
 
     const control = new OrbitControls(camera, renderer.domElement);
 
@@ -119,29 +88,6 @@ function WebGL() {
       }
     };
     tick();
-
-    //const raycaster = new THREE.Raycaster();
-    //let pointer = new THREE.Vector2(0, 0);
-
-    // canvas.addEventListener("click", e => {
-    //     pointer.setX((e.offsetX / window.innerWidth) * 2 - 1) // 범위는 -1 ~ 1
-    //     pointer.setY(-(e.offsetY / window.innerHeight) * 2 + 1) // 범위는 -1 ~ 1
-    //     raycaster.setFromCamera(pointer, camera);
-    //     const intersects = raycaster.intersectObjects(scene.children)
-    //     // const intersect = [...intersects.map(p => p.name === '?')]
-    //     if (intersects.length > 0){
-    //         const intersect = intersects[0];
-    //         intersect.object.material.color.set(THREE.MathUtils.randInt(0x000000, 0xffffff))
-    //         if (intersect.object.name === 'background-color') {
-    //             const app = document.querySelector(".App")
-    //             // const app = document.querySelector(".App")
-    //             // app.style.backgroundColor = "#ffff00"
-    //             // app.classList.toggle("click")
-    //         } else if (intersect.object.name === 'redirect') {
-    //             // window.open("https://naver.com");
-    //         }
-    //     }
-    // })
 
     return () => {
       cancelAnimationFrame(requestId);
