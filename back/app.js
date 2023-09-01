@@ -40,8 +40,6 @@ app.use(
     cookie: {
       httpOnly: true,
       secure: false,
-      domin: "192.168",
-      sameSite: "none",
     },
   })
 );
