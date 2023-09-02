@@ -52,7 +52,6 @@ exports.login = (req, res, next) => {
             process.env.JWT_SECRET,
             { expiresIn: "1m" }
           );
-
           // 토큰과 함께 응답 전송
           return res.json({
             message: "로그인성공",
@@ -80,3 +79,7 @@ exports.logout = (req, res) => {
     }
   });
 };
+
+// exports.tokenLogout = (req, res) => {
+
+// }
