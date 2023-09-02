@@ -45,10 +45,12 @@ exports.createToken = async (req, res) => {
 //토큰 검증
 exports.verifyToken = (req, res, next) => {
   try {
+    console.log(`token: ${req.headers.authorization}`);
     res.locals.decoded = jwt.verify(
       req.headers.authorization,
       process.env.JWT_SECRET
     );
+    // console.log(res.locals.decoded);
     return next();
   } catch (error) {
     if (error.name === "TokenExpiredError") {

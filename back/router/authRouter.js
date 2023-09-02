@@ -6,6 +6,8 @@ const {
   verifyToken,
   createToken,
 } = require("../middlewares/index");
+
+//tokenLogout
 const { signup, login, logout } = require("../controllers/auth");
 
 const router = express.Router();
@@ -40,5 +42,7 @@ router.get("/kakao/callback", (req, res, next) => {
 });
 
 router.get("/logout", verifyToken, logout);
+
+// router.get("/tokenLogout", verifyToken, tokenLogout);
 
 module.exports = router;
