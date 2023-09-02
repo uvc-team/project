@@ -1,13 +1,18 @@
 const express = require("express");
 const passport = require("passport");
-const { isLoggedIn, isNotLoggedIn } = require("../middlewares/index");
+const {
+  isLoggedIn,
+  isNotLoggedIn,
+  verifyToken,
+  createToken,
+} = require("../middlewares/index");
 const { signup, login, logout } = require("../controllers/auth");
 
 const router = express.Router();
 
 router.post("/signup", isNotLoggedIn, signup);
 
-router.post("/login", isNotLoggedIn, login);
+router.post("/login", isNotLoggedIn, createToken, login);
 
 router.get("/kakao", passport.authenticate("kakao"));
 
@@ -34,6 +39,6 @@ router.get("/kakao/callback", (req, res, next) => {
   })(req, res, next);
 });
 
-router.get("/logout", isLoggedIn, logout);
+router.get("/logout", verifyToken, logout);
 
 module.exports = router;
