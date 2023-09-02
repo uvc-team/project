@@ -1,5 +1,6 @@
 const bcrypt = require("bcrypt");
 const passport = require("passport");
+const jwt = require("jsonwebtoken");
 const User = require("../models/user");
 
 exports.signup = async (req, res, next) => {
@@ -36,18 +37,37 @@ exports.login = (req, res, next) => {
       if (!user) {
         return res.status(404).json(`message: ${info.message}`);
       }
-      return req.login(user, (loginError) => {
+
+      return req.login(user, async (loginError) => {
+        // async 추가
         if (loginError) {
           console.error(loginError);
           return next(loginError);
         }
 
-        // res.cookie("user", user);
-        // console.log(res.cookie);
-        return res.json({ message: "로그인성공" });
+        // 로그인 성공 후 토큰 생성
+        try {
+          const token = jwt.sign(
+            { id: user.id, nick: user.nick }, // user 정보 사용
+            process.env.JWT_SECRET,
+            { expiresIn: "1m" }
+          );
+
+          // 토큰과 함께 응답 전송
+          return res.json({
+            message: "로그인성공",
+            token,
+          });
+        } catch (error) {
+          console.error(error);
+          return res.status(500).json({
+            code: 500,
+            message: "서버에러",
+          });
+        }
       });
     }
-  )(req, res, next); //미들웨어 내의 미들웨어에 붙힘
+  )(req, res, next);
 };
 
 exports.logout = (req, res) => {

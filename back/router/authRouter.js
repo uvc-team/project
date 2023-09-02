@@ -12,7 +12,7 @@ const router = express.Router();
 
 router.post("/signup", isNotLoggedIn, signup);
 
-router.post("/login", isNotLoggedIn, createToken, login);
+router.post("/login", isNotLoggedIn, login);
 
 router.get("/kakao", passport.authenticate("kakao"));
 
