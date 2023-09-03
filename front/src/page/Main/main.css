@@ -1,0 +1,33 @@
+/* main.css */
+.background {
+    width: 100vw;
+    height: 100vh;
+    padding: 0;
+    margin: 0;
+}
+
+.background-image {
+    /* 배경 이미지 설정 */
+    /* background-image: url('public/images/background.jpeg');
+    /* 이미지 위치와 크기 조정 */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+
+    /* 화면 전체를 채우도록 설정 */
+    /* width: 100vw;
+    height: 100vh; */
+
+    /* 중앙 정렬을 위한 Flexbox 스타일 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    /* 텍스트 스타일 */
+    color: white;
+    font-size: large;
+}
+
+.background-image h1 {
+    text-align: center;
+}
