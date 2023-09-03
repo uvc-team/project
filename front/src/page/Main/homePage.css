@@ -1,0 +1,18 @@
+.textStyle2 {
+    color: #FFF;
+    font-family: Inter;
+    font-size: 64px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    white-space: pre-wrap;
+}
+
+.box3 {
+    margin-top: 217px;
+    height: 315px;
+    flex-shrink: 0;
+    border-radius: 20px;
+    background-color: rgba(255, 0, 0, 0.0);
+    border-left: 5px solid #FDD500;
+}

@@ -1,33 +1,30 @@
 /* main.css */
-.background {
+.box {
+    margin: auto;
     width: 100vw;
-    height: 100vh;
-    padding: 0;
-    margin: 0;
+    height: 544px;
+    background: rgba(0, 0, 0, 0.44);
 }
 
-.background-image {
-    /* 배경 이미지 설정 */
-    /* background-image: url('public/images/background.jpeg');
-    /* 이미지 위치와 크기 조정 */
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-
-    /* 화면 전체를 채우도록 설정 */
-    /* width: 100vw;
-    height: 100vh; */
-
-    /* 중앙 정렬을 위한 Flexbox 스타일 */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    /* 텍스트 스타일 */
-    color: white;
-    font-size: large;
+.textStyle {
+    color: #FFF;
+    font-family: Inter;
+    font-size: 64px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    margin-top: 195px;
+    margin-left: 50px;
 }
 
-.background-image h1 {
-    text-align: center;
+.textStyle1 {
+    color: rgba(253, 213, 0, 0.99);
+    font-family: Inter;
+    font-size: 40px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    letter-spacing: 0.4px;
+    margin-left: 50px;
+    margin-top: -45px;
 }

@@ -3,9 +3,23 @@ import './main.css';
 
 const MainPage = () => {
     return (
-        <body className='background'>
-        <h1>함박오이, 안전을 우선으로, 스마트팩토리</h1>
-        </body>
+         <div style={{
+            backgroundImage: 'url(images/main.jpg)',
+            backgroundRepeat: 'no-repeat',
+            backgroundSize: 'cover',
+            display: 'flex',
+            justifyContent: 'center',
+            width: '100vw',
+            height: '100vh'
+        }}> 
+        <div className='box'>
+            <h1 className='textStyle'>(주)함박오이</h1>
+            <h3 className='textStyle1'>Safety first, Smart Factory</h3>
+            
+        </div>
+        </div>
+
+
          
     );
 };

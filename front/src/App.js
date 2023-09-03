@@ -1,7 +1,7 @@
 import React from "react";
 import { BrowserRouter, Route, Routes ,Navigate } from "react-router-dom";
 
-import MyPage from "./page/myPage";
+import HomePage from "./page/Main/homePage";
 import Home from "./page/Login/Join";
 import Login from "./page/Login/login";
 import Logout from "./page/Login/Logout";
@@ -25,12 +25,12 @@ function App() {
         {/* 로고 삭제 */}
         
         {/* Navbar 추가 */}
-        <Navbar />
+        {/* <Navbar /> */}
 
       <Routes>
         <Route path="/" element={<Navigate to="/main" />} />
         <Route path="/Join" exact element={<Home />} />
-        <Route path="/myPage" element={<MyPage />} />
+        <Route path="/homePage" element={<HomePage />} />
         <Route path="/login" element={<Login />} />
         <Route path="/Logout" element={<Logout />} />
         {/* 새로운 Route 추가 */}
