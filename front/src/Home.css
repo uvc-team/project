@@ -1,0 +1,75 @@
+.homeBackground {
+    height: 1000px;
+    justify-content: center;
+}
+
+.homeBackgroundImg {
+    background-image: url('../public/img2.jpg');
+    display: flex;
+    justify-content: center;
+    /* 가로로 중앙 정렬 */
+    /* 세로로 중앙 정렬 */
+    background-size: cover;
+    width: 1100px;
+    height: 400px;
+    flex-direction: column;
+    margin: auto;
+    margin-bottom: 25px;
+
+
+}
+
+.boxY {
+    width: 401px;
+    height: 200px;
+    flex-shrink: 0;
+    border-radius: 20px;
+    border-left: 5px solid #FDD500;
+    background: rgba(253, 213, 0, 0.00);
+    display: flex;
+    justify-content: center;
+    /* 가로로 중앙 정렬 */
+    align-items: center;
+    /* 세로로 중앙 정렬 */
+    margin-left: 10%;
+}
+
+.homePageBox {
+    width: 300px;
+    height: 200px;
+    top: 800px;
+    background-size: cover;
+}
+
+.container {
+    display: flex;
+    /* flex 레이아웃 사용 */
+    flex-direction: row;
+    justify-content: center;
+    /* 가로로 중앙 정렬 */
+    align-items: center;
+    /* 가로로 배치 */
+
+}
+
+.hover {
+    filter: brightness(0.8);
+}
+
+.container.hovered {
+    background-color: rgb(255, 255, 255);
+}
+
+/* 기본 스타일 */
+.text {
+    color: white;
+    font-size: 24px;
+    text-align: center;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+/* 마우스를 올렸을 때의 스타일 */
+.text.show {
+    opacity: 0.8;
+}
