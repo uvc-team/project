@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import './user.css';
 
 const API_URL = "http://192.168.0.124:8080";
 
-const Home = (props) => {
+const Join = (props) => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     email: "",
@@ -42,7 +43,7 @@ const Home = (props) => {
   return (
     <form onSubmit={handleSubmit}>
       <h1>Home</h1>
-      <input
+      <input className='inputStyle'
         type="email"
         id="email"
         name="email"
@@ -66,16 +67,12 @@ const Home = (props) => {
         onChange={handleChange}
         placeholder="비밀번호"
       />
-      <button type="submit">전송</button>
-      <button
-        onClick={() => {
+      <button onClick={() => {
           navigate("/mypage");
-        }}
-      >
-        Go to MyPage
-      </button>
+        }} 
+      type="submit">전송</button>
     </form>
   );
 };
 
-export default Home;
+export default Join;
