@@ -24,6 +24,14 @@
   color: white;
 }
 
+.WebGL-container {
+  overflow: hidden; /* Hide scrollbars */
+  width: 100%; /* Ensure it takes up the full width */
+  height: 100vh; /* Ensure it takes up the full viewport height */
+  margin: 0; /* Remove any margins */
+  padding: 0; /* Remove any padding */
+  position: relative; /* Position relative for children */
+}
 .App-link {
   color: #61dafb;
 }

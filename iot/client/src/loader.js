@@ -21,8 +21,6 @@ export default class Edukit {
     group3.position.x = 10;
 
     const body = await this.loader.loadAsync("files/Body.FBX");
-    // body.position.x = -15;
-    body.scale.set(0.5, 0.5, 0.5);
 
     const mesh1 = (this.object.mesh1 = await this.loader.loadAsync(
       "files/StaticMesh1.FBX"
@@ -46,6 +44,8 @@ export default class Edukit {
       await this.loader.loadAsync("files/Robot_1_Pusher.FBX"));
     const RobotPusher2 = (this.object.RobotPusher2 =
       await this.loader.loadAsync("files/Robot_2_Pusher.FBX"));
+
+    body.scale.set(0.5, 0.5, 0.5);
 
     mesh1.position.y = -1.5;
     mesh1.rotation.x = -90 * (Math.PI / 180);
@@ -111,7 +111,6 @@ export default class Edukit {
   actionY(value) {
     const currentY = this.axes.yAxis.position.y;
     if (typeof value !== "undefined") {
-      // value가 정의되었는지 확인
       if (value.toFixed(2) < currentY.toFixed(2)) {
         this.axes.yAxis.position.y -= 0.05;
       } else if (value.toFixed(2) > currentY.toFixed(2)) {
@@ -123,7 +122,6 @@ export default class Edukit {
   actionX(value) {
     const currentX = this.axes.xAxis2.rotation.y;
     if (typeof value !== "undefined") {
-      // value가 정의되었는지 확인
       if (value.toFixed(2) < currentX.toFixed(2)) {
         this.axes.xAxis.rotation.y += MathUtils.degToRad(1);
         this.axes.xAxis2.rotation.y += MathUtils.degToRad(-1);
