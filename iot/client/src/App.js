@@ -4,21 +4,32 @@ import "./App.css";
 import WebGL from "./Webgl";
 
 function App() {
-  const [messagePayload, setMessagePayload] = useState("");
+  const [webSocket, setWebSocket] = useState(null);
 
   useEffect(() => {
     const ws = new WebSocket("ws://192.168.0.124:8081");
 
-    ws.addEventListener("message", function (event) {
-      const receivedMessage = event.data;
-      console.log("Received message from server:", receivedMessage);
-      setMessagePayload(receivedMessage);
-    });
+    setWebSocket(ws);
 
     return () => {
       ws.close();
     };
   }, []);
+
+  const startToEdukit = () => {
+    if (webSocket) {
+      const data = JSON.stringify({ tagId: "1", value: "1" });
+      webSocket.send(data);
+      console.log("Data sent to the server: 1");
+    }
+  };
+  const stopToEdukit = () => {
+    if (webSocket) {
+      const data = JSON.stringify({ tagId: "1", value: "0" });
+      webSocket.send(data);
+      console.log("Data sent to the server: 0");
+    }
+  };
 
   return (
     <BrowserRouter>
@@ -26,7 +37,8 @@ function App() {
         <header className="App-header">
           <Link to={"/"}>Home</Link>
           <Link to={"/webgl"}>3D MODEL</Link>
-          <p>The message payload is: {messagePayload}</p>
+          <button onClick={startToEdukit}>시작</button>
+          <button onClick={stopToEdukit}>중지</button>
         </header>
         <div className="content">
           <Routes>
@@ -39,3 +51,4 @@ function App() {
 }
 
 export default App;
+//

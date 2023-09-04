@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import { GUI } from "dat.gui";
@@ -6,7 +6,17 @@ import Stats from "three/examples/jsm/libs/stats.module";
 import Edukit from "./loader";
 
 function WebGL() {
+  const [messagePayload, setMessagePayload] = useState("");
+
   useEffect(() => {
+    const ws = new WebSocket("ws://192.168.0.124:8081");
+
+    ws.addEventListener("message", function (event) {
+      const receivedMessage = event.data;
+
+      setMessagePayload(JSON.parse(receivedMessage));
+    });
+
     const canvas = document.querySelector("#webgl");
     const scene = new THREE.Scene();
 
@@ -24,43 +34,15 @@ function WebGL() {
     camera.position.y = 10;
     scene.add(camera);
 
-    const gui = new GUI({ autoPlace: false });
-    document.querySelector(".container").appendChild(gui.domElement);
-
     const stats = new Stats();
     document.querySelector(".container").appendChild(stats.dom);
-
-    const object = {
-      num: -2728,
-      num2: 0,
-    };
-    const folder = gui.addFolder("폴더이름");
-
-    const [min, max] = [-2728, 53294192312];
-
-    const yAxisFunc = (() => {
-      return function () {
-        return ((object.num - min) / (max - min)) * 7;
-      };
-    })();
-
-    const xAxisFunc = (() => {
-      return function () {
-        return (
-          ((object.num2 - min) / (max - min)) * THREE.MathUtils.degToRad(90)
-        );
-      };
-    })();
-
-    folder.add(object, "num", min, max, 0.1).name("rangebar").listen();
-    folder.add(object, "num2", min, max, 0.01).name("rangebar2").listen();
 
     const renderer = new THREE.WebGLRenderer({ canvas: canvas });
     renderer.setPixelRatio(window.devicePixelRatio);
     renderer.setSize(window.innerWidth, window.innerHeight);
     renderer.shadowMap.enabled = true;
 
-    renderer.setClearColor(0x333333);
+    renderer.setClearColor(0xfffff);
 
     window.addEventListener("resize", () => {
       camera.aspect = window.innerWidth / window.innerHeight;
@@ -68,8 +50,10 @@ function WebGL() {
       renderer.setSize(window.innerWidth, window.innerHeight);
     });
 
-    const ambientLight = new THREE.AmbientLight(0xffffff, 10);
-    scene.add(ambientLight);
+    const ambientLight = new THREE.AmbientLight(0xffffff, 5);
+    const directionalLight = new THREE.DirectionalLight();
+    // scene.add(ambientLight);
+    scene.add(directionalLight);
 
     const control = new OrbitControls(camera, renderer.domElement);
 
@@ -82,17 +66,32 @@ function WebGL() {
       camera.updateMatrixWorld();
       camera.updateProjectionMatrix();
 
+      const Tag21 = messagePayload.Wrapper
+        ? messagePayload.Wrapper.find((item) => item.tagId === "21")
+        : null;
+      const Tag22 = messagePayload.Wrapper
+        ? messagePayload.Wrapper.find((item) => item.tagId === "22")
+        : null;
+
       if (edukit.loaded) {
-        edukit.actionY(yAxisFunc());
-        edukit.actionX(xAxisFunc());
+        if (Tag21 && Tag21.value) {
+          edukit.actionX(parseFloat(Tag21.value)); // Tag21.value를 숫자로 파싱하여 전달
+        }
+
+        // group3에서 Tag22를 사용하여 Y 축 움직임
+        if (Tag22 && Tag22.value) {
+          edukit.actionY(parseFloat(Tag22.value)); // Tag22.value를 숫자로 파싱하여 전달
+        }
       }
     };
     tick();
 
     return () => {
       cancelAnimationFrame(requestId);
+      ws.close();
     };
   }, []);
+
   return (
     <div>
       <div className="container" style={{ display: "flex" }}></div>

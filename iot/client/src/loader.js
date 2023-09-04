@@ -1,5 +1,4 @@
 import { Group, AxesHelper, MathUtils } from "three";
-
 import { FBXLoader } from "three/examples/jsm/loaders/FBXLoader";
 
 export default class Edukit {
@@ -22,8 +21,8 @@ export default class Edukit {
     group3.position.x = 10;
 
     const body = await this.loader.loadAsync("files/Body.FBX");
-    body.position.x = -15;
-    body.scale.set(0.0005, 0.0005, 0.0005);
+    // body.position.x = -15;
+    body.scale.set(0.5, 0.5, 0.5);
 
     const mesh1 = (this.object.mesh1 = await this.loader.loadAsync(
       "files/StaticMesh1.FBX"
@@ -75,6 +74,10 @@ export default class Edukit {
     RobotPusher2.rotation.x = 90 * (Math.PI / 180);
     RobotPusher2.rotation.y = -180 * (Math.PI / 180);
 
+    body.rotation.x = -90 * (Math.PI / 180);
+    body.rotation.z = 180 * (Math.PI / 180);
+    body.position.y = -3.5;
+    body.position.z = -5;
     for (const [_, object] of Object.entries(this.object)) {
       object.scale.set(0.5, 0.5, 0.5);
       object.traverse(function (child) {
@@ -84,6 +87,7 @@ export default class Edukit {
         }
       });
     }
+
     group1.position.set(-10, 0, 0);
     group2.position.set(0, 0, 0);
     group3.position.set(10, 0, 0);
@@ -99,27 +103,34 @@ export default class Edukit {
     scene.add(group1);
     scene.add(group2);
     scene.add(group3);
+    scene.add(body);
 
     this.loaded = true;
   }
 
   actionY(value) {
     const currentY = this.axes.yAxis.position.y;
-    if (value.toFixed(2) < currentY.toFixed(2)) {
-      this.axes.yAxis.position.y -= 0.05;
-    } else if (value.toFixed(2) > currentY.toFixed(2)) {
-      this.axes.yAxis.position.y += 0.05;
+    if (typeof value !== "undefined") {
+      // value가 정의되었는지 확인
+      if (value.toFixed(2) < currentY.toFixed(2)) {
+        this.axes.yAxis.position.y -= 0.05;
+      } else if (value.toFixed(2) > currentY.toFixed(2)) {
+        this.axes.yAxis.position.y += 0.05;
+      }
     }
   }
 
   actionX(value) {
     const currentX = this.axes.xAxis2.rotation.y;
-    if (value.toFixed(2) < currentX.toFixed(2)) {
-      this.axes.xAxis.rotation.y += MathUtils.degToRad(1);
-      this.axes.xAxis2.rotation.y += MathUtils.degToRad(-1);
-    } else if (value.toFixed(2) > currentX.toFixed(2)) {
-      this.axes.xAxis.rotation.y += MathUtils.degToRad(-1);
-      this.axes.xAxis2.rotation.y += MathUtils.degToRad(1);
+    if (typeof value !== "undefined") {
+      // value가 정의되었는지 확인
+      if (value.toFixed(2) < currentX.toFixed(2)) {
+        this.axes.xAxis.rotation.y += MathUtils.degToRad(1);
+        this.axes.xAxis2.rotation.y += MathUtils.degToRad(-1);
+      } else if (value.toFixed(2) > currentX.toFixed(2)) {
+        this.axes.xAxis.rotation.y += MathUtils.degToRad(-1);
+        this.axes.xAxis2.rotation.y += MathUtils.degToRad(1);
+      }
     }
   }
 }
