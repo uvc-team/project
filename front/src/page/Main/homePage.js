@@ -3,63 +3,87 @@ import './homePage.css';
 
 const HomePage = (props) => {
   const [isHovering, setIsHovering] = useState(false);
-  const [originalImage, setoriginalImage] = useState('url(images/images1.jpg)');
-  const [isAnimated, setIsAnimated] = useState(false);
+  
   const [scrollPosition, setScrollPosition] = useState(0);
+  const [isVisible, setIsVisible] = useState(false); // 나타나기 선언
 
-  // 마우스 올렸을때 반응하는 핸들러 등록
-  const handleMouseOver= () => {
-    setIsHovering(true);
-    setoriginalImage('none');
-  };
-  const handleMouseOut= () => {
-    setIsHovering(false);
-    setoriginalImage('url(images/images1.jpg)');
-  };
-// 스크롤 이벤트 핸들러 등록
+  // 스크롤 이벤트 핸들러 등록
   useEffect(() => {
     const handleScroll = () => {
       // 현재 스크롤 위치를 감지하여 스크롤 위치 상태 업데이트
       setScrollPosition(window.scrollY);
 
       // 요소가 화면에 나타날 때 애니메이션 적용
-      const element = document.getElementById('animation-element');
-      if (element) {
-        const elementPosition = element.getBoundingClientRect().top;
-        const windowHeight = window.innerHeight;
-        if (elementPosition < windowHeight/4) {
-          setIsAnimated(true);
+      const windowHeight = window.innerHeight;
+      if (scrollPosition> windowHeight/2){
+        setIsVisible(true);
       }
-    }};
-
+      else{setIsVisible(false);
+      }
+    };
     window.addEventListener('scroll', handleScroll);
+
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
-  },[]);
+  }, [scrollPosition]);
+
+
+  // 공통 설명 텍스트
+  const text = {
+    color: 'white',
+    fontSize: '50px',
+    textAlign: 'center',
+    transform: 'translate(-50%, -50%)',
+    display: isHovering ? 'block' : 'none',
+    position: 'absolute',
+      top: '20%', // 수직 중앙 정렬
+      left: '45%', // 수평 중앙 정렬
+    };
   
-  
+  //화사소개 블럭
   const divStyle = { 
-  backgroundImage: originalImage,
+  backgroundImage: 'url(images/imag1.jpg)',
   width: '453px',
   height: '680px',
   backgroundSize:'cover',
   position: 'absolute',
-  top:'95%',
+  top:'1166px',
   marginLeft:'25px',
-  backgroundColor: isAnimated ? 'rgba(58,191,220,0.7)' : 'transparent', // 마우스 오버 시 배경 색상을 파란색으로 변경
+  transition: 'opacity 0.5s',// 애니메이션 속성 설정
+  opacity: isVisible ? 1 : 0, // 요소의 불투명도를 0 또는 1로 설정하여 나타냄
+  //backgroundColor: isHovering ? 'rgba(58,191,220,0.7)' : 'transparent', // 마우스 오버 시 배경 색상을 파란색으로 변경
 // 배경 색상 전환에 애니메이션 적용
 };
-const text = {
-  color: 'white',
-  fontSize: '50px',
-  textAlign: 'center',
-  transform: 'translate(-50%, -50%)',
-  display: isAnimated ? 'block' : 'none',
+
+//직원 소개 블럭
+const divStyle2 = {
+  backgroundImage: 'url(images/imag2.jpg)',
+  width: '453px',
+  height: '680px',
+  backgroundSize:'cover',
   position: 'absolute',
-    top: '20%', // 수직 중앙 정렬
-    left: '45%', // 수평 중앙 정렬
-  };
+  top:'1166px',
+  marginLeft: '493px',
+  transition: 'opacity 0.5s',// 애니메이션 속성 설정
+  opacity: isVisible ? 1 : 0, // 요소의 불투명도를 0 또는 1로 설정하여 나타냄
+// 배경 색상 전환에 애니메이션 적용
+};
+
+
+//아이디어 소개 블럭
+const divStyle3 = {
+  backgroundImage: 'url(images/imag3.jpg)',
+  width: '453px',
+  height: '680px',
+  backgroundSize:'cover',
+  position: 'absolute',
+  top:'1166px',
+  marginLeft:'961px',
+  transition: 'opacity 0.5s',// 애니메이션 속성 설정
+  opacity: isVisible ? 1 : 0,
+
+}
 
      return (
     <>
@@ -79,39 +103,25 @@ const text = {
          정확한 진단, 빠른 대처 </h1>
         </div>       
     </div>
-    
+    {/* 회사 소개 블럭 */}
     <div style={divStyle}
-    onMouseOver={handleMouseOver}
-    onMouseOut={handleMouseOut}
     id="animation-element" > 
       <p style={text}>회사 소개</p>
     </div>
+
     {/* 화면의 현재 스크롤 위치 표시*/}
     <div style={{ position: 'fixed', top: 0, left: 0, backgroundColor: 'white' }}>
         현재 스크롤 위치: {scrollPosition}
       </div>
-    
-    <div style={{
-      backgroundImage: 'url(images/img2.jpg)',
-      width: '453px',
-    height: '680px',
-    backgroundSize:'cover',
-    position: 'absolute',
-    top:'95%',
-    marginLeft: '493px'
-    }}>
+
+    {/* 직원 소개 블럭*/}
+    <div style={divStyle2}
+    id="animation-element" > 
     </div>
 
-   < div style={{
-      backgroundImage: 'url(images/img3.jpg)',
-      width: '453px',
-    height: '680px',
-    backgroundSize:'cover',
-    position: 'absolute',
-    top:'95%',
-    marginLeft:'961px'
-
-    }}>
+{/* 아이디어 소개 블럭 */}
+   < div style={divStyle3}
+    id="animation-element" > 
     </div>
 
     </>
