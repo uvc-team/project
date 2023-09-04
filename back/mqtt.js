@@ -5,7 +5,7 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 const dotenv = require("dotenv");
 const mqttRouter = require("./router/mqttRouter"); // 라우터 추가
-
+//test
 dotenv.config();
 
 const app = express();
