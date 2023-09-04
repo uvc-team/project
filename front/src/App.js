@@ -10,7 +10,6 @@ import HomePage from "./Home";
 import MainPage from "./Main";
 import KakaoOauth from "./kakao";
 
-import WebGL from "./webGL";
 
 // Navbar import
 // Logo 컴포넌트는 이제 Navbar 내에서 사용됩니다.
@@ -35,7 +34,6 @@ function App() {
         <Route path="/main" element={<MainPage />} />
         <Route path="/kakao" element={<KakaoOauth />} />
         <Route path="/homePage" element={<HomePage />} />
-        <Route path="/webgl" element={<WebGL />} />
       </Routes>
       {/* <Navbar /> */}
       </div>
