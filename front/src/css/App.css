@@ -24,6 +24,15 @@
   color: white;
 }
 
+.WebGL-container {
+  overflow: hidden;
+  width: 100%;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  position: relative;
+}
+
 .App-link {
   color: #61dafb;
 }

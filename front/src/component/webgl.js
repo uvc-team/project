@@ -87,7 +87,7 @@ function WebGL() {
       cancelAnimationFrame(requestId);
       ws.close();
     };
-  }, []);
+  }, [messagePayload.Wrapper]);
 
   const startToEdukit = () => {
     if (webSocket) {

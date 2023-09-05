@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import "./user.css";
+import "../css/user.css";
 
 const Join = (props) => {
   const navigate = useNavigate();
