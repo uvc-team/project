@@ -2,7 +2,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
-const API_URL = "http://192.168.0.124:8080";
+const API_URL = process.env.REACT_URL;
 
 const Logout = (props) => {
   const navigate = useNavigate();
