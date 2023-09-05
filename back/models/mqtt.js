@@ -1,7 +1,8 @@
 const mongoose = require("mongoose");
 
 const { Schema } = mongoose;
-const plc = new Schema({
+
+const PLC_Data = new Schema({
   tagId: {
     type: String,
     required: true,
@@ -16,8 +17,11 @@ const plc = new Schema({
   },
 });
 
-// const plc = new Schema({
-//   payload: [PLC_Data],
-// });
+const plc = new Schema(
+  {
+    payload: [PLC_Data],
+  },
+  { collection: "plc" }
+);
 
-module.exports = mongoose.model("final", plc);
+module.exports = mongoose.model("MqttData", plc);
