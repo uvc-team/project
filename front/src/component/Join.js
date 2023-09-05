@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "../css/user.css";
+import Profile from "./profile";
 
 const Join = (props) => {
   const navigate = useNavigate();
@@ -34,7 +35,7 @@ const Join = (props) => {
       console.log("회원 가입 성공:", response.data);
 
       // 예를 들어, 회원 가입이 성공했을 때 MyPage로 이동할 수 있습니다.
-      navigate("/mypage");
+      navigate("/main");
     } catch (error) {
       // 오류 처리
       console.error("회원 가입 오류:", error);
@@ -70,9 +71,6 @@ const Join = (props) => {
         placeholder="비밀번호"
       />
       <button
-        onClick={() => {
-          navigate("/mypage");
-        }}
         type="submit"
       >
         전송

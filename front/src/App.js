@@ -8,6 +8,8 @@ import HomePage from "./component/Home";
 import MainPage from "./component/Main";
 import KakaoOauth from "./component/kakao";
 import Dash from "./component/dash";
+import Profile from "./component/profile";
+
 
 function App() {
   return (
@@ -22,6 +24,7 @@ function App() {
           <Route path="/main" element={<MainPage />} />
           <Route path="/kakao" element={<KakaoOauth />} />
           <Route path="/homePage" element={<HomePage />} />
+          <Route path="/profile" element={<Profile />} />
         </Routes>
       </div>
     </BrowserRouter>
