@@ -13,7 +13,7 @@ const server = http.createServer(app);
 const wss = new WebSocket.Server({ server });
 
 //cors설정
-const allowedOrigins = ["http://192.168.0.33:3000"];
+const allowedOrigins = ["http://192.168.0.33:3000", "http://192.168.0.28:3000"];
 
 app.use(
   cors({
