@@ -3,8 +3,6 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./user.css";
 
-const API_URL = process.env.REACT_URL;
-
 const Join = (props) => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
@@ -25,7 +23,10 @@ const Join = (props) => {
     e.preventDefault();
     try {
       // 이메일과 비밀번호를 서버로 보내는 POST 요청
-      const response = await axios.post(`${API_URL}/auth/signup`, formData);
+      const response = await axios.post(
+        `${process.env.REACT_APP_URL}/auth/signup`,
+        formData
+      );
       console.log(formData);
       console.log(`response: ${response}`);
 
