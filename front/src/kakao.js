@@ -1,6 +1,6 @@
 import React from "react";
 
-const API_URL = "http://192.168.0.124:8080";
+const API_URL = process.env.REACT_URL;
 
 export default function KakaoOauth() {
   const Rest_api_key = process.env.REACT_APP_KAKAO_ID;

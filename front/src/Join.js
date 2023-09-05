@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import './user.css';
+import "./user.css";
 
-const API_URL = "http://192.168.0.124:8080";
+const API_URL = process.env.REACT_URL;
 
 const Join = (props) => {
   const navigate = useNavigate();
@@ -43,7 +43,8 @@ const Join = (props) => {
   return (
     <form onSubmit={handleSubmit}>
       <h1>Home</h1>
-      <input className='inputStyle'
+      <input
+        className="inputStyle"
         type="email"
         id="email"
         name="email"
@@ -67,10 +68,14 @@ const Join = (props) => {
         onChange={handleChange}
         placeholder="비밀번호"
       />
-      <button onClick={() => {
+      <button
+        onClick={() => {
           navigate("/mypage");
-        }} 
-      type="submit">전송</button>
+        }}
+        type="submit"
+      >
+        전송
+      </button>
     </form>
   );
 };
