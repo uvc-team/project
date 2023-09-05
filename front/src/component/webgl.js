@@ -3,6 +3,7 @@ import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import Stats from "three/examples/jsm/libs/stats.module";
 import Edukit from "./loader";
+import Header from "./Header";
 
 function WebGL() {
   const [messagePayload, setMessagePayload] = useState("");
@@ -21,13 +22,13 @@ function WebGL() {
 
     const canvas = document.querySelector("#webgl");
     const scene = new THREE.Scene();
-
     const edukit = new Edukit();
+
     edukit.fileload(scene);
 
     const camera = new THREE.PerspectiveCamera(
       45,
-      window.innerWidth / window.innerHeight,
+      (window.innerWidth * 2) / (window.innerHeight * 3),
       0.1,
       1000
     );
@@ -41,15 +42,15 @@ function WebGL() {
 
     const renderer = new THREE.WebGLRenderer({ canvas: canvas });
     renderer.setPixelRatio(window.devicePixelRatio);
-    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setSize(window.innerWidth * (2 / 3), window.innerHeight);
     renderer.shadowMap.enabled = true;
 
     renderer.setClearColor(0x333333);
 
     window.addEventListener("resize", () => {
-      camera.aspect = window.innerWidth / window.innerHeight;
+      camera.aspect = (window.innerWidth * 2) / (window.innerHeight * 3);
       camera.updateProjectionMatrix();
-      renderer.setSize(window.innerWidth, window.innerHeight);
+      renderer.setSize(window.innerWidth * (2 / 3), window.innerHeight);
     });
 
     const directionalLight = new THREE.DirectionalLight();
@@ -106,6 +107,7 @@ function WebGL() {
 
   return (
     <div className="WebGL-container">
+      <Header />
       <div className="container" style={{ display: "flex" }}></div>
       <canvas id="webgl"></canvas>
     </div>
