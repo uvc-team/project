@@ -17,13 +17,18 @@ function Header() {
     <div>
       <CssBaseline />
       <AppBar
-        position="absolute"
+        position="fixed"
         style={{ backgroundColor: "transparent", boxShadow: "none" }}
       >
         <Toolbar>
           <Typography variant="h6" sx={{ flexGrow: 1 }}></Typography>
           <Tabs>
-            <Tab label="Home" icon={<HomeIcon />} component={Link} to="/main" />
+            <Tab
+              label="Home"
+              icon={<HomeIcon />}
+              component={Link}
+              to="/homepage"
+            />
             <Tab
               label="DashBoard"
               icon={<Airplay />}
