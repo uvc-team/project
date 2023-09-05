@@ -7,23 +7,24 @@ import GraphComponent from "./component/Graph";
 import HomePage from "./component/Home";
 import MainPage from "./component/Main";
 import KakaoOauth from "./component/kakao";
-import WebGL from "./component/webgl";
-import Header from "./component/Header";
+import Dash from "./component/dash";
+import Profile from "./component/profile";
+
 
 function App() {
   return (
     <BrowserRouter>
       <div className="App">
-        <Header />
         <Routes>
           <Route path="/" element={<Navigate to="/main" />} />
           <Route path="/login" element={<Login />} />
           <Route path="/Logout" element={<Logout />} />
-          <Route path="/webgl" element={<WebGL />} />
+          <Route path="/webgl" element={<Dash />} />
           <Route path="/chart" element={<GraphComponent />} />
           <Route path="/main" element={<MainPage />} />
           <Route path="/kakao" element={<KakaoOauth />} />
           <Route path="/homePage" element={<HomePage />} />
+          <Route path="/profile" element={<Profile />} />
         </Routes>
       </div>
     </BrowserRouter>
