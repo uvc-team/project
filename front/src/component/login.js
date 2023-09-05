@@ -37,7 +37,7 @@ const Login = (props) => {
         console.log("Saved token:", localStorage.getItem("token")); // 확인용
 
         // 예를 들어, 회원 가입이 성공했을 때 MyPage로 이동할 수 있습니다.
-        navigate("/Mainpage");
+        navigate("/homepage");
       } else {
         throw new Error("토큰이 없습니다.");
       }
@@ -67,13 +67,6 @@ const Login = (props) => {
         placeholder="비밀번호"
       />
       <button type="submit">전송</button>
-      <button
-        onClick={() => {
-          navigate("/MainPage");
-        }}
-      >
-        Go to MyPage
-      </button>
     </form>
   );
 };
