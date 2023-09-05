@@ -78,6 +78,7 @@ export default class Edukit {
     body.rotation.z = 180 * (Math.PI / 180);
     body.position.y = -3.5;
     body.position.z = -5;
+
     for (const [_, object] of Object.entries(this.object)) {
       object.scale.set(0.5, 0.5, 0.5);
       object.traverse(function (child) {

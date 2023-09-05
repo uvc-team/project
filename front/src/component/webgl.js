@@ -1,23 +1,29 @@
 import { useEffect, useState } from "react";
 import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
+import GUI from "lil-gui";
 import Stats from "three/examples/jsm/libs/stats.module";
 import Edukit from "./loader";
-import Header from "./Header";
 
 function WebGL() {
-  const [messagePayload, setMessagePayload] = useState("");
+  //const [messagePayload, setMessagePayload] = useState("");
   const [webSocket, setWebSocket] = useState(null);
 
   useEffect(() => {
     const ws = new WebSocket("ws://192.168.0.124:8081");
 
-    setWebSocket(ws);
+    ws.addEventListener("open", () => {
+      console.log("WebSocket connection established.");
+      setWebSocket(ws);
+    });
 
-    ws.addEventListener("message", function (event) {
-      const receivedMessage = event.data;
+    ws.addEventListener("error", (error) => {
+      console.error("WebSocket error:", error);
+    });
 
-      setMessagePayload(JSON.parse(receivedMessage));
+    ws.addEventListener("close", () => {
+      console.log("WebSocket connection closed.");
+      // 여기서 필요한 처리를 수행하세요. 예를 들어 다시 연결 시도 등.
     });
 
     const canvas = document.querySelector("#webgl");
@@ -39,6 +45,30 @@ function WebGL() {
 
     const stats = new Stats();
     document.querySelector(".container").appendChild(stats.dom);
+
+    const gui = new GUI();
+
+    const myObject = {
+      start: function () {
+        if (webSocket) {
+          const data = JSON.stringify({ tagId: "1", value: "1" });
+          webSocket.send(data);
+          console.log(data);
+          console.log(1);
+        }
+      },
+      stop: function () {
+        if (webSocket) {
+          const data = JSON.stringify({ tagId: "1", value: "0" });
+          webSocket.send(data);
+          console.log(data);
+          console.log(2);
+        }
+      },
+    };
+
+    gui.add(myObject, "start");
+    gui.add(myObject, "stop");
 
     const renderer = new THREE.WebGLRenderer({ canvas: canvas });
     renderer.setPixelRatio(window.devicePixelRatio);
@@ -66,48 +96,19 @@ function WebGL() {
       stats.update();
       camera.updateMatrixWorld();
       camera.updateProjectionMatrix();
-
-      const Tag21 = messagePayload.Wrapper
-        ? messagePayload.Wrapper.find((item) => item.tagId === "21")
-        : null;
-      const Tag22 = messagePayload.Wrapper
-        ? messagePayload.Wrapper.find((item) => item.tagId === "22")
-        : null;
-
-      if (edukit.loaded) {
-        if (Tag21 && Tag21.value) {
-          edukit.actionX(parseFloat(Tag21.value));
-        } else if (Tag22 && Tag22.value) {
-          edukit.actionY(parseFloat(Tag22.value));
-        }
-      }
     };
     tick();
 
     return () => {
       cancelAnimationFrame(requestId);
-      ws.close();
+      if (webSocket) {
+        webSocket.close();
+      }
     };
-  }, [messagePayload.Wrapper]);
-
-  const startToEdukit = () => {
-    if (webSocket) {
-      const data = JSON.stringify({ tagId: "1", value: "1" });
-      webSocket.send(data);
-      console.log("Data sent to the server: 1");
-    }
-  };
-  const stopToEdukit = () => {
-    if (webSocket) {
-      const data = JSON.stringify({ tagId: "1", value: "0" });
-      webSocket.send(data);
-      console.log("Data sent to the server: 0");
-    }
-  };
+  }, []);
 
   return (
     <div className="WebGL-container">
-      <Header />
       <div className="container" style={{ display: "flex" }}></div>
       <canvas id="webgl"></canvas>
     </div>

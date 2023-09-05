@@ -1,5 +1,0 @@
-canvas#webgl {
-  width: 25%; /* 화면 너비의 1/4 크기로 조절 */
-  height: auto; /* 높이를 자동으로 조절하여 원래 비율 유지 */
-  max-width: none; /* 최대 너비 제한 해제 */
-}
