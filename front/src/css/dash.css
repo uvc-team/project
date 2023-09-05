@@ -1,0 +1,13 @@
+.DashContainer {
+  display: flex;
+  height: 100vh;
+}
+
+.RightContainer {
+  flex: 1;
+  background-color: black;
+}
+
+.LeftContainer {
+  flex: 1;
+}

@@ -1,6 +1,6 @@
 /* main.css */
+
 .background {
-  margin: 0;
   width: 100vw;
   height: 100vh;
   position: relative;
@@ -26,8 +26,8 @@
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height: 100%;
 
   /* 중앙 정렬을 위한 Flexbox 스타일 */
   display: flex;
@@ -45,7 +45,6 @@
   font-style: normal;
   font-weight: 600;
   line-height: normal;
-  margin-top: 9%;
 }
 
 .textStyleY {
@@ -55,7 +54,6 @@
   font-weight: 700;
   line-height: normal;
   letter-spacing: 0.4px;
-  margin-top: -4.8%;
 }
 
 .boxW {
