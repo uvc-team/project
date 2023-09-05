@@ -1,9 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import './user.css';
-
-const API_URL = "http://192.168.0.124:8080";
+import "./user.css";
 
 const Join = (props) => {
   const navigate = useNavigate();
@@ -25,7 +23,10 @@ const Join = (props) => {
     e.preventDefault();
     try {
       // 이메일과 비밀번호를 서버로 보내는 POST 요청
-      const response = await axios.post(`${API_URL}/auth/signup`, formData);
+      const response = await axios.post(
+        `${process.env.REACT_APP_URL}/auth/signup`,
+        formData
+      );
       console.log(formData);
       console.log(`response: ${response}`);
 
@@ -43,7 +44,8 @@ const Join = (props) => {
   return (
     <form onSubmit={handleSubmit}>
       <h1>Home</h1>
-      <input className='inputStyle'
+      <input
+        className="inputStyle"
         type="email"
         id="email"
         name="email"
@@ -67,10 +69,14 @@ const Join = (props) => {
         onChange={handleChange}
         placeholder="비밀번호"
       />
-      <button onClick={() => {
+      <button
+        onClick={() => {
           navigate("/mypage");
-        }} 
-      type="submit">전송</button>
+        }}
+        type="submit"
+      >
+        전송
+      </button>
     </form>
   );
 };
