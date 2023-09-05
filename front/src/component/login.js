@@ -2,8 +2,6 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
-const API_URL = process.env.REACT_URL;
-
 const Login = (props) => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
@@ -23,17 +21,26 @@ const Login = (props) => {
     e.preventDefault();
     try {
       // 이메일과 비밀번호를 서버로 보내는 요청
-      const response = await axios.post(`${API_URL}/auth/login`, formData, {
-        withCredentials: true,
-      });
-      console.log(formData);
-      console.log(`response: ${response}`);
-
+      const response = await axios.post(
+        `${process.env.REACT_APP_URL}/auth/login`,
+        formData,
+        {
+          withCredentials: true,
+        }
+      );
       // 서버에서 응답을 받으면 원하는 동작을 수행할 수 있습니다.
       console.log("회원 가입 성공:", response.data);
 
-      // 예를 들어, 회원 가입이 성공했을 때 MyPage로 이동할 수 있습니다.
-      navigate("/Mainpage");
+      if (response.data && response.data.token) {
+        localStorage.setItem("token", response.data.token);
+
+        console.log("Saved token:", localStorage.getItem("token")); // 확인용
+
+        // 예를 들어, 회원 가입이 성공했을 때 MyPage로 이동할 수 있습니다.
+        navigate("/Mainpage");
+      } else {
+        throw new Error("토큰이 없습니다.");
+      }
     } catch (error) {
       // 오류 처리
       console.error("error:", error);
