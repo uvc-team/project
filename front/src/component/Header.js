@@ -7,7 +7,7 @@ import {
   CssBaseline,
 } from "@mui/material";
 import HomeIcon from "@mui/icons-material/Home";
-import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+//import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import Airplay from "@mui/icons-material/Airplay";
 
 import { Link } from "react-router-dom";
@@ -30,16 +30,10 @@ function Header() {
               to="/homepage"
             />
             <Tab
-              label="DashBoard"
+              label="profile"
               icon={<Airplay />}
               component={Link}
               to="/webgl"
-            />
-            <Tab
-              label="Profile"
-              icon={<AccountCircleIcon />}
-              component={Link}
-              to="/profile"
             />
           </Tabs>
         </Toolbar>
