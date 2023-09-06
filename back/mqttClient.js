@@ -16,11 +16,12 @@ function connectToMqttBroker() {
 function subscribeToMqttTopic() {
   mqttClient.on("connect", function () {
     mqttClient.subscribe(topic);
+    mqttClient.subscribe("edukit/control");
   });
 }
 
 mqttClient.on("message", async function (mqttTopic, message) {
-  // console.log("MQTT에서 메시지 받음:", message.toString());
+  console.log("MQTT에서 메시지 받음:", message.toString());
 });
 
 module.exports = { mqttClient, connectToMqttBroker, subscribeToMqttTopic };

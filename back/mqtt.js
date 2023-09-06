@@ -59,20 +59,21 @@ subscribeToMqttTopic();
 // WebSocket 연결 및 데이터 전송
 const topic = "edukit/control";
 wss.on("connection", function connection(ws) {
-  try {
-    console.log("클라이언트 연결됨");
+  console.log("클라이언트 연결됨");
 
-    mqttClient.on("message", function (topic, message) {
-      //console.log("메시지 받음:", message.toString());
-      ws.send(message.toString());
-    });
+  const messageHandler = function (topic, message) {
+    ws.send(message.toString());
+  };
 
-    ws.on("message", function (message) {
-      mqttClient.publish(topic, message);
-    });
-  } catch (error) {
-    console.error("연결실패", error);
-  }
+  mqttClient.on("message", messageHandler);
+
+  ws.on("close", function () {
+    mqttClient.off("message", messageHandler);
+  });
+
+  ws.on("message", function (message) {
+    mqttClient.publish(topic, message);
+  });
 });
 
 app.use("/mqtt", mqttRouter);
