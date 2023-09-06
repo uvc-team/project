@@ -1,58 +1,121 @@
-
-.divBody {
-    width: 100%;
-    height: 100%;
-    background: #ae2b2b00;
-}
-
-.homePage {
-    background-image: url("../../public/img2.jpg");
-    /* 헤더 크기 72px */
-    width: 100%;
-    height: 100%;
-    display: flex;
-    background-size: cover;
-
-}
-
-.homeBox {
+.homeBody {
   width: 100%;
-  height: 23%;
-  background: #ae2b2b00;
-  justify-content: center;
+  height: 100%;
+  flex-direction: column;
   display: flex;
-  position: absolute;
-  bottom: 15%;
+  align-items: center;
+  background-color: #060606;
+
 }
 
-.homImge1 {
-  background-position: center center;
-  background-size: cover;
-  background-image: url("../../public/img3.jpg");
-  width: 300px;
-  height: 100%;
-}
-
-.homImge2 {
-  background-position: center center;
-  background-size: cover;
-  background-image: url("../../public/img4.jpg");
-  width: 300px;
-  height: 100%;
-  margin-left: 5px;
-  margin-right: 5px;
-}
-
-.homImge3 {
-  background-position: center center;
-  background-size: cover;
-  background-image: url("../../public/img6.jpg");
-  width: 300px;
-  height: 100%;
-}
-
-.middelBox {
+/* 전체 화면 */
+.homePage1Box {
   width: 100%;
-  height: 50%;
-  background: #336af5;
+  height: 3000px;
+  background-color: rgba(0, 255, 255, 0);
+  display: flex;
+}
+
+.homePage2Box {
+  width: 100%;
+  height: 3500px;
+  display: flex;
+  align-items: flex-end;
+}
+
+.homePage3Box {
+  width: 100%;
+  height: 4000px;
+  display: flex;
+  background-color: #7af9f2;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+}
+
+/* 배경 밝기 조절 박스 */
+.homeBox1 {
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  /* 이미지를 딱 맞게 조절합니다. */
+  background-repeat: no-repeat;
+  /* 이미지 반복 없음 */
+  background-position: center center;
+  background-image: url('../../public/img1Box.png');
+}
+
+.homeBox2 {
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  /* 이미지를 딱 맞게 조절합니다. */
+  background-repeat: no-repeat;
+  /* 이미지 반복 없음 */
+  background-position: center center;
+  background-image: url('../../public/img2Box.png');
+}
+
+/* 숨겨진 상태에 대한 초기 스타일 화면  */
+.homePage1 {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 1s ease-in-out, transform 2s ease-in-out;
+  background-image: url('../../public/img1.jpeg');
+  background-size: cover;
+  /* 이미지를 딱 맞게 조절합니다. */
+  background-repeat: no-repeat;
+  /* 이미지 반복 없음 */
+  background-position: center center;
+  /* 이미지를 중앙 정렬합니다. */
+}
+
+.homePage2 {
+  width: 100%;
+  height: 80%;
+  background-image: url('../../public/img2.jpg');
+  background-size: cover;
+  /* 이미지를 딱 맞게 조절합니다. */
+  background-repeat: no-repeat;
+  /* 이미지 반복 없음 */
+  background-position: center center;
+  /* 이미지를 중앙 정렬합니다. */
+}
+
+.homePage3 {
+  width: 100%;
+  height: 15%;
+  background-color: #3f00ec;
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+
+/* 텍스트 스타일 */
+.homePageTextW {
+  color: #ffffff;
+  font-family: Inter;
+  font-style: normal;
+  font-weight: 900;
+  line-height: normal;
+  text-transform: uppercase;
+}
+
+.homePageTextB {
+  color: #0097EC;
+  font-family: Inter;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}
+
+/* visible 클래스가 추가되면 나타나는 애니메이션 */
+.visible {
+  opacity: 1;
+  transform: translateY(0);
 }

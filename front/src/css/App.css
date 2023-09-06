@@ -1,5 +1,14 @@
 body {
   margin: 0;
+  -ms-overflow-style: none;
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+p {
+  margin: 0;
 }
 
 /* .WebGL-container {
