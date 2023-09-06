@@ -5,7 +5,7 @@ import Navbar from "./navbar";
 const MainPage = () => {
   return (
     <header>
-      <body className="background">
+      <div className="background">
         <div className="background-image">
           <div className="boxBlack">
             <div className="boxW">
@@ -17,7 +17,7 @@ const MainPage = () => {
             </div>
           </div>
         </div>
-      </body>
+      </div>
     </header>
   );
 };
