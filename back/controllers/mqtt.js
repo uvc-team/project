@@ -20,12 +20,12 @@ exports.dataget = async (req, res) => {
   try {
     const plcdata = await MqttData.aggregate([
       { $unwind: "$payload" },
-      // { $sort: { _id: -1 } },
-    ]).limit(3);
+      { $sort: { _id: -1 } },
+    ]).limit(1);
     if (plcdata) {
-      // console.log(plcdata);
+      console.log(plcdata);
       // console.log(plcdata.payload);
-      console.log(JSON.stringify(plcdata, 2));
+      // console.log(JSON.stringify(plcdata, 2));
       res.status(200).json(plcdata);
     } else {
       res.status(404).json({ error: "데이터가 없습니다" });

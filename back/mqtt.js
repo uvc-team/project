@@ -2,18 +2,24 @@ const express = require("express");
 const http = require("http");
 const WebSocket = require("ws");
 const mongoose = require("mongoose");
-const cors = require("cors");
 const dotenv = require("dotenv");
 const mqttRouter = require("./router/mqttRouter"); // 라우터 추가
 //test
 dotenv.config();
 
+const cors = require("cors");
 const app = express();
 const server = http.createServer(app);
 const wss = new WebSocket.Server({ server });
 
 //cors설정
-const allowedOrigins = ["http://192.168.0.33:3000", "http://192.168.0.28:3000"];
+const allowedOrigins = [
+  "http://192.168.0.33:3000",
+  "http://192.168.0.28:3000",
+  "http://192.168.0.124:3000",
+  "http://localhost:3000",
+  "http://172.29.48.1:3000",
+];
 
 app.use(
   cors({
@@ -53,16 +59,20 @@ subscribeToMqttTopic();
 // WebSocket 연결 및 데이터 전송
 const topic = "edukit/control";
 wss.on("connection", function connection(ws) {
-  console.log("클라이언트 연결됨");
+  try {
+    console.log("클라이언트 연결됨");
 
-  mqttClient.on("message", function (topic, message) {
-    console.log("메시지 받음:", message.toString());
-    ws.send(message.toString());
-  });
+    mqttClient.on("message", function (topic, message) {
+      //console.log("메시지 받음:", message.toString());
+      ws.send(message.toString());
+    });
 
-  ws.on("message", function (message) {
-    mqttClient.publish(topic, message);
-  });
+    ws.on("message", function (message) {
+      mqttClient.publish(topic, message);
+    });
+  } catch (error) {
+    console.error("연결실패", error);
+  }
 });
 
 app.use("/mqtt", mqttRouter);
