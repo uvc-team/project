@@ -1,3 +1,4 @@
+
 .divBody {
     width: 100%;
     height: 100%;
@@ -12,52 +13,46 @@
     display: flex;
     background-size: cover;
 
-
 }
 
 .homeBox {
-    width: 100%;
-    height: 23%;
-    background: #ae2b2b00;
-    justify-content: center;
-    display: flex;
-    position: absolute;
-    /* 절대 위치로 설정 */
-    bottom: 15%;
-    /* 페이지 하단에 배치 */
+  width: 100%;
+  height: 23%;
+  background: #ae2b2b00;
+  justify-content: center;
+  display: flex;
+  position: absolute;
+  bottom: 15%;
 }
 
 .homImge1 {
-    background-position: center center;
-    /* 이미지를 수평 및 수직 가운데로 정렬 */
-    background-size: cover;
-    background-image: url("../../public/img3.jpg");
-    width: 300px;
-    height: 100%;
+  background-position: center center;
+  background-size: cover;
+  background-image: url("../../public/img3.jpg");
+  width: 300px;
+  height: 100%;
 }
 
 .homImge2 {
-    background-position: center center;
-    /* 이미지를 수평 및 수직 가운데로 정렬 */
-    background-size: cover;
-    background-image: url("../../public/img4.jpg");
-    width: 300px;
-    height: 100%;
-    margin-left: 5px;
-    margin-right: 5px;
+  background-position: center center;
+  background-size: cover;
+  background-image: url("../../public/img4.jpg");
+  width: 300px;
+  height: 100%;
+  margin-left: 5px;
+  margin-right: 5px;
 }
 
 .homImge3 {
-    background-position: center center;
-    /* 이미지를 수평 및 수직 가운데로 정렬 */
-    background-size: cover;
-    background-image: url("../../public/img6.jpg");
-    width: 300px;
-    height: 100%;
+  background-position: center center;
+  background-size: cover;
+  background-image: url("../../public/img6.jpg");
+  width: 300px;
+  height: 100%;
 }
 
 .middelBox {
-    width: 100%;
-    height: 50%;
-    background: #336af5;
+  width: 100%;
+  height: 50%;
+  background: #336af5;
 }
