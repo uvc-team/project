@@ -48,9 +48,13 @@ const Login = (props) => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <h1>Home</h1>
+    <form className="modalBox" 
+    onSubmit={handleSubmit}>
+      <h1>로그인</h1>
+      <p className="styleText">  
+        email</p>
       <input
+      className="inputStyle"
         type="email"
         id="email"
         name="email"
@@ -58,7 +62,10 @@ const Login = (props) => {
         onChange={handleChange}
         placeholder="이메일"
       />
+      <p className="styleText">  
+        password</p>
       <input
+      className="inputStyle"
         type="password"
         id="password"
         name="password"
