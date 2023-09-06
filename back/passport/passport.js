@@ -66,6 +66,7 @@ module.exports = () => {
               nick: profile.displayName,
               snsId: profile.id,
               provider: "kakao",
+              manager: true,
             });
             done(null, newUser);
           }
