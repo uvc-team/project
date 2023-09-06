@@ -16,32 +16,18 @@ exports.isNotLoggedIn = (req, res, next) => {
     res.json(`/?error=${message}`);
   }
 };
-//토큰
-exports.createToken = async (req, res) => {
-  const User = req.body;
-  try {
-    const token = jwt.sign(
-      {
-        id: User.id,
-        nick: User.nick,
-      },
-      process.env.JWT_SECRET,
-      { expiresIn: "1m" }
-    );
-    return res.json({
-      code: 200,
-      message: "토큰이 발급되었습니다.",
-      token,
-    });
-  } catch (error) {
-    console.error(error);
-    return res.status(500).json({
-      code: 500,
-      message: "서버에러",
-    });
-  }
+//토큰 생성
+exports.createToken = (user) => {
+  const token = jwt.sign(
+    {
+      id: user.id,
+      nick: user.nick,
+    },
+    process.env.JWT_SECRET,
+    { expiresIn: "1m" }
+  );
+  return token;
 };
-
 //토큰 검증
 exports.verifyToken = (req, res, next) => {
   try {
@@ -50,7 +36,6 @@ exports.verifyToken = (req, res, next) => {
       req.headers.authorization,
       process.env.JWT_SECRET
     );
-    // console.log(res.locals.decoded);
     return next();
   } catch (error) {
     if (error.name === "TokenExpiredError") {
