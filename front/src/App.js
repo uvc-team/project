@@ -1,30 +1,23 @@
 import React from "react";
 import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
-import "./css/App.css";
-import Login from "./component/login";
-import Logout from "./component/Logout";
-import GraphComponent from "./component/Graph";
-import HomePage from "./component/Home";
-import MainPage from "./component/Main";
-import KakaoOauth from "./component/kakao";
-import Dash from "./component/dash";
-import Profile from "./component/profile";
-
-
+import GraphComponent from './Chart/Graph';
+import Dash from "./Chart/dash";
+import KakaoOauth from "./component/user/kakao";
+import HomePage from "./component/HomePage";
+import '../src/css/App.css';
+import JoinModal from "../src/Modal/joinModal";
+import Navbar from "./Navebar/Navebar";
 function App() {
   return (
     <BrowserRouter>
+    <Navbar />
       <div className="App">
         <Routes>
-          <Route path="/" element={<Navigate to="/main" />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/Logout" element={<Logout />} />
+          <Route path="/" element={<HomePage />} />
           <Route path="/webgl" element={<Dash />} />
           <Route path="/chart" element={<GraphComponent />} />
-          <Route path="/main" element={<MainPage />} />
           <Route path="/kakao" element={<KakaoOauth />} />
-          <Route path="/homePage" element={<HomePage />} />
-          <Route path="/profile" element={<Profile />} />
+          <Route path="/join" element={<JoinModal />} />
         </Routes>
       </div>
     </BrowserRouter>

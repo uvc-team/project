@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import "../css/user.css";
-import Profile from "./profile";
+import '../userCss/user.css';
 
 const Join = (props) => {
   const navigate = useNavigate();
@@ -43,38 +42,44 @@ const Join = (props) => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <h1>Home</h1>
-      <input
-        className="inputStyle"
-        type="email"
-        id="email"
-        name="email"
-        value={formData.email}
-        onChange={handleChange}
-        placeholder="이메일"
-      />
-      <input
-        type="nick"
-        id="nick"
-        name="nick"
-        value={formData.nick}
-        onChange={handleChange}
-        placeholder="닉네임"
-      />
-      <input
-        type="password"
-        id="password"
-        name="password"
-        value={formData.password}
-        onChange={handleChange}
-        placeholder="비밀번호"
-      />
-      <button
-        type="submit"
-      >
-        전송
-      </button>
+    <form className="joinBox"
+    onSubmit={handleSubmit}>
+      <form className="logoBox">
+      <p className="texStyle">email</p>
+
+<input className="joinInput"
+  type="email"
+  id="email"
+  name="email"
+  value={formData.email}
+  onChange={handleChange}
+  placeholder="이메일"
+/>
+<p className="texStyle">nick</p>
+<input 
+className="joinInput"
+  type="nick"
+  id="nick"
+  name="nick"
+  value={formData.nick}
+  onChange={handleChange}
+  placeholder="닉네임"
+/>
+<p className="texStyle">password</p>
+<input 
+className="joinInput"
+  type="password"
+  id="password"
+  name="password"
+  value={formData.password}
+  onChange={handleChange}
+  placeholder="비밀번호"
+/>
+      </form>
+      <button className="button"
+  type="submit">
+  전송
+</button>
     </form>
   );
 };
