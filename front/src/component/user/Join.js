@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import "../css/Navbar.css";
+import '../userCss/user.css';
 
 const Join = (props) => {
   const navigate = useNavigate();
@@ -42,47 +42,44 @@ const Join = (props) => {
   };
 
   return (
-    <form className="modalBox"
+    <form className="joinBox"
     onSubmit={handleSubmit}>
-      <h1>회원가입</h1>
-      <p className="styleText">  
-        email</p>
-      <input
-        className="inputStyle"
-        type="email"
-        id="email"
-        name="email"
-        value={formData.email}
-        onChange={handleChange}
-        placeholder="이메일"
-      />
-      <p className="styleText">  
-        nick</p>
-      <input 
-      className="inputStyle"
-        type="nick"
-        id="nick"
-        name="nick"
-        value={formData.nick}
-        onChange={handleChange}
-        placeholder="닉네임"
-      />
-      <p className="styleText">  
-      password</p>
-      <input 
-      className="inputStyle"
-        type="password"
-        id="password"
-        name="password"
-        value={formData.password}
-        onChange={handleChange}
-        placeholder="비밀번호"
-      />
-      <button className="buttonStyle"
-        type="submit"
-      >
-        전송
-      </button>
+      <form className="logoBox">
+      <p className="texStyle">email</p>
+
+<input className="joinInput"
+  type="email"
+  id="email"
+  name="email"
+  value={formData.email}
+  onChange={handleChange}
+  placeholder="이메일"
+/>
+<p className="texStyle">nick</p>
+<input 
+className="joinInput"
+  type="nick"
+  id="nick"
+  name="nick"
+  value={formData.nick}
+  onChange={handleChange}
+  placeholder="닉네임"
+/>
+<p className="texStyle">password</p>
+<input 
+className="joinInput"
+  type="password"
+  id="password"
+  name="password"
+  value={formData.password}
+  onChange={handleChange}
+  placeholder="비밀번호"
+/>
+      </form>
+      <button className="button"
+  type="submit">
+  전송
+</button>
     </form>
   );
 };

@@ -1,0 +1,11 @@
+.modalBackground {
+    width: 550px;
+    height: 400px;
+    background-color: aqua;
+    flex-direction: column;
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+
+
+}

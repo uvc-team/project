@@ -3,18 +3,16 @@ import '../css/homePage.css';
 
 const HomePage = (props) => {
   return (
-    <div className="homePage">
-        <div className='homeBox'>
-          <div className="homeImageBox">
-            3분할 이미지 위치 테스트 1
-          </div>
-          <div className="homeImageBox">
-            3분할 이미지 위치 테스트 2
-          </div>
-          <div className="homeImageBox">
-            3분할 이미지 위치 테스트 3
-          </div>
-        </div>
+    <div className="homeBody">
+      <div className="homePage">
+      <div className="homeHeader" />
+      <h1>안전을 우선으로 빠른 진단 정확한 대처</h1>
+      <div className="homeBox">
+        <div className="homImge1">테스트 이미지 입니다.</div>
+      <div className="homImge2">테스트 이미지 입니다.</div>
+      <div className="homImge3">테스트 이미지 입니다.</div>
+      </div>
+    </div>
     </div>
     
   );
