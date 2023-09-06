@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import "../css/user.css";
+import "../css/Navbar.css";
 import Profile from "./profile";
 
 const Join = (props) => {
@@ -43,8 +43,11 @@ const Join = (props) => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <h1>Home</h1>
+    <form className="modalBox"
+    onSubmit={handleSubmit}>
+      <h1>회원가입</h1>
+      <p className="styleText">  
+        email</p>
       <input
         className="inputStyle"
         type="email"
@@ -54,7 +57,10 @@ const Join = (props) => {
         onChange={handleChange}
         placeholder="이메일"
       />
-      <input
+      <p className="styleText">  
+        nick</p>
+      <input 
+      className="inputStyle"
         type="nick"
         id="nick"
         name="nick"
@@ -62,7 +68,10 @@ const Join = (props) => {
         onChange={handleChange}
         placeholder="닉네임"
       />
-      <input
+      <p className="styleText">  
+      password</p>
+      <input 
+      className="inputStyle"
         type="password"
         id="password"
         name="password"
@@ -70,7 +79,7 @@ const Join = (props) => {
         onChange={handleChange}
         placeholder="비밀번호"
       />
-      <button
+      <button className="buttonStyle"
         type="submit"
       >
         전송
