@@ -4,6 +4,7 @@ import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import GUI from "lil-gui";
 import Stats from "three/examples/jsm/libs/stats.module";
 import Edukit from "./loader";
+import "../css/gui.css";
 
 function WebGL() {
   const [messagePayload, setMessagePayload] = useState("");
@@ -34,10 +35,17 @@ function WebGL() {
     camera.position.z = 50;
     camera.position.y = 30;
     scene.add(camera);
+
     const stats = new Stats();
     document.querySelector(".container").appendChild(stats.dom);
 
-    const gui = new GUI();
+    const guiContainer = document.createElement("div");
+    guiContainer.classList.add("gui-container");
+    document.body.appendChild(guiContainer);
+
+    // Create GUI and append to container
+    const gui = new GUI({ autoPlace: false });
+    guiContainer.appendChild(gui.domElement);
 
     const myObject = {
       start: function () {
@@ -75,7 +83,6 @@ function WebGL() {
       myObject.NO2 = tag4 && tag4.value ? "#00FF00" : "#FF0000";
       myObject.NO3 = tag40 && tag40.value ? "#00FF00" : "#FF0000";
 
-      // Update GUI color controls to reflect the new values
       no1.setValue(myObject.NO1);
       no2.setValue(myObject.NO2);
       no3.setValue(myObject.NO3);
@@ -124,8 +131,8 @@ function WebGL() {
   }, []);
 
   return (
-    <div className="WebGL-container">
-      <div className="container" style={{ display: "flex" }}></div>
+    <div>
+      <div className="container"></div>
       <canvas id="webgl"></canvas>
     </div>
   );
