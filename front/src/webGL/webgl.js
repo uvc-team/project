@@ -66,6 +66,10 @@ function WebGL() {
       NO1: "#FF0000",
       NO2: "#FF0000",
       NO3: "#FF0000",
+      reset: function () {
+        const data = JSON.stringify({ tagId: "8", value: "1" });
+        ws.send(data);
+      },
     };
 
     gui.add(myObject, "start");
@@ -74,6 +78,7 @@ function WebGL() {
     const no1 = gui.addColor(myObject, "NO1");
     const no2 = gui.addColor(myObject, "NO2");
     const no3 = gui.addColor(myObject, "NO3");
+    gui.add(myObject, "reset");
 
     const renderer = new THREE.WebGLRenderer({ canvas: canvas });
     renderer.setPixelRatio(window.devicePixelRatio);
