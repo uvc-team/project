@@ -1,9 +1,8 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
-import GUI from "lil-gui";
-import Stats from "three/examples/jsm/libs/stats.module";
 import Edukit from "./loader";
+import GUI from "lil-gui";
 import "../css/gui.css";
 
 function WebGL() {
@@ -31,39 +30,27 @@ function WebGL() {
         no1.setValue(myObject.NO1);
         no2.setValue(myObject.NO2);
         no3.setValue(myObject.NO3);
-
-        console.log(
-          "Updated colors:",
-          myObject.NO1,
-          myObject.NO2,
-          myObject.NO3
-        );
       }
     });
 
     const canvas = document.querySelector("#webgl");
     const scene = new THREE.Scene();
-    const edukit = new Edukit();
-    edukit.fileload(scene);
     const camera = new THREE.PerspectiveCamera(
       45,
       (window.innerWidth * 3) / (window.innerHeight * 5),
       0.1,
       1000
     );
-    camera.position.x = 5;
-    camera.position.z = 50;
-    camera.position.y = 30;
-    scene.add(camera);
+    const edukit = new Edukit();
+    edukit.fileload(scene);
 
-    const stats = new Stats();
-    document.querySelector(".container").appendChild(stats.dom);
+    camera.position.set(5, 30, 50);
+    scene.add(camera);
 
     const guiContainer = document.createElement("div");
     guiContainer.classList.add("gui-container");
     document.body.appendChild(guiContainer);
 
-    // Create GUI and append to container
     const gui = new GUI({ autoPlace: false });
     guiContainer.appendChild(gui.domElement);
 
@@ -76,7 +63,7 @@ function WebGL() {
         const data = JSON.stringify({ tagId: "1", value: "0" });
         ws.send(data);
       },
-      NO1: "#FF0000", // 수정: 초기 색상값을 직접 지정
+      NO1: "#FF0000",
       NO2: "#FF0000",
       NO3: "#FF0000",
     };
@@ -109,8 +96,6 @@ function WebGL() {
     const tick = () => {
       renderer.render(scene, camera);
       requestId = requestAnimationFrame(tick);
-
-      stats.update();
       camera.updateMatrixWorld();
       camera.updateProjectionMatrix();
     };
@@ -126,7 +111,6 @@ function WebGL() {
 
   return (
     <div>
-      <div className="container"></div>
       <canvas id="webgl"></canvas>
     </div>
   );

@@ -5,6 +5,7 @@ import Header from "../Header/header";
 const HomePage = (props) => {
   const elementRefs = [useRef(null), useRef(null), useRef(null)];
   const [isVisible, setIsVisible] = useState([false, false, false]);
+  const [numValue, setNumValue] = useState(0);
 
   useEffect(() => {
     const handleIntersection = (entries, index) => {
@@ -48,7 +49,7 @@ const HomePage = (props) => {
 
   return (
     <div>
-      <Header />
+      <Header numValue={numValue} setNumValue={setNumValue} />
       <div className="homeBody">
         {/* 화면1 */}
         <div className="homePage1Box">
