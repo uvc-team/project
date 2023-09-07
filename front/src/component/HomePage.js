@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import "../css/homePage.css";
 import Header from "../Header/header";
+import { positions } from "@mui/system";
 
 const HomePage = (props) => {
   const elementRefs = [useRef(null), useRef(null), useRef(null)];
@@ -58,49 +59,44 @@ const HomePage = (props) => {
             className={`homePage1 ${isVisible[0] ? "visible" : ""}`}
             ref={elementRefs[0]}
           >
-            <div className="homeBox1"></div>
+            <div className="homeBox1">
+              <div className="homePage1LOGO" />
+            </div>
           </div>
         </div>
+
         {/* 화면2 */}
         <div className="homePage2Box">
           <div className="homePage2">
-            <div className="homeBox2"></div>
+            <div className="homeBox2">
+              <div className="homePage2LOGO" />
+              <p className="homePageTextW"
+                  style={{
+                    marginTop: "102px",
+                    textAlign: 'right',
+                    fontSize: '25px',
+                }}>공장 관리와 공정 효율화에 특화된 기술과 솔루션을 제공하는 기업으로<br />
+                  더욱 안전하고 효율적인 생산 환경을 제공합니다.</p>
+            </div>
           </div>
         </div>
+
         {/* 화면3 */}
         <div className="homePage3Box">
-          <div className="homePage3">
-            <p
-              style={{
-                fontSize: "200px",
-                marginRight: "10%",
-              }}
-              className="homePageTextW"
-            >
-              Efficient
-            </p>
-
-            <p
-              style={{
-                fontSize: "200px",
-                marginRight: "10%",
-              }}
-              className="homePageTextB"
-            >
-              MONITERING
-            </p>
-          </div>
+          <div className="homePage3" />
+          <div className="homePage3LOGO" />
         </div>
-        <div className="homePage3_2Box">
-          <div className="homeBody3_2Icon" />
-          <p className="homePageTextW">
-            <p
-              style={{
-                marginTop: "10%",
-                textAlign: "center",
-                fontSize: "10px",
-              }}
-              className="homePageTextW"
+
+        {/* 화면4 */}
+        <div className="homePage4Box">
+          <div className="homeBody4Icon" />
+          <p className="homePageTextW"
+          style={{
+            marginTop: '25px',
+            textAlign: "center",
+            fontSize: "25px",
+          }}
+              
             >
               이미 작동 중인 공장에서 우리의 솔루션을 도입하면 모니터링이 쉽고
               효율적으로 이루어집니다.
@@ -108,10 +104,16 @@ const HomePage = (props) => {
               관리자 모니터링 페이지를 통해 실시간으로 공정 데이터를 확인하고{" "}
               <br />
               오류 및 오차율을 신속하게 감지하여 조치할 수 있습니다.
-            </p>
           </p>
-          <div className="homeBody3Logo" />
+          
         </div>
+
+        {/* 화면5 */}
+        <div className="homePage5Box">
+        <div className="homeBody5Logo" />
+        </div>
+        
+        
       </div>
     </div>
   );
