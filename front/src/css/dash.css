@@ -4,6 +4,7 @@
 }
 
 .RightContainer {
+  top: 74px;
   flex: 1;
   background-color: rgb(45, 41, 41);
 }
