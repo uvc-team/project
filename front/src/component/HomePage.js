@@ -11,12 +11,14 @@ const HomePage = (props) => {
   useEffect(() => {
     const handleIntersection = (entries, index) => {
       entries.forEach((entry) => {
+        
         if (entry.isIntersecting) {
           setIsVisible((prev) => {
             const newVisibility = [...prev];
             newVisibility[index] = true;
             return newVisibility;
           });
+
           //div 확인용 콘솔
           console.log(`${entry.target.className} is in the viewport`);
         }
@@ -48,6 +50,7 @@ const HomePage = (props) => {
     };
   }, []);
 
+  
   return (
     <div>
       <Header numValue={numValue} setNumValue={setNumValue} />
@@ -60,7 +63,15 @@ const HomePage = (props) => {
             ref={elementRefs[0]}
           >
             <div className="homeBox1">
-              <div className="homePage1LOGO" />
+              <div className="homePage1LOGO" >
+              <p className="homePageTextW"
+                style={{
+                  fontSize: "16px",
+                  marginTop: "150px",
+                }}>
+                UVC<br/> Total-Project
+              </p>
+              </div>
             </div>
           </div>
         </div>
@@ -72,18 +83,19 @@ const HomePage = (props) => {
               <div className="homePage2LOGO" />
               <p className="homePageTextW"
                   style={{
-                    marginTop: "102px",
                     textAlign: 'right',
                     fontSize: '25px',
-                }}>공장 관리와 공정 효율화에 특화된 기술과 솔루션을 제공하는 기업으로<br />
-                  더욱 안전하고 효율적인 생산 환경을 제공합니다.</p>
+                    marginRight: "3%",
+                }}>공장 관리와 공정 효율화에 특화된 기술과 솔루션을 제공하는 기업으로
+                  <br />더욱 안전하고 효율적인 생산 환경을 제공합니다.</p>
             </div>
           </div>
         </div>
 
         {/* 화면3 */}
         <div className="homePage3Box">
-          <div className="homePage3" />
+          <div className={`homePage3 ${isVisible[2]?"moveLeft":""}`}
+          ref={elementRefs[2]} />
           <div className="homePage3LOGO" />
         </div>
 
@@ -92,7 +104,7 @@ const HomePage = (props) => {
           <div className="homeBody4Icon" />
           <p className="homePageTextW"
           style={{
-            marginTop: '25px',
+            marginTop: '20px',
             textAlign: "center",
             fontSize: "25px",
           }}

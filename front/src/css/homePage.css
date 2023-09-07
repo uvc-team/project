@@ -4,7 +4,7 @@
   flex-direction: column;
   display: flex;
   align-items: center;
-  background-color: #060606;
+  background-color: #000;
 
 }
 
@@ -18,16 +18,16 @@
 
 .homePage2Box {
   width: 100vw;
-  height: 100vh;
+  height: 750px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
 }
 
 .homePage3Box {
   width: 100vw;
   height: 655px;
   display: flex;
+  margin-top: 20%;
   background-color: #3caca700;
   align-content: center;
   align-items: flex-end;
@@ -38,7 +38,7 @@
 
 .homePage4Box {
   width: 100vw;
-  height: 710px;
+  height: 650px;
   background-color: #564b4b00;
   display: flex;
   justify-content: flex-end;
@@ -65,17 +65,22 @@
   /* 이미지 반복 없음 */
   background-position: center center;
   background-image: url('../../public/img1Box.png');
+  align-items: flex-start;
+  margin-top: 15%;
 }
 
 .homeBox2 {
   width: 100vw;
   height: 100vh;
+  display: flex;
   background-size: cover;
   /* 이미지를 딱 맞게 조절합니다. */
   background-repeat: no-repeat;
   /* 이미지 반복 없음 */
   background-position: center center;
   background-image: url('../../public/img2Box.png');
+  flex-direction: column;
+  justify-content: space-evenly;
 }
 
 /* 숨겨진 상태에 대한 초기 스타일 화면  */
@@ -87,7 +92,7 @@
   transform: translateY(20px);
   transition: opacity 1s ease-in-out, transform 2s ease-in-out;
   background-image: url('../../public/img1.jpeg');
-  background-size: contain;
+  background-size: cover;
   /* 이미지를 딱 맞게 조절합니다. */
   background-repeat: no-repeat;
   /* 이미지 반복 없음 */
@@ -97,7 +102,7 @@
 
 .homePage2 {
   width: 100vw;
-  height: 660px;
+  height: 100vh;
   background-image: url('../../public/img2.jpg');
   background-size: cover;
   /* 이미지를 딱 맞게 조절합니다. */
@@ -105,6 +110,7 @@
   /* 이미지 반복 없음 */
   background-position: center center;
   /* 이미지를 중앙 정렬합니다. */
+  margin-top: 10%;
 }
 
 .homePage3 {
@@ -113,26 +119,28 @@
   background-color: #0097EC;
   z-index: 1;
   position: relative;
-  animation: moveLeft 3s linear infinite;
+  transform: translateX(0);
+  transition: transform 2s ease-in-out;
+
 }
 
 /* 각 초기 스타일 화면안의 요소  */
 .homePage1LOGO {
   width: 30vw;
   background-size: contain;
+  margin-left: 8%;
   /* 이미지를 딱 맞게 조절합니다. */
   background-repeat: no-repeat;
   /* 이미지 반복 없음 */
   background-position: center center;
   /* 이미지를 중앙 정렬합니다. */
   background-image: url('../../public/img1Logo.png');
-  margin-left: 10%;
-  margin-bottom: 15%;
 }
 
 .homePage2LOGO {
-  width: 500px;
+  width: 450px;
   height: 261px;
+  margin-left: 5%;
   background-size: contain;
   /* 이미지를 딱 맞게 조절합니다. */
   background-repeat: no-repeat;
@@ -152,6 +160,7 @@
   height: 184px;
   z-index: 2;
   position: absolute;
+  margin-right: 6%;
   /* 자식 요소를 absolute로 설정 */
   background-image: url('../../public/img3Logo.png');
 }
@@ -171,8 +180,8 @@
 
 .homeBody4Icon {
   display: flex;
-  width: 300px;
-  height: 300px;
+  width: 230px;
+  height: 230px;
   margin-bottom: 100px;
   background-size: contain;
   /* 이미지를 딱 맞게 조절합니다. */
@@ -207,19 +216,7 @@
   transform: translateY(0);
 }
 
-@keyframes moveLeft {
-  0% {
-    transform: translateX(0);
-    /* 왼쪽으로 이동하는 애니메이션 시작 위치 */
-  }
+.moveLeft {
+  transform: translateX(-65vw);
 
-  50% {
-    transform: translateX(-80vw);
-    /* 오른쪽으로 이동하는 애니메이션 중간 위치 */
-  }
-
-  100% {
-    transform: translateX(0);
-    /* 다시 왼쪽으로 이동하는 애니메이션 끝 위치 */
-  }
 }
