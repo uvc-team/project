@@ -28,18 +28,21 @@ function Header() {
               icon={<HomeIcon />}
               component={Link}
               to="/homepage"
+              sx={{ color: "white" }}
             />
             <Tab
               label="DashBoard"
               icon={<Airplay />}
               component={Link}
               to="/dash"
+              sx={{ color: "white" }}
             />
             <Tab
               label="Profile"
               icon={<AccountCircleIcon />}
               component={Link}
               to="/profile"
+              sx={{ color: "white" }}
             />
           </Tabs>
         </Toolbar>
