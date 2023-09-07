@@ -47,6 +47,7 @@ const HomePage = (props) => {
   }, []);
 
   return (
+<<<<<<< HEAD
     <div><Header />
     <div className="homeBody">
       {/* 화면1 */}
@@ -79,10 +80,41 @@ const HomePage = (props) => {
               marginRight: "10%",
             }}
             className="homePageTextW"
+=======
+    <div>
+      <Header />
+      <div className="homeBody">
+        {/* 화면1 */}
+        <div className="homePage1Box">
+          {/* 나타나는 애니메이션 */}
+          <div
+            className={`homePage1 ${isVisible[0] ? "visible" : ""}`}
+            ref={elementRefs[0]}
+>>>>>>> ec99f3a4c8b324e94739be1783bc3afbf8be7a2a
           >
-            Efficient
-          </p>
+            <div className="homeBox1"></div>
+          </div>
+        </div>
+        {/* 화면2 */}
+        <div className="homePage2Box">
+          <div className="homePage2">
+            <div className="homeBox2"></div>
+          </div>
+        </div>
+        {/* 화면3 */}
+        <div className="homePage3Box">
+          <div className="homePage3">
+            <p
+              style={{
+                fontSize: "200px",
+                marginRight: "10%",
+              }}
+              className="homePageTextW"
+            >
+              Efficient
+            </p>
 
+<<<<<<< HEAD
           <p
             style={{
               fontSize: "75px",
@@ -92,6 +124,18 @@ const HomePage = (props) => {
           >
             MONITERING
           </p>
+=======
+            <p
+              style={{
+                fontSize: "200px",
+                marginRight: "10%",
+              }}
+              className="homePageTextB"
+            >
+              MONITERING
+            </p>
+          </div>
+>>>>>>> ec99f3a4c8b324e94739be1783bc3afbf8be7a2a
         </div>
         <div className="homePage3_2Box">
             <div className="homeBody3_2Icon" />
