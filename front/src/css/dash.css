@@ -6,7 +6,8 @@
 .RightContainer {
   top: 74px;
   flex: 1;
-  background-color: rgb(45, 41, 41);
+  background-color: rgb(203, 193, 193);
+  flex-direction: column-reverse;
 }
 
 .LeftContainer {
