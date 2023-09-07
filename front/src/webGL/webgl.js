@@ -7,8 +7,6 @@ import Edukit from "./loader";
 import "../css/gui.css";
 
 function WebGL() {
-  const [messagePayload, setMessagePayload] = useState("");
-
   useEffect(() => {
     const ws = new WebSocket("ws://192.168.0.124:8081");
 
@@ -17,8 +15,30 @@ function WebGL() {
     });
 
     ws.addEventListener("message", (event) => {
-      const receivedMessage = event.data;
-      setMessagePayload(JSON.parse(receivedMessage));
+      const receivedMessage = JSON.parse(event.data);
+
+      if (receivedMessage.Wrapper) {
+        const tag3 = receivedMessage.Wrapper.find((item) => item.tagId === "3");
+        const tag4 = receivedMessage.Wrapper.find((item) => item.tagId === "4");
+        const tag21 = receivedMessage.Wrapper.find(
+          (item) => item.tagId === "21"
+        );
+
+        myObject.NO1 = tag3 && tag3.value ? "#00FF00" : "#FF0000";
+        myObject.NO2 = tag4 && tag4.value ? "#00FF00" : "#FF0000";
+        myObject.NO3 = tag21 && tag21.value >= 1 ? "#00FF00" : "#FF0000";
+
+        no1.setValue(myObject.NO1);
+        no2.setValue(myObject.NO2);
+        no3.setValue(myObject.NO3);
+
+        console.log(
+          "Updated colors:",
+          myObject.NO1,
+          myObject.NO2,
+          myObject.NO3
+        );
+      }
     });
 
     const canvas = document.querySelector("#webgl");
@@ -27,7 +47,7 @@ function WebGL() {
     edukit.fileload(scene);
     const camera = new THREE.PerspectiveCamera(
       45,
-      (window.innerWidth * 2) / (window.innerHeight * 3),
+      (window.innerWidth * 3) / (window.innerHeight * 5),
       0.1,
       1000
     );
@@ -56,9 +76,9 @@ function WebGL() {
         const data = JSON.stringify({ tagId: "1", value: "0" });
         ws.send(data);
       },
-      NO1: "##FF0000",
-      NO2: "##FF0000",
-      NO3: "##FF0000",
+      NO1: "#FF0000", // 수정: 초기 색상값을 직접 지정
+      NO2: "#FF0000",
+      NO3: "#FF0000",
     };
 
     gui.add(myObject, "start");
@@ -68,36 +88,16 @@ function WebGL() {
     const no2 = gui.addColor(myObject, "NO2");
     const no3 = gui.addColor(myObject, "NO3");
 
-    const updateColors = () => {
-      const tag3 = messagePayload.Wrapper
-        ? messagePayload.Wrapper.find((item) => item.tagId === "3")
-        : "n";
-      const tag4 = messagePayload.Wrapper
-        ? messagePayload.Wrapper.find((item) => item.tagId === "4")
-        : "n";
-      const tag40 = messagePayload.Wrapper
-        ? messagePayload.Wrapper.find((item) => item.tagId === "40")
-        : "n";
-
-      myObject.NO1 = tag3 && tag3.value ? "#00FF00" : "#FF0000";
-      myObject.NO2 = tag4 && tag4.value ? "#00FF00" : "#FF0000";
-      myObject.NO3 = tag40 && tag40.value ? "#00FF00" : "#FF0000";
-
-      no1.setValue(myObject.NO1);
-      no2.setValue(myObject.NO2);
-      no3.setValue(myObject.NO3);
-    };
-
     const renderer = new THREE.WebGLRenderer({ canvas: canvas });
     renderer.setPixelRatio(window.devicePixelRatio);
-    renderer.setSize(window.innerWidth * (2 / 3), window.innerHeight);
+    renderer.setSize(window.innerWidth * (3 / 5), window.innerHeight);
     renderer.shadowMap.enabled = true;
     renderer.setClearColor(0x333333);
 
     window.addEventListener("resize", () => {
-      camera.aspect = (window.innerWidth * 2) / (window.innerHeight * 3);
+      camera.aspect = (window.innerWidth * 3) / (window.innerHeight * 5);
       camera.updateProjectionMatrix();
-      renderer.setSize(window.innerWidth * (2 / 3), window.innerHeight);
+      renderer.setSize(window.innerWidth * (3 / 5), window.innerHeight);
     });
 
     const directionalLight = new THREE.DirectionalLight();
@@ -113,10 +113,6 @@ function WebGL() {
       stats.update();
       camera.updateMatrixWorld();
       camera.updateProjectionMatrix();
-
-      if (edukit.loaded) {
-        updateColors();
-      }
     };
 
     tick();
@@ -124,9 +120,7 @@ function WebGL() {
     return () => {
       cancelAnimationFrame(requestId);
       ws.close();
-      if (messagePayload) {
-        messagePayload.close();
-      }
+      guiContainer.remove();
     };
   }, []);
 

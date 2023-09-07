@@ -5,14 +5,12 @@ import Header from "../Header/header";
 
 function Dash() {
   return (
-    <div>
+    <div className="DashContainer">
       <Header />
-      <div className="DashContainer">
-        <div className="LeftContainer">
-          <WebGL />
-        </div>
-        <div className="RightContainer"></div>
+      <div className="LeftContainer">
+        <WebGL />
       </div>
+      <div className="RightContainer"></div>
     </div>
   );
 }
