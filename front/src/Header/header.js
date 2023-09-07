@@ -27,7 +27,7 @@ function Header() {
               label="Home"
               icon={<HomeIcon />}
               component={Link}
-              to="/homepage"
+              to="/"
               sx={{ color: "white" }}
             />
             <Tab
