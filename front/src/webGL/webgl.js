@@ -84,7 +84,7 @@ function WebGL() {
     renderer.setPixelRatio(window.devicePixelRatio);
     renderer.setSize(window.innerWidth * (3 / 5), window.innerHeight);
     renderer.shadowMap.enabled = true;
-    renderer.setClearColor(0x333333);
+    renderer.setClearColor(0xffffff);
 
     window.addEventListener("resize", () => {
       camera.aspect = (window.innerWidth * 3) / (window.innerHeight * 5);
@@ -94,7 +94,8 @@ function WebGL() {
 
     const directionalLight = new THREE.DirectionalLight();
     scene.add(directionalLight);
-
+    const ambientLight = new THREE.AmbientLight(0xffffff, 1);
+    scene.add(ambientLight);
     new OrbitControls(camera, renderer.domElement);
 
     let requestId = null;

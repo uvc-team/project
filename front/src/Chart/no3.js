@@ -72,7 +72,7 @@ function No3() {
   }, []);
 
   return (
-    <div>
+    <div style={{ height: "200px", width: "300px" }}>
       <Line data={chartData} />
     </div>
   );
