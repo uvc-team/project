@@ -17,8 +17,7 @@ const GraphComponent = () => {
           `http://192.168.0.124:8081/mqtt/plcdata`
         );
         console.log(response.data);
-        console.log(response.data);
-        setDataset(response.data[0].payload.Wrapper);
+        setDataset(response.data[0].payload.Wrapper.find());
       } catch (error) {
         console.error("Failed to fetch data", error);
       }

@@ -3,6 +3,7 @@ import WebGL from "../webGL/webgl";
 import "../css/dash.css";
 import Header from "../Header/header";
 import GraphComponent from "./Graph";
+import No3 from "./no3";
 
 function Dash() {
   const [numValue, setNumValue] = useState(1);
@@ -13,7 +14,12 @@ function Dash() {
         <WebGL />
       </div>
       <div className="RightContainer">
-        <GraphComponent />
+        <div>
+          <GraphComponent />
+        </div>
+        <div>
+          <No3 />
+        </div>
       </div>
     </div>
   );
