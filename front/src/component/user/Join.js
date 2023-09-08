@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import '../userCss/user.css';
+import '../userCss/loginPage.css'
 
 const Join = (props) => {
   const navigate = useNavigate();
@@ -43,43 +43,38 @@ const Join = (props) => {
 
   return (
     <form className="joinBox"
-    onSubmit={handleSubmit}>
-      <form className="logoBox">
-      <p className="texStyle">email</p>
-
-<input className="joinInput"
+        onSubmit={handleSubmit}>
+<input className="inputStyle"
   type="email"
   id="email"
   name="email"
   value={formData.email}
   onChange={handleChange}
-  placeholder="이메일"
+  placeholder="email"
 />
-<p className="texStyle">nick</p>
 <input 
-className="joinInput"
+className="inputStyle"
   type="nick"
   id="nick"
   name="nick"
   value={formData.nick}
   onChange={handleChange}
-  placeholder="닉네임"
+  placeholder="Nick"
 />
-<p className="texStyle">password</p>
 <input 
-className="joinInput"
+className="inputStyle"
   type="password"
   id="password"
   name="password"
   value={formData.password}
   onChange={handleChange}
-  placeholder="비밀번호"
+  placeholder="Password"
 />
-      </form>
-      <button className="button"
-  type="submit">
-  전송
-</button>
+<button className="buttonStyle"
+        type="submit">
+        회원가입
+        </button>
+      
     </form>
   );
 };

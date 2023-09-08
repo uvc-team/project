@@ -4,8 +4,9 @@ import GraphComponent from "./Chart/Graph";
 import Dash from "./Chart/dash";
 import KakaoOauth from "./component/user/kakao";
 import HomePage from "./component/HomePage";
+import LoginPage from "./component/loginPage";
+import Team from "./component/team";
 import "../src/css/App.css";
-import JoinModal from "../src/Modal/joinModal";
 
 function App() {
   return (
@@ -16,7 +17,8 @@ function App() {
           <Route path="/dash" element={<Dash />} />
           <Route path="/chart" element={<GraphComponent />} />
           <Route path="/kakao" element={<KakaoOauth />} />
-          <Route path="/join" element={<JoinModal />} />
+          <Route path="/loginPage" element={<LoginPage />} />
+          <Route path="/team" element={<Team />} />
         </Routes>
       </div>
     </BrowserRouter>

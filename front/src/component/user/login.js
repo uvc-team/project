@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import '../userCss/loginPage.css'
 import axios from "axios";
 
 const Login = (props) => {
@@ -49,11 +50,8 @@ const Login = (props) => {
   };
 
   return (
-    <form className="modalBox" 
+    <form className="loginBox" 
     onSubmit={handleSubmit}>
-      <h1>로그인</h1>
-      <p className="styleText">  
-        email</p>
       <input
       className="inputStyle"
         type="email"
@@ -61,10 +59,8 @@ const Login = (props) => {
         name="email"
         value={formData.email}
         onChange={handleChange}
-        placeholder="이메일"
+        placeholder="email"
       />
-      <p className="styleText">  
-        password</p>
       <input
       className="inputStyle"
         type="password"
@@ -72,9 +68,10 @@ const Login = (props) => {
         name="password"
         value={formData.password}
         onChange={handleChange}
-        placeholder="비밀번호"
+        placeholder="password"
       />
-      <button type="submit">전송</button>
+      <button className="buttonStyle" 
+      type="submit">로그인</button>
     </form>
   );
 };

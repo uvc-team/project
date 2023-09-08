@@ -1,12 +1,12 @@
 import React, { useEffect, useRef, useState } from "react";
 import "../css/homePage.css";
 import Header from "../Header/header";
-import { positions } from "@mui/system";
 
 const HomePage = (props) => {
   const elementRefs = [useRef(null), useRef(null), useRef(null)];
   const [isVisible, setIsVisible] = useState([false, false, false]);
   const [numValue, setNumValue] = useState(0);
+
 
   useEffect(() => {
     const handleIntersection = (entries, index) => {
@@ -98,6 +98,7 @@ const HomePage = (props) => {
           ref={elementRefs[2]} />
           <div className="homePage3LOGO" />
         </div>
+        
 
         {/* 화면4 */}
         <div className="homePage4Box">
@@ -124,7 +125,7 @@ const HomePage = (props) => {
         <div className="homePage5Box">
         <div className="homeBody5Logo" />
         </div>
-        
+       
         
       </div>
     </div>
