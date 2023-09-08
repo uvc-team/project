@@ -4,6 +4,7 @@ import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import Edukit from "./loader";
 import GUI from "lil-gui";
 import "../css/gui.css";
+import "../css/dash.css";
 
 function WebGL() {
   useEffect(() => {
@@ -37,14 +38,14 @@ function WebGL() {
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(
       45,
-      (window.innerWidth * 3) / (window.innerHeight * 5),
+      (window.innerWidth * 0.45) / (window.innerHeight * 0.85),
       0.1,
       1000
     );
     const edukit = new Edukit();
     edukit.fileload(scene);
 
-    camera.position.set(5, 30, 50);
+    camera.position.set(50, 50, 70);
     scene.add(camera);
 
     const guiContainer = document.createElement("div");
@@ -80,21 +81,24 @@ function WebGL() {
     const no3 = gui.addColor(myObject, "NO3");
     gui.add(myObject, "reset");
 
-    const renderer = new THREE.WebGLRenderer({ canvas: canvas });
+    const renderer = new THREE.WebGLRenderer({
+      canvas: canvas,
+      antialias: true,
+    });
     renderer.setPixelRatio(window.devicePixelRatio);
-    renderer.setSize(window.innerWidth * (3 / 5), window.innerHeight);
+    renderer.setSize(window.innerWidth * 0.45, window.innerHeight * 0.85);
     renderer.shadowMap.enabled = true;
-    renderer.setClearColor(0xffffff);
+    renderer.setClearColor(0x1c2631);
 
     window.addEventListener("resize", () => {
-      camera.aspect = (window.innerWidth * 3) / (window.innerHeight * 5);
+      camera.aspect = window.innerWidth / window.innerHeight;
       camera.updateProjectionMatrix();
-      renderer.setSize(window.innerWidth * (3 / 5), window.innerHeight);
+      renderer.setSize(window.innerWidth, window.innerHeight);
     });
 
-    const directionalLight = new THREE.DirectionalLight();
+    const directionalLight = new THREE.DirectionalLight(0xffffff, 2);
     scene.add(directionalLight);
-    const ambientLight = new THREE.AmbientLight(0xffffff, 1);
+    const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
     scene.add(ambientLight);
     new OrbitControls(camera, renderer.domElement);
 
@@ -117,7 +121,7 @@ function WebGL() {
 
   return (
     <div>
-      <canvas id="webgl"></canvas>
+      <canvas id="webgl" style={{ borderRadius: "30px" }}></canvas>
     </div>
   );
 }

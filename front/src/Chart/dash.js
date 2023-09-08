@@ -5,44 +5,27 @@ import Header from "../Header/header";
 import GraphComponent from "./Graph";
 import No3 from "./no3";
 
-import {
-  Chart,
-  CategoryScale,
-  LinearScale,
-  BarController,
-  BarElement,
-  LineController,
-  PointElement,
-  LineElement,
-} from "chart.js";
-
-Chart.register(
-  CategoryScale,
-  LinearScale,
-  BarController,
-  BarElement,
-  LineController,
-  LineElement,
-  PointElement
-);
 function Dash() {
   return (
     <div>
       <Header />
-      <div className="DashContainer">
-        <div className="LeftContainer">
+      <div className="Dash">
+        <div className="DashBoard">
           <WebGL />
-        </div>
-        <div className="RightContainer">
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-            }}
-          >
-            <GraphComponent />
-            <No3 />
+          <div className="Right">
+            <div className="twice">
+              <div className="bg-slate-800">
+                <GraphComponent />
+              </div>
+              <div className="bg-slate-200"></div>
+            </div>
+            <div className="bg-slate-900">
+              <No3 />
+            </div>
+            <div className="twice">
+              <div className="bg-slate-100"></div>
+              <div className="bg-slate-200"></div>
+            </div>
           </div>
         </div>
       </div>

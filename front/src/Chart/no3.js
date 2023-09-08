@@ -21,7 +21,16 @@ function No3() {
       },
     ],
   });
-
+  const options = {
+    scales: {
+      x: {
+        display: false,
+      },
+      y: {
+        beginAtZero: true,
+      },
+    },
+  };
   useEffect(() => {
     const ws = new WebSocket("ws://192.168.0.124:8081");
 
@@ -72,8 +81,8 @@ function No3() {
   }, []);
 
   return (
-    <div style={{ height: "200px", width: "300px" }}>
-      <Line data={chartData} />
+    <div>
+      <Line data={chartData} options={options} width="750px" />
     </div>
   );
 }
