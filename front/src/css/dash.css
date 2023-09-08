@@ -1,15 +1,58 @@
-.DashContainer {
-  display: flex;
+.Dash {
+  background-color: black;
   height: 100vh;
+  display: flex;
 }
 
-.RightContainer {
-  top: 74px;
-  flex: 1;
-  background-color: rgb(203, 193, 193);
-  flex-direction: column-reverse;
+.DashBoard {
+  margin: 30px;
+  display: flex;
+  margin-top: 74px;
 }
 
-.LeftContainer {
-  flex: 1;
+.Right {
+  flex-direction: column;
+  margin-left: 20px;
+}
+
+.bg-slate-800 {
+  background-color: #232f3e;
+  border-radius: 30px;
+  margin-right: 8px;
+  height: 217px;
+  margin-bottom: 8px;
+  width: 380px;
+}
+
+.bg-slate-900 {
+  display: flex;
+  align-items: center;
+  background-color: #232f3e;
+  margin-bottom: 8px;
+  border-radius: 30px;
+  width: 770px;
+  height: 180px;
+}
+
+.bg-slate-100 {
+  background-color: #232f3e;
+  margin-bottom: 8px;
+  border-radius: 30px;
+  width: 380px;
+  height: 217px;
+  margin-right: 8px;
+}
+
+.bg-slate-200 {
+  background-color: #232f3e;
+  margin-bottom: 8px;
+  border-radius: 30px;
+  width: 380px;
+  height: 217px;
+}
+
+.twice {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

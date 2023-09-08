@@ -1,9 +1,30 @@
 import { useEffect, useState } from "react";
 import { Bar } from "react-chartjs-2";
 
+import {
+  Chart,
+  CategoryScale,
+  LinearScale,
+  BarController,
+  BarElement,
+  LineController,
+  PointElement,
+  LineElement,
+} from "chart.js";
+
+Chart.register(
+  CategoryScale,
+  LinearScale,
+  BarController,
+  BarElement,
+  LineController,
+  LineElement,
+  PointElement
+);
+
 function GraphComponent() {
   const [chartData, setChartData] = useState({
-    labels: ["공급지연시간", "1호기", "2호기", "3호기", "빨간색", "하얀색"],
+    labels: ["지연시간", "1호기", "2호기", "3호기", "빨간색", "하얀색"],
     datasets: [
       {
         label: "Data",
@@ -25,11 +46,18 @@ function GraphComponent() {
             return index + 1;
           },
         },
+        grid: {
+          display: false,
+        },
       },
+
       y: {
         display: true,
         barPercentage: 0.5,
         categoryPercentage: 0.5,
+        grid: {
+          display: false,
+        },
       },
     },
   };
@@ -54,10 +82,6 @@ function GraphComponent() {
         const tag17Value =
           receivedMessage.Wrapper.find((item) => item.tagId === "17")?.value ||
           -1;
-
-        // // For ColorSensorSensing we'll have two bars
-        // let colorSensorTrueValue = 0;
-        // let colorSensorFalseValue = 0;
 
         if (
           receivedMessage.Wrapper.some(
@@ -99,7 +123,7 @@ function GraphComponent() {
     };
   }, []);
   return (
-    <div style={{ height: "200px", width: "300px" }}>
+    <div style={{ marginTop: "13px" }}>
       <Bar data={chartData} options={options} />
     </div>
   );
