@@ -13,7 +13,7 @@ import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import Airplay from "@mui/icons-material/Airplay";
 import { Link } from "react-router-dom";
 
-function Header({ numValue, setNumValue }) {
+function Header({ numValue, setNumValue , openModal}) {
   const changeNumber = (event, newValue) => {
     setNumValue(newValue);
   };
@@ -44,9 +44,9 @@ function Header({ numValue, setNumValue }) {
             <Tab
               label="계정"
               icon={<AccountCircleIcon />}
-              component={Link}
-              to="/profile"
-              sx={{ color: "white" }}
+              component ={Link}
+              to = '/loginPage'
+              sx={{ color: "white" }}       
             />
           </Tabs>
         </Toolbar>
