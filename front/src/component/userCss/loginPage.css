@@ -25,7 +25,7 @@
     height: 60%;
     flex-shrink: 0;
     border-radius: 5px;
-    background: rgba(0, 0, 0, 0.58);
+    background: rgb(39, 39, 39);
     display: flex;
     flex-direction: row-reverse;
     position: absolute;
@@ -59,7 +59,7 @@
 }
 
 .loginPage {
-    background: rgb(195, 49, 151);
+    background: rgb(39, 39, 39);
     width: 700px;
     height: 60%;
     flex-shrink: 0;
@@ -68,8 +68,7 @@
     flex-direction: row-reverse;
     position: absolute;
     z-index: 2;
-    transform: translateX(0);
-    transition: transform 2s ease-in-out;
+    transition: transform 3s ease-out;
 }
 
 .loginBox {
@@ -97,8 +96,6 @@
     margin-bottom: 1%;
     color: #ffffff;
     margin-top: 5%;
-
-
 }
 
 .texStyle {
@@ -141,15 +138,5 @@
     font-family: 'GongGothicMedium';
     border: 2px solid #FFF;
     background: rgba(217, 217, 217, 0.00);
-
-}
-
-.moveLeft {
-    transform: translateX(-100vw);
-
-}
-
-.moveRight {
-    transform: translateX(0);
 
 }
