@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState } from "react";
 import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import Edukit from "./loader";
@@ -8,12 +8,7 @@ import "../css/gui.css";
 function WebGL() {
   const [x, setX] = useState(0);
   const [y, setY] = useState(0);
-
-  // Add these lines
-  const currentX = useRef(x);
-  const currentY = useRef(y);
-
-  const edukitRef = useRef(null);
+  console.log("--------------", y);
 
   useEffect(() => {
     const ws = new WebSocket("ws://192.168.0.124:8081");
@@ -44,8 +39,6 @@ function WebGL() {
 
         setX(tag21.value);
         setY(tag22.value);
-        currentX.current = tag21.value;
-        currentY.current = tag22.value;
       }
     });
 
@@ -53,12 +46,12 @@ function WebGL() {
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(
       45,
-      (window.innerWidth * 0.45) / (window.innerHeight * 0.85),
+      (window.innerWidth * 3) / (window.innerHeight * 5),
       0.1,
       1000
     );
 
-    camera.position.set(50, 50, 70);
+    camera.position.set(5, 30, 50);
     scene.add(camera);
 
     const guiContainer = document.createElement("div");
@@ -70,8 +63,6 @@ function WebGL() {
 
     const edukit = new Edukit(); // edukit을 한 번만 불러옵니다.
     edukit.fileload(scene);
-
-    edukitRef.current = edukit;
 
     const myObject = {
       start: function () {
@@ -90,16 +81,18 @@ function WebGL() {
         ws.send(data);
       },
     };
-    const [minY, maxY] = [0, 18000000];
-    const [minX, maxX] = [0, 1030000];
+    const [min, max] = [-2728, 53294192312];
+    const yAxisFunc = (() => {
+      return function () {
+        return ((min - min) / (max - min)) * 7;
+      };
+    })();
+    const xAxisFunc = (() => {
+      return function () {
+        return ((0 - min) / (max - min)) * THREE.MathUtils.degToRad(90);
+      };
+    })();
 
-    const yAxisFunc = (value) => {
-      return ((value - minY) / (maxY - minY)) * 7;
-    };
-
-    const xAxisFunc = (value) => {
-      return ((value - minX) / (maxX - minX)) * THREE.MathUtils.degToRad(90);
-    };
     gui.add(myObject, "start");
     gui.add(myObject, "stop");
 
@@ -108,40 +101,36 @@ function WebGL() {
     const no3 = gui.addColor(myObject, "NO3");
     gui.add(myObject, "reset");
 
-    const renderer = new THREE.WebGLRenderer({
-      canvas: canvas,
-      antialias: true,
-    });
+    const renderer = new THREE.WebGLRenderer({ canvas: canvas });
     renderer.setPixelRatio(window.devicePixelRatio);
-    renderer.setSize(window.innerWidth * 0.45, window.innerHeight * 0.85);
+    renderer.setSize(window.innerWidth * (3 / 5), window.innerHeight);
     renderer.shadowMap.enabled = true;
-    renderer.setClearColor(0x1c2631);
+    renderer.setClearColor(0xffffff);
 
     window.addEventListener("resize", () => {
-      camera.aspect = window.innerWidth / window.innerHeight;
+      camera.aspect = (window.innerWidth * 3) / (window.innerHeight * 5);
       camera.updateProjectionMatrix();
-      renderer.setSize(window.innerWidth, window.innerHeight);
+      renderer.setSize(window.innerWidth * (3 / 5), window.innerHeight);
     });
 
-    const directionalLight = new THREE.DirectionalLight(0xffffff, 2);
+    const directionalLight = new THREE.DirectionalLight();
     scene.add(directionalLight);
-    const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
+    const ambientLight = new THREE.AmbientLight(0xffffff, 1);
     scene.add(ambientLight);
     new OrbitControls(camera, renderer.domElement);
 
     let requestId = null;
     const tick = () => {
       renderer.render(scene, camera);
-
       requestId = requestAnimationFrame(tick);
       camera.updateMatrixWorld();
       camera.updateProjectionMatrix();
 
-      if (edukitRef.current && edukitRef.current.loaded) {
-        console.log("-------------------Y", currentY.current);
-        console.log("-------------------X", currentX.current);
-        edukitRef.current.actionY(yAxisFunc(currentY.current));
-        edukitRef.current.actionX(xAxisFunc(currentX.current));
+      if (edukit.loaded) {
+        console.log(y);
+        edukit.actionY(yAxisFunc(y));
+
+        edukit.actionX(xAxisFunc(x));
       }
     };
 
@@ -156,7 +145,7 @@ function WebGL() {
 
   return (
     <div>
-      <canvas id="webgl" style={{ borderRadius: "30px" }}></canvas>
+      <canvas id="webgl"></canvas>
     </div>
   );
 }

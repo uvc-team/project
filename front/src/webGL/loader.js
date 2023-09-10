@@ -80,6 +80,8 @@ export default class Edukit {
     const Tray = (this.object.Tray = await this.loader.loadAsync(
       "files/Tray.FBX"
     ));
+    const Dice2 = this.object.Dice.clone();
+    const Tray2 = this.object.Tray.clone();
 
     body.scale.set(0.5, 0.5, 0.5);
 
@@ -147,10 +149,14 @@ export default class Edukit {
     groupT.position.set(0, -3.5, -19.5);
     groupC.position.set(1.5, -3.5, -5);
     Dice.position.set(8.85, -1.65, 24.8);
-    Tray.position.set(-1.75, -3.3, 22.5);
+    Dice2.position.set(8.85, 6, 23.3);
+    Tray.position.set(-1.6, -3.3, 22.5);
+    Tray2.position.set(-1.6, 3.5, 22.5);
 
     group3.scale.set(1, 1, 1);
     VisionSensor.scale.set(0.3, 0.3, 0.3);
+    Dice2.scale.set(0.5, 0.5, 0.5);
+    Tray2.scale.set(0.5, 0.5, 0.5);
 
     scene.add(group1);
     scene.add(group2);
@@ -161,18 +167,23 @@ export default class Edukit {
     scene.add(groupV);
     scene.add(groupC);
     scene.add(Dice);
+    scene.add(Dice2);
     scene.add(Tray);
+    scene.add(Tray2);
 
     this.loaded = true;
   }
-
   actionY(value) {
     const currentY = this.axes.yAxis.position.y;
     if (typeof value !== "undefined") {
-      if (value.toFixed(2) < currentY.toFixed(2)) {
-        this.axes.yAxis.position.y -= 0.05;
-      } else if (value.toFixed(2) > currentY.toFixed(2)) {
-        this.axes.yAxis.position.y += 0.05;
+      const fixedValue = parseFloat(value.toFixed(2));
+      const fixedCurrentY = parseFloat(currentY.toFixed(2));
+      const deltaY = Math.abs(fixedValue - fixedCurrentY) * 0.01; // 비례 상수를 조절하여 세밀함을 결정
+
+      if (fixedValue < fixedCurrentY) {
+        this.axes.yAxis.position.y -= deltaY;
+      } else if (fixedValue > fixedCurrentY) {
+        this.axes.yAxis.position.y += deltaY;
       }
     }
   }
@@ -180,12 +191,17 @@ export default class Edukit {
   actionX(value) {
     const currentX = this.axes.xAxis2.rotation.y;
     if (typeof value !== "undefined") {
-      if (value.toFixed(2) < currentX.toFixed(2)) {
-        this.axes.xAxis.rotation.y += MathUtils.degToRad(1);
-        this.axes.xAxis2.rotation.y += MathUtils.degToRad(-1);
-      } else if (value.toFixed(2) > currentX.toFixed(2)) {
-        this.axes.xAxis.rotation.y += MathUtils.degToRad(-1);
-        this.axes.xAxis2.rotation.y += MathUtils.degToRad(1);
+      const fixedValue = parseFloat(value.toFixed(2));
+      const fixedCurrentX = parseFloat(currentX.toFixed(2));
+      const deltaXDeg = Math.abs(fixedValue - fixedCurrentX); // degree 단위로 차이 계산
+      const deltaXRad = MathUtils.degToRad(deltaXDeg * 1); // 비례 상수를 조절하여 세밀함을 결정
+
+      if (fixedValue < fixedCurrentX) {
+        this.axes.xAxis.rotation.y += deltaXRad;
+        this.axes.xAxis2.rotation.y -= deltaXRad;
+      } else if (fixedValue > fixedCurrentX) {
+        this.axes.xAxis.rotation.y -= deltaXRad;
+        this.axes.xAxis2.rotation.y += deltaXRad;
       }
     }
   }
