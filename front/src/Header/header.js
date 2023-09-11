@@ -18,9 +18,9 @@ function Header({ numValue, setNumValue }) {
 
   // 페이지 로딩시 로컬스토리지에서 토큰 가져와 사용자 인증 상태를 확인
   useEffect(() => {
-    const token = localStorage.getItem("token");
-    if (token) {
-      setToken(token);
+    const storedToken = localStorage.getItem("token");
+    if (storedToken) {
+      setToken(storedToken);
     }
   }, []);
 
@@ -29,8 +29,8 @@ function Header({ numValue, setNumValue }) {
   };
 
   const handleAccountClick = () => {
-    if (token) {
-      // 토큰이 있는 경우 계정 아이콘을 클릭하면 프로필 페이지로 이동
+    if (token === setToken) {
+      // 토큰이 있는 경우 중 저장된 토큰과 같다면 계정 아이콘을 클릭하면 프로필 페이지로 이동
       navigate("/profile");
     } else {
       // 토큰이 없는 경우 계정 아이콘을 클릭하면 로그인 페이지로 이동
@@ -65,7 +65,7 @@ function Header({ numValue, setNumValue }) {
             <Tab
               label="계정"
               icon={<AccountCircleIcon />}
-              onClick={handleAccountClick} // 계정 아이콘 클릭 핸들러 추가
+              onClick={handleAccountClick}
               sx={{ color: "white" }}
             />
           </Tabs>

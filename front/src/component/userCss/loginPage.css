@@ -125,6 +125,18 @@
     margin-bottom: 22%;
     border-radius: 5px;
     font-family: 'GongGothicMedium';
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+    /* 색상 변화에 대한 전환 효과 추가 */
+}
+
+.buttonStyle:hover {
+    background-color: #FFF;
+    color: #0f2836;
+}
+
+.buttonStyle:active {
+    background-color: #442aa4;
 }
 
 .buttonStyleW {
@@ -138,5 +150,16 @@
     font-family: 'GongGothicMedium';
     border: 2px solid #FFF;
     background: rgba(217, 217, 217, 0.00);
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+    /* 색상 변화에 대한 전환 효과 추가 */
+}
 
+.buttonStyleW:hover {
+    background-color: #d0eeff;
+    color: #0f2836;
+}
+
+.buttonStyleW:active {
+    background-color: #0f2836;
 }
