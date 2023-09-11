@@ -68,7 +68,7 @@
     flex-direction: row-reverse;
     position: absolute;
     z-index: 2;
-    transition: transform 3s ease-out;
+    transition: transform 2s ease-out;
 }
 
 .loginBox {

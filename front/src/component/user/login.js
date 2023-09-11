@@ -1,12 +1,16 @@
 import React, { useState } from "react";
 import '../userCss/loginPage.css'
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const Login = (props) => {
+  const navigate = useNavigate(); // useNavigate 초기화
+
   const [formData, setFormData] = useState({
     email: "",
     password: "",
   });
+
   
 
   const handleChange = (e) => {
@@ -33,9 +37,11 @@ const Login = (props) => {
       console.log("회원 가입 성공:", response.data);
 
       if (response.data && response.data.token) {
-        localStorage.setItem("token", response.data.token);
+        localStorage.setItem("token", response.data.token); // 토큰 발행
         console.log("Saved token:", localStorage.getItem("token")); // 확인용
-        // 예를 들어, 회원 가입이 성공했을 때 MyPage로 이동할 수 있습니다.
+        // 예를 들어, 회원 가입이 성공했을 때 MyPage로 이동할 수 있습니다
+        navigate("/");
+        
 
       } else {
         throw new Error("토큰이 없습니다.");

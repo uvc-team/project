@@ -18,8 +18,7 @@ const Logout = (props) => {
       localStorage.removeItem("token");
 
       console.log("로그아웃:", response.data);
-
-      navigate("/home");
+      navigate("/");
     } catch (error) {
       // 오류 처리
       console.error("로그아웃오류:", error);
@@ -28,7 +27,6 @@ const Logout = (props) => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <h1>MainPage</h1>
       <button type="submit">로그아웃</button>
     </form>
   );

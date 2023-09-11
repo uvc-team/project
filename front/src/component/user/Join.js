@@ -7,7 +7,7 @@ const Join = (props) => {
 
   const [formData, setFormData] = useState({
     email: "",
-    nick: "",
+    name: "",
     password: "",
   });
 
@@ -53,12 +53,12 @@ const Join = (props) => {
   placeholder="email"
       />
       <input className="inputStyle"
-            type="nick"
-            id="nick"
-            name="nick"
+            type="name"
+            id="name"
+            name="name"
             value={formData.nick}
             onChange={handleChange}
-            placeholder="Nick"
+            placeholder="Name"
         />
       <input className="inputStyle"
         type="password"
