@@ -1,6 +1,6 @@
 .homeBody {
   width: 100vw;
-  height: 6000px;
+  height: 4700px;
   flex-direction: column;
   display: flex;
   align-items: center;
@@ -25,7 +25,7 @@
 
 .homePage3Box {
   width: 100vw;
-  height: 655px;
+  height: 700px;
   display: flex;
   margin-top: 20%;
   background-color: #3caca700;
@@ -38,7 +38,7 @@
 
 .homePage4Box {
   width: 100vw;
-  height: 650px;
+  height: 500px;
   background-color: #564b4b00;
   display: flex;
   justify-content: flex-end;
@@ -129,7 +129,7 @@
   z-index: 1;
   position: relative;
   transform: translateX(0);
-  transition: transform 2s ease-in-out;
+  transition: transform 0.5s ease-in-out;
 
 }
 
@@ -138,6 +138,7 @@
   width: 30vw;
   background-size: contain;
   margin-left: 8%;
+  display: flex;
   /* 이미지를 딱 맞게 조절합니다. */
   background-repeat: no-repeat;
   /* 이미지 반복 없음 */
@@ -227,6 +228,6 @@
 }
 
 .moveLeft {
-  transform: translateX(-65vw);
+  transform: translateX(-80vw);
 
 }

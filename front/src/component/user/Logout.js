@@ -1,6 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import '../userCss/loginPage.css';
 
 const Logout = (props) => {
   const navigate = useNavigate();
@@ -27,7 +28,12 @@ const Logout = (props) => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <button type="submit">로그아웃</button>
+      <button className="buttonStyleW"
+              style={{
+                fontSize: "10px",
+                fontWeight: "10px"
+              }}
+      type="submit">로그아웃</button>
     </form>
   );
 };

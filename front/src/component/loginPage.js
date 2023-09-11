@@ -1,13 +1,13 @@
 import React,{ useState, useEffect } from "react";
 import Join from "./user/Join";
 import Login from "./user/login";
+import Header from "../Header/header";
 import "./userCss/loginPage.css";
 import "../css/front.css";
 
-
-
 const LoginPage = () => { 
     const [position, setPosition] = useState(0);
+    const [numValue, setNumValue] = useState(0);
     
     useEffect(() =>{
         if (position) {
@@ -32,6 +32,7 @@ const LoginPage = () => {
 
     return (
         <div className="Background">
+            <Header numValue={numValue} setNumValue={setNumValue} />
             <div className="pageBox">
                 <div className="joinPage">
             <Join />

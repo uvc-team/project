@@ -65,12 +65,16 @@ const HomePage = (props) => {
           >
             <div className="homeBox1">
               <div className="homePage1LOGO" >
-              <p className="homePageTextW"
+              <p
                 style={{
                   fontSize: "16px",
                   marginTop: "150px",
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'flex-start'
                 }}>
-                UVC<br/> Total-Project
+                UVC
+                <p> Total-Project</p>
               </p>
               </div>
             </div>

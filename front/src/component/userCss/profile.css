@@ -9,7 +9,7 @@
 }
 
 .profileBox {
-    width: 70%;
+    width: 950px;
     height: 650px;
     background-color: rgb(255, 255, 255);
     border-radius: 5px;
@@ -17,13 +17,24 @@
 }
 
 .userProfile {
-    width: 65%;
+    width: 50%;
     height: 100%;
     border-radius: 0px 5px 5px 0px;
     background: #0097EC;
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+.userTextBox {
+    width: 90%;
+    height: 5%;
+    background-color: rgba(35, 85, 64, 0);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
 }
 
 .dataBox {
@@ -34,8 +45,9 @@
 }
 
 .userImg {
-    width: 100px;
-    height: 100px;
+    width: 120px;
+    height: 120px;
     background-color: aliceblue;
     border-radius: 100%;
+    margin-bottom: 5%;
 }
