@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import "../css/homePage.css";
 import Header from "../Header/header";
+import Team from "../component/team";
 
 const HomePage = (props) => {
   const elementRefs = [useRef(null), useRef(null), useRef(null)];
@@ -122,8 +123,12 @@ const HomePage = (props) => {
         </div>
 
         {/* 화면5 */}
-        <div className="homePage5Box">
+        <div className="homePage5Box" />
+
+        {/* 화면6 역할 팀원 소개 페이지 */}
+        <div className="homePage6Box">
         <div className="homeBody5Logo" />
+          <Team />
         </div>
        
         

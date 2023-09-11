@@ -14,7 +14,7 @@ function App() {
   return (
     <BrowserRouter>
       <div className="App">
-        <Routes>
+      <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/dash" element={<Dash />} />
           <Route path="/chart" element={<GraphComponent />} />
@@ -23,6 +23,7 @@ function App() {
           <Route path="/team" element={<Team />} />
           <Route path="/profile" element={<Profile />} />
         </Routes>
+        
       </div>
     </BrowserRouter>
   );
