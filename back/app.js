@@ -10,6 +10,7 @@ dotenv.config();
 const { sequelize } = require("./models/index");
 const passportConfig = require("./passport/passport");
 const authRouter = require("./router/authRouter");
+const positionRouter = require("./router/positionRouter");
 const cors = require("cors");
 const app = express();
 
@@ -74,6 +75,7 @@ app.use(
 
 // 라우터
 app.use("/auth", authRouter);
+app.use("/position", positionRouter);
 
 // 에러 핸들링
 app.use((req, res, next) => {

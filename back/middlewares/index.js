@@ -20,22 +20,23 @@ exports.isNotLoggedIn = (req, res, next) => {
 exports.createToken = (user) => {
   const token = jwt.sign(
     {
-      id: user.id,
-      nick: user.nick,
+      userId: user.userId,
+      name: user.name,
     },
     process.env.JWT_SECRET,
-    { expiresIn: "1m" }
+    { expiresIn: "2h" }
   );
   return token;
 };
 //토큰 검증
 exports.verifyToken = (req, res, next) => {
   try {
-    console.log(`token: ${req.headers.authorization}`);
+    // console.log(`token: ${req.headers.authorization}`);
     res.locals.decoded = jwt.verify(
       req.headers.authorization,
       process.env.JWT_SECRET
     );
+    req.userId = res.locals.decoded.userId;
     return next();
   } catch (error) {
     if (error.name === "TokenExpiredError") {
