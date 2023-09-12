@@ -8,23 +8,13 @@ import "../css/front.css";
 const LoginPage = () => { 
     const [position, setPosition] = useState(0);
     const [numValue, setNumValue] = useState(0);
-    
-    useEffect(() =>{
-        if (position) {
-            console.log("왼쪽");
-          }
-        else {
-            console.log("오른쪽");
-        };
-        }, [position]);
-        
 
-        const moveLeft = () => {
-            setPosition(position - 100); // 왼쪽으로 이동
+        const moveBotton = () => {
+            setPosition(position - 100);
           };
         
-          const moveRight = () => {
-            setPosition(position + 100); // 오른쪽으로 이동
+          const moveTop = () => {
+            setPosition(position + 100); 
           };
         
 
@@ -59,7 +49,7 @@ const LoginPage = () => {
                         marginTop: "40px"
                     }}>가입된 정보가 있으신가요?</p>
                 <button className="buttonStyleW"
-                onClick={moveRight}
+                onClick={moveBotton}
                         style={{
                             fontWeight: '100'
                         }}>로그인</button>
@@ -67,7 +57,7 @@ const LoginPage = () => {
             
                 </div>
                 <div className="loginPage"
-                style={{ transform: `translateX(${position}vw)` }} >
+                style={{ transform: `translateY(${position}vw)` }} >
                 <Login />
                 <div className="joinBoxText">
                 <p className="texStyle"
@@ -90,7 +80,7 @@ const LoginPage = () => {
                         marginTop: "40px"
                     }}>처음 방문하셨나요?</p>
                 <button className="buttonStyleW"
-                        onClick={moveLeft}
+                        onClick={moveTop}
                         style={{
                             fontWeight: '100'
                         }}>회원가입</button>         

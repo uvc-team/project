@@ -6,6 +6,7 @@ import KakaoOauth from "./component/user/kakao";
 import HomePage from "./component/HomePage";
 import LoginPage from "./component/loginPage";
 import Profile from "./component/user/proflie";
+import MasterProfile from "./component/rankProfile/master";
 import "../src/css/App.css";
 
 
@@ -20,6 +21,7 @@ function App() {
           <Route path="/kakao" element={<KakaoOauth />} />
           <Route path="/loginPage" element={<LoginPage />} />
           <Route path="/profile" element={<Profile />} />
+          <Route path="/master" element={<MasterProfile />} />
         </Routes>
         
       </div>

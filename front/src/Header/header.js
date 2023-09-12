@@ -48,20 +48,25 @@ function Header({ numValue, setNumValue }) {
         <Toolbar>
           <Typography variant="h6" sx={{ flexGrow: 1 }}></Typography>
           <Tabs value={numValue} onChange={changeNumber}>
-            <Tab
+            {token === setToken ? (
+              // 토큰이 있는 경우 중 저장된 토큰과 같다면 대시보드 탭을 렌더링
+              <Tab
+              label="대시보드"
+              icon={<Airplay />}
+              component={Link}
+              to="/dash"
+              sx={{ color: "white" }}
+             />
+            ) : (
+              // 토큰이 없거나 다를 경우 대시보드 홈을 렌더링 
+              <Tab
               label="홈"
               icon={<HomeIcon />}
               component={Link}
               to="/"
               sx={{ color: "white" }}
             />
-            <Tab
-              label="대시보드"
-              icon={<Airplay />}
-              component={Link}
-              to="/dash"
-              sx={{ color: "white" }}
-            />
+            )}
             <Tab
               label="계정"
               icon={<AccountCircleIcon />}
