@@ -16,7 +16,6 @@ export default function Profile() {
               <p style={{
                 fontSize: '5px',
               }}>123@email.com</p>
-               {/* 로그아웃 컴포넌트를 렌더링합니다. */}
           </p>
           <Logout />
         </div>

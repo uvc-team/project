@@ -11,7 +11,7 @@
 
 .pageBox {
     width: 700px;
-    height: 100vh;
+    height: 750px;
     overflow: hidden;
     /* 넘치는 부분은 숨김 */
     position: relative;

@@ -34,7 +34,7 @@ const Login = (props) => {
       );
       
       // 서버에서 응답을 받으면 원하는 동작을 수행할 수 있습니다.
-      console.log("회원 가입 성공:", response.data);
+      console.log("로그인 성공:", response.data);
 
       if (response.data && response.data.token) {
         localStorage.setItem("token", response.data.token); // 토큰 발행

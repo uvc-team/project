@@ -49,7 +49,7 @@ function WebGL() {
         currentY.current = tag22.value;
       }
     });
-
+// 화면 비율
     const canvas = document.querySelector("#webgl");
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(
@@ -113,15 +113,36 @@ function WebGL() {
       canvas: canvas,
       antialias: true,
     });
+
     renderer.setPixelRatio(window.devicePixelRatio);
-    renderer.setSize(window.innerWidth * 0.45, window.innerHeight * 0.85);
+    // renderer.setSize(window.innerWidth * 0.45, window.innerHeight * 0.85);
+
+    // .Right 클래스에 맞게 캔버스 크기를 설정
+    const rightElement = document.querySelector(".Right");
+
+    // 캔버스 크기 업데이트
+    function updateCanvasSize(){
+
+    const rightWidth = rightElement.clientWidth;
+    const rightHeight = rightElement.clientHeight;
+
+    // .Right의 가로와 세로 비율에 맞춰 카메라 비율 조절
+    camera.aspect = rightWidth/rightHeight; 
+    renderer.setSize(rightWidth, rightHeight);
+    }
+    
+    // 초기 화면 크기 설정
+    updateCanvasSize();
+
     renderer.shadowMap.enabled = true;
     renderer.setClearColor(0x1c2631);
 
+    // 윈도우 크기가 변경될 때마다 크기 업데이트
     window.addEventListener("resize", () => {
-      camera.aspect = window.innerWidth / window.innerHeight;
-      camera.updateProjectionMatrix();
-      renderer.setSize(window.innerWidth, window.innerHeight);
+      updateCanvasSize();
+      // camera.aspect = window.innerWidth / window.innerHeight;
+      // camera.updateProjectionMatrix();
+      // renderer.setSize(window.innerWidth, window.innerHeight);
     });
 
     const directionalLight = new THREE.DirectionalLight(0xffffff, 2);
@@ -156,9 +177,12 @@ function WebGL() {
   }, []);
 
   return (
-    <div>
-      <canvas id="webgl" style={{ borderRadius: "30px" }}></canvas>
-    </div>
+        <div className="Right" >
+          <canvas id="webgl" 
+              style={{ borderRadius: "30px",
+                        padding: '2%'}}></canvas>
+        </div>
+    
   );
 }
 
