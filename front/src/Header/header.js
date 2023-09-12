@@ -29,7 +29,7 @@ function Header({ numValue, setNumValue }) {
   };
 
   const handleAccountClick = () => {
-    if (token === setToken) {
+    if (setToken) {
       // 토큰이 있는 경우 중 저장된 토큰과 같다면 계정 아이콘을 클릭하면 프로필 페이지로 이동
       navigate("/profile");
     } else {
@@ -48,8 +48,8 @@ function Header({ numValue, setNumValue }) {
         <Toolbar>
           <Typography variant="h6" sx={{ flexGrow: 1 }}></Typography>
           <Tabs value={numValue} onChange={changeNumber}>
-            {token === setToken ? (
-              // 토큰이 있는 경우 중 저장된 토큰과 같다면 대시보드 탭을 렌더링
+            {setToken ? (
+              // 토큰이 있다면 대시보드 탭을 렌더링
               <Tab
               label="대시보드"
               icon={<Airplay />}

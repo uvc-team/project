@@ -124,7 +124,9 @@ function GraphComponent() {
     };
   }, []);
   return (
-      <Bar data={chartData} options={options} />
+    <div>
+      <Bar data={chartData} options={options} style={{ width: '100%'}}/>
+    </div>
   );
 }
 

@@ -180,7 +180,7 @@ function WebGL() {
         <div className="Right" >
           <canvas id="webgl" 
               style={{ borderRadius: "30px",
-                        padding: '2%'}}></canvas>
+                        padding: '1%'}}></canvas>
         </div>
     
   );
