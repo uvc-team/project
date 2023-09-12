@@ -194,7 +194,7 @@ export default class Edukit {
       const fixedValue = parseFloat(value.toFixed(2));
       const fixedCurrentX = parseFloat(currentX.toFixed(2));
       const deltaXDeg = Math.abs(fixedValue - fixedCurrentX); // degree 단위로 차이 계산
-      const deltaXRad = MathUtils.degToRad(deltaXDeg * 1); // 비례 상수를 조절하여 세밀함을 결정
+      const deltaXRad = MathUtils.degToRad(deltaXDeg * 0.01); // 비례 상수를 조절하여 세밀함을 결정
 
       if (fixedValue < fixedCurrentX) {
         this.axes.xAxis.rotation.y += deltaXRad;

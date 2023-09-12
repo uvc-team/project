@@ -6,7 +6,7 @@ const {
   verifyToken,
 } = require("../middlewares/index");
 
-const { signup, login, logout, nickChange } = require("../controllers/auth");
+const { signup, login, logout } = require("../controllers/auth");
 
 const router = express.Router();
 
@@ -40,8 +40,5 @@ router.get("/kakao/callback", (req, res, next) => {
 });
 
 router.get("/logout", verifyToken, logout);
-
-//todo 닉네임 변경
-router.patch("/nick", isLoggedIn, nickChange);
 
 module.exports = router;
