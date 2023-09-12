@@ -2,24 +2,27 @@ const bcrypt = require("bcrypt");
 const passport = require("passport");
 const { createToken } = require("../middlewares/index");
 const User = require("../models/user");
+const Position = require("../models/position");
 
 exports.signup = async (req, res, next) => {
-  const { email, nick, password } = req.body;
+  const { email, name, password } = req.body;
   try {
-    const exUser = await User.findOne({ where: { email } });
+    const exUser = await User.findOne({
+      where: { email },
+    });
     if (exUser) {
       return res.status(404).json({ message: "이미 존재하는 이메일 입니다" });
     }
-    const exnick = await User.findOne({ where: { nick } });
-    if (exnick) {
-      return res.status(404).json({ message: "중복되는 닉네임 입니다." });
+    if (!name) {
+      return res.status(404).json({ message: "이름을 입력해 주세요" });
     }
 
     const hash = await bcrypt.hash(password, 12);
     await User.create({
       email,
-      nick,
+      name,
       password: hash,
+      positionId: 3,
     });
     return res.status(200).json({ message: "회원가입 성공" });
   } catch (error) {
@@ -48,13 +51,25 @@ exports.login = (req, res, next) => {
           return next(loginError);
         }
 
-        // 로그인 성공 후 토큰 생성
         try {
+          //사용자 직급 추가
+          const userRole = await User.findOne({
+            where: { userId: user.userId },
+            include: [{ model: Position, as: "Position" }],
+          });
+
+          if (!userRole) {
+            return res.status(404).json({ message: "없는 사용자 입니다" });
+          }
+          const role = userRole.Position.dataValues.role;
+
+          // 로그인 성공 후 토큰 생성
           const token = createToken(user);
 
           return res.json({
             message: "로그인성공",
             token,
+            role,
           });
         } catch (error) {
           console.error(error);
@@ -77,40 +92,4 @@ exports.logout = (req, res) => {
       res.status(200).json({ message: "로그아웃하엿습니다" });
     }
   });
-};
-
-exports.nickChange = async (req, res, next) => {
-  const { email, newnick, password } = req.body;
-  try {
-    const user = await User.findOne({ where: { email } });
-    const samenick = await User.findOne({ where: { nick: newnick } });
-
-    if (!user) {
-      return res.status(404).json({ message: "존재하지 않는 이메일입니다." });
-    }
-
-    if (!newnick) {
-      return res.status(400).json({ message: "닉네임을 입력해주세요." });
-    }
-
-    if (samenick) {
-      return res.status(400).json({ message: "중복되는 닉네임입니다." });
-    }
-
-    // 입력된 비밀번호와 저장된 해시 값의 일치 여부 확인
-    const pass = await bcrypt.compare(password, user.password);
-
-    if (!pass) {
-      return res.status(400).json({ message: "비밀번호가 일치하지 않습니다." });
-    }
-
-    user.nick = newnick;
-
-    await user.save();
-
-    return res.status(200).json({ message: "닉네임 변경 성공" });
-  } catch (error) {
-    console.error(error);
-    return next(error);
-  }
 };
