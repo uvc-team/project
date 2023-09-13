@@ -39,8 +39,21 @@ const Login = (props) => {
       if (response.data && response.data.token) {
         localStorage.setItem("token", response.data.token); // 토큰 발행
         console.log("Saved token:", localStorage.getItem("token")); // 확인용
+
         // 예를 들어, 회원 가입이 성공했을 때 MyPage로 이동할 수 있습니다
-        navigate("/");
+        const position = response.data.positionId;
+        
+        if(position === 1){
+          navigate('../master', { state: { id: position } });
+          console.log({state:{id: position}});
+        }
+        if(position === 2){
+          console.log('매니저입니다.');
+        }
+        if(position === 3){
+          navigate('../profile');
+        }
+        
         
 
       } else {

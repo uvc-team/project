@@ -6,18 +6,13 @@ import "./userCss/loginPage.css";
 import "../css/front.css";
 
 const LoginPage = () => { 
-    const [position, setPosition] = useState(0);
+    const [isHidden, setIsHidden] = useState(false);
     const [numValue, setNumValue] = useState(0);
-
-        const moveBotton = () => {
-            setPosition(position - 100);
-          };
-        
-          const moveTop = () => {
-            setPosition(position + 100); 
-          };
-        
-
+    
+        const toggleHidden = () =>{
+            setIsHidden(!isHidden);
+        }
+    // 토큰을 불러와 직급 판단
              
 
     return (
@@ -49,17 +44,16 @@ const LoginPage = () => {
                         marginTop: "40px"
                     }}>가입된 정보가 있으신가요?</p>
                 <button className="buttonStyleW"
-                onClick={moveBotton}
+                onClick={toggleHidden}
                         style={{
                             fontWeight: '100'
                         }}>로그인</button>
             </div>
             
                 </div>
-                <div className="loginPage"
-                style={{ transform: `translateY(${position}vw)` }} >
+                <div className={`loginPage ${isHidden ? "" : "hidden"}`} >
                 <Login />
-                <div className="joinBoxText">
+                <div className= "joinBoxText">
                 <p className="texStyle"
                     style={{
                         fontSize: "35px",
@@ -80,7 +74,7 @@ const LoginPage = () => {
                         marginTop: "40px"
                     }}>처음 방문하셨나요?</p>
                 <button className="buttonStyleW"
-                        onClick={moveTop}
+                        onClick={toggleHidden}
                         style={{
                             fontWeight: '100'
                         }}>회원가입</button>         

@@ -10,46 +10,63 @@ import {
 import HomeIcon from "@mui/icons-material/Home";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import Airplay from "@mui/icons-material/Airplay";
-import { Link, useNavigate } from "react-router-dom";
-
-function Header({ numValue, setNumValue }) {
-  const [token, setToken] = useState("");
-  const navigate = useNavigate(); // useNavigate 초기화
+import { Link, useNavigate, useLocation } from "react-router-dom";
+import Notice from "../component/notice";
 
   // 페이지 로딩시 로컬스토리지에서 토큰 가져와 사용자 인증 상태를 확인
-  useEffect(() => {
-    const storedToken = localStorage.getItem("token");
-    if (storedToken) {
-      setToken(storedToken);
-    }
-  }, []);
+  function Header({ numValue, setNumValue }) {
+    const [token, setToken] = useState("");
+    const navigate = useNavigate(); // useNavigate 초기화
 
-  const changeNumber = (event, newValue) => {
-    setNumValue(newValue);
-  };
-
-  const handleAccountClick = () => {
-    if (setToken) {
-      // 토큰이 있는 경우 중 저장된 토큰과 같다면 계정 아이콘을 클릭하면 프로필 페이지로 이동
-      navigate("/profile");
-    } else {
-      // 토큰이 없는 경우 계정 아이콘을 클릭하면 로그인 페이지로 이동
-      navigate("/loginPage");
-    }
-  };
+    // 페이지 로딩시 로컬스토리지에서 토큰 가져와 사용자 인증 상태를 확인
+    const location = useLocation();
+    const id = location.state;
+    useEffect(() => {
+      const storedToken = localStorage.getItem("token");
+      if (storedToken) {
+        setToken(storedToken);
+      }
+    }, []);
+  
+    const changeNumber = (event, newValue) => {
+      setNumValue(newValue);
+    };
+  
+    const handleAccountClick = () => {
+      if (!token) {
+        // 토큰이 없을 때 로그인 페이지로 이동
+        navigate("/loginPage");
+      } else {
+        // 토큰이 있을 때 프로필 페이지로 이동
+        navigate("/profile");
+        
+      }
+    };
 
   return (
     <div>
       <CssBaseline />
       <AppBar
         position="fixed"
-        style={{ backgroundColor: "transparent", boxShadow: "none" }}
+        style={{ backgroundColor: "transparent", boxShadow: "none"}}
       >
         <Toolbar>
-          <Typography variant="h6" sx={{ flexGrow: 1 }}></Typography>
+          <Typography variant="h6" sx={{ flexGrow: 1, display:'flex',justifyContent: 'center' }}>
+          <Tab
+              icon={<Notice sx={{fontSize:'100%'}} />}
+              to = {'/notice'}
+              sx={{ color: "white", width:'100%'}}
+              component={Link}
+            />
+          </Typography>
+          <Tab
+              label="홈"
+              icon={<HomeIcon />}
+              component={Link}
+              to="/"
+              sx={{ color: "white" }}
+            />
           <Tabs value={numValue} onChange={changeNumber}>
-            {setToken ? (
-              // 토큰이 있다면 대시보드 탭을 렌더링
               <Tab
               label="대시보드"
               icon={<Airplay />}
@@ -57,22 +74,14 @@ function Header({ numValue, setNumValue }) {
               to="/dash"
               sx={{ color: "white" }}
              />
-            ) : (
-              // 토큰이 없거나 다를 경우 대시보드 홈을 렌더링 
-              <Tab
-              label="홈"
-              icon={<HomeIcon />}
-              component={Link}
-              to="/"
-              sx={{ color: "white" }}
-            />
-            )}
+            
             <Tab
               label="계정"
               icon={<AccountCircleIcon />}
               onClick={handleAccountClick}
               sx={{ color: "white" }}
             />
+            
           </Tabs>
         </Toolbar>
       </AppBar>
