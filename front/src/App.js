@@ -8,6 +8,7 @@ import LoginPage from "./component/loginPage";
 import Profile from "./component/user/proflie";
 import MasterProfile from "./component/rankProfile/master";
 import "../src/css/App.css";
+import Notice from "./component/notice";
 
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
           <Route path="/loginPage" element={<LoginPage />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/master" element={<MasterProfile />} />
+          <Route path="/notice" element={<Notice />} />
         </Routes>
         
       </div>

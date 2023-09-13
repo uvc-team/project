@@ -1,0 +1,35 @@
+.notice {
+    position: relative;
+    padding: 0 40px;
+    height: 70px;
+    width: 100%;
+    overflow: hidden;
+    list-style: none;
+    display: flex;
+}
+
+.notice-content {
+    position: absolute;
+    width: 100%;
+    height: 30px;
+    padding: 20px 0;
+    line-height: 30px;
+    transition-duration: 2s;
+    transition-property: opacity, transform;
+    transform: translateY(100%);
+    opacity: 0;
+}
+
+.notice-content.active {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+.notice-header {
+    font-weight: bold;
+    margin-right: 5px;
+}
+
+.notice-title {
+    font-weight: normal;
+}
