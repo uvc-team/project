@@ -10,22 +10,23 @@ import {
 import HomeIcon from "@mui/icons-material/Home";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import Airplay from "@mui/icons-material/Airplay";
-import { Link, useNavigate, useLocation } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Notice from "../component/notice";
 
   // 페이지 로딩시 로컬스토리지에서 토큰 가져와 사용자 인증 상태를 확인
-  function Header({ numValue, setNumValue }) {
+  function Header({ numValue, setNumValue,position,setPosition }) {
     const [token, setToken] = useState("");
     const navigate = useNavigate(); // useNavigate 초기화
+    
 
     // 페이지 로딩시 로컬스토리지에서 토큰 가져와 사용자 인증 상태를 확인
-    const location = useLocation();
-    const id = location.state;
     useEffect(() => {
       const storedToken = localStorage.getItem("token");
+    
       if (storedToken) {
         setToken(storedToken);
       }
+  
     }, []);
   
     const changeNumber = (event, newValue) => {
@@ -39,6 +40,8 @@ import Notice from "../component/notice";
       } else {
         // 토큰이 있을 때 프로필 페이지로 이동
         navigate("/profile");
+        console.log(position);
+ 
         
       }
     };
