@@ -1,14 +1,11 @@
-import React,{useState} from 'react';
+import React from 'react';
 import Logout from './Logout';
-import Header from '../../Header/header';
+
 import '../userCss/profile.css';
 
 export default function Profile() {
-  const [numValue, setNumValue] = useState(0);
-  
   return (
     <div className='proFileBackground'>
-      <Header numValue={numValue} setNumValue={setNumValue} /> 
       <div className='profileBox'>
         <div className='userProfile'>
           <h2>안녕하세요 OO님</h2>

@@ -1,12 +1,12 @@
 import React, { useEffect, useRef, useState } from "react";
 import "../css/homePage.css";
-import Header from "../Header/header";
+
 import Team from "../component/team";
 
 const HomePage = (props) => {
   const elementRefs = [useRef(null), useRef(null), useRef(null)];
   const [isVisible, setIsVisible] = useState([false, false, false]);
-  const [numValue, setNumValue] = useState(0);
+ 
 
 
   useEffect(() => {
@@ -54,7 +54,7 @@ const HomePage = (props) => {
   
   return (
     <div>
-      <Header numValue={numValue} setNumValue={setNumValue} />
+
       <div className="homeBody">
         {/* 화면1 */}
         <div className="homePage1Box">
