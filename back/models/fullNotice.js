@@ -9,9 +9,17 @@ class FullNotice extends Sequelize.Model {
           autoIncrement: true,
           primaryKey: true,
         },
+        title: {
+          type: Sequelize.STRING(255),
+          allowNull: false,
+        },
         content: {
           type: Sequelize.TEXT,
           allowNull: false,
+        },
+        readCount: {
+          type: Sequelize.INTEGER,
+          defaultValue: 0,
         },
       },
       {
