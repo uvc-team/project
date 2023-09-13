@@ -1,13 +1,13 @@
-import React,{ useState, useEffect } from "react";
+import React,{ useState } from "react";
 import Join from "./user/Join";
 import Login from "./user/login";
-import Header from "../Header/header";
+
 import "./userCss/loginPage.css";
 import "../css/front.css";
 
 const LoginPage = () => { 
     const [isHidden, setIsHidden] = useState(false);
-    const [numValue, setNumValue] = useState(0);
+   
     
         const toggleHidden = () =>{
             setIsHidden(!isHidden);
@@ -17,7 +17,6 @@ const LoginPage = () => {
 
     return (
         <div className="Background">
-            <Header numValue={numValue} setNumValue={setNumValue} />
             <div className="pageBox">
                 <div className="joinPage">
             <Join />
