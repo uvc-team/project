@@ -1,4 +1,4 @@
-import { Group, AxesHelper, MathUtils } from "three";
+import { Group, AxesHelper,BoxGeometry, MeshBasicMaterial, Mesh, MathUtils } from "three";
 import { FBXLoader } from "three/examples/jsm/loaders/FBXLoader";
 
 export default class Edukit {
@@ -7,6 +7,7 @@ export default class Edukit {
     this.object = {};
     this.loaded = false;
     this.axes = {};
+    this.Tray3 = null; // Tray3 프로퍼티를 초기화
   }
 
   async fileload(scene) {
@@ -19,6 +20,11 @@ export default class Edukit {
     const groupV = (this.axes.group = new Group());
     const groupT = (this.axes.group = new Group());
     const groupC = (this.axes.group = new Group());
+
+    // const geometry = new BoxGeometry(3, 3, 3);
+    //     const material = new MeshBasicMaterial( {color: 'red'} );
+    //     const mesh = new Mesh(geometry, material)
+    //     mesh.position.y = 3
 
     groupX2.position.x = 5;
     group3.position.x = 10;
@@ -82,6 +88,8 @@ export default class Edukit {
     ));
     const Dice2 = this.object.Dice.clone();
     const Tray2 = this.object.Tray.clone();
+    const Tray3 = this.object.Tray.clone();
+    this.Tray3 = Tray3;
 
     body.scale.set(0.5, 0.5, 0.5);
 
@@ -133,8 +141,8 @@ export default class Edukit {
     group1.add(RobotBody1, RobotPusher1);
     group2.add(RobotBody2, RobotPusher2);
 
-    groupX2.add(mesh1, new AxesHelper(7));
-    groupX.add(mesh2, groupX2, new AxesHelper(7));
+    groupX2.add(mesh1, new AxesHelper(7), );
+    groupX.add(mesh2, groupX2, new AxesHelper(7), );
     groupY.add(groupX, mesh3);
     group3.add(groupY, mesh4);
     groupV.add(VisionSensor);
@@ -144,7 +152,9 @@ export default class Edukit {
     group1.position.set(-10, 0, 0.5);
     group2.position.set(0, 0, 2);
     group3.position.set(10, 0, 4.5);
+
     Belt.position.set(0.5, -3.5, 22.5);
+
     VisionSensor.position.set(3, -4.3, -7);
     groupT.position.set(0, -3.5, -19.5);
     groupC.position.set(1.5, -3.5, -5);
@@ -152,6 +162,9 @@ export default class Edukit {
     Dice2.position.set(8.85, 6, 23.3);
     Tray.position.set(-1.6, -3.3, 22.5);
     Tray2.position.set(-1.6, 3.5, 22.5);
+
+    Tray3.position.set(-1.2, -3, 27);
+    Tray3.scale.set(0.5, 0.5, 0.5);
 
     group3.scale.set(1, 1, 1);
     VisionSensor.scale.set(0.3, 0.3, 0.3);
@@ -170,9 +183,30 @@ export default class Edukit {
     scene.add(Dice2);
     scene.add(Tray);
     scene.add(Tray2);
+    scene.add(Tray3);
 
     this.loaded = true;
   }
+
+  actionChip(chip) {
+    if (typeof chip === 'boolean') {
+      if (chip === true) {
+        // chip이 true인 경우에 수행할 작업
+        console.log(chip); // chip 변수의 값을 출력
+        this.Tray3.position.x += 0.01;
+        console.log(this.Tray3.position.x);
+      } else {
+        // chip이 false인 경우에 수행할 작업
+        console.log('00');
+      }
+    } else {
+      // chip이 불리언이 아닌 경우에 수행할 작업
+      console.log(typeof chip)
+    }
+  }
+  
+
+  
   actionY(value) {
     const currentY = this.axes.yAxis.position.y;
     if (typeof value !== "undefined") {
@@ -193,15 +227,15 @@ export default class Edukit {
     if (typeof value !== "undefined") {
       const fixedValue = parseFloat(value.toFixed(2));
       const fixedCurrentX = parseFloat(currentX.toFixed(2));
-      const deltaXDeg = Math.abs(fixedValue - fixedCurrentX); // degree 단위로 차이 계산
-      const deltaXRad = MathUtils.degToRad(deltaXDeg * 0.01); // 비례 상수를 조절하여 세밀함을 결정
+      const deltaXDeg = Math.abs(fixedValue - fixedCurrentX)*0.01; // degree 단위로 차이 계산
+      //const deltaXRad = MathUtils.degToRad(deltaXDeg * 0.01); // 비례 상수를 조절하여 세밀함을 결정
 
       if (fixedValue < fixedCurrentX) {
-        this.axes.xAxis.rotation.y += deltaXRad;
-        this.axes.xAxis2.rotation.y -= deltaXRad;
+        this.axes.xAxis.rotation.y += deltaXDeg;
+        this.axes.xAxis2.rotation.y -= deltaXDeg;
       } else if (fixedValue > fixedCurrentX) {
-        this.axes.xAxis.rotation.y -= deltaXRad;
-        this.axes.xAxis2.rotation.y += deltaXRad;
+        this.axes.xAxis.rotation.y -= deltaXDeg;
+        this.axes.xAxis2.rotation.y += deltaXDeg;
       }
     }
   }
