@@ -10,7 +10,10 @@ import MasterProfile from "./component/rankProfile/master";
 import "../src/css/App.css";
 import Notice from "./component/notice";
 import Header from "./Header/header";
-
+import NoticeBoard from "./component/notice/NoticeBoard";
+import PostView from "./component/notice/post/PostView";
+import PostMain from "./component/notice/post/PostMain";
+import CreatePostPage from "./component/notice/CreatePost";
 import { checkSever } from "./component/user/checkServer";
 
 
@@ -37,6 +40,10 @@ function App() {
           <Route path="/profile" element={<Profile />} />
           <Route path="/master" element={<MasterProfile />} />
           <Route path="/notice" element={<Notice />} />
+          <Route path="/noticeBoard" element={<NoticeBoard />} />
+          <Route path="/posts" element={<PostMain />} />
+          <Route path="/postView/:noticeId" element={<PostView />} />
+          <Route path="/create-post" element={<CreatePostPage />} />
         </Routes>
         
       </div>
