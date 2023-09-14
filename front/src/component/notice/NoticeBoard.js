@@ -17,13 +17,16 @@ const NoticeBoard = () => {
       })
       .then((response) => {
         // 서버에서 받아온 데이터를 가공하여 포맷된 날짜와 클릭 핸들러까지 포함한 배열을 생성합니다.
-        const formattedData = response.data.notices.map((item) => [
+        let formattedData = response.data.notices.map((item) => [
           item.noticeId,
           item.title,
           item.formattedDate,
           item.readCount,
           () => handleRowClick(item.noticeId),
         ]);
+
+        // noticeId(글번호) 기준으로 내림차순 정렬합니다.
+        formattedData.sort((a, b) => b[0] - a[0]);
 
         setData(formattedData);
       })
@@ -38,6 +41,7 @@ const handleRowClick = (noticeId) => {
 const handleCreatePostButtonClick = () => {
   navigate('/create-post');
 };
+
 
 return (
   <div style={{ paddingTop: "73px", height: "100vh", width: "100vw" }}>
