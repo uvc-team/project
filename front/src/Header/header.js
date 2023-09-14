@@ -63,7 +63,7 @@ import Notice from "../component/notice";
               icon={<Notice sx={{fontSize:'100%'}} />}
               to = {'/notice'}
               sx={{ color: "white", width:'100%'}}
-              component={Link}
+              // component={Link}
             />
           </Typography>
           
