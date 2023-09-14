@@ -1,5 +1,6 @@
 const FullNotice = require("../models/fullNotice");
 const Answer = require("../models/answer");
+const User = require("../models/user");
 //전체공지조회
 exports.getNoticeById = async (req, res, next) => {
   try {
@@ -30,6 +31,7 @@ exports.getDetailNotice = async (req, res, next) => {
     //해당전체공지의 댓글 추가
     const answer = await Answer.findAll({
       where: { noticeId: noticeId },
+      include: [{ model: User, attributes: ["name"], as: "User" }],
     });
 
     return res.status(200).json({ message: "상세조회성공", notic, answer });
@@ -43,6 +45,14 @@ exports.getDetailNotice = async (req, res, next) => {
 exports.notify = async (req, res, next) => {
   const { title, content } = req.body;
   const userId = req.userId;
+
+  if (!title) {
+    return res.status(400).json({ error: "제목을 입력해주세요" });
+  }
+
+  if (!content) {
+    return res.status(400).json({ error: "내용을 입력해주세요" });
+  }
 
   if (title.length > 100) {
     res.status(404).json({ error: "100자 이상은 입력 불가능 합니다" });

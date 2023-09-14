@@ -1,9 +1,12 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-import { useParams, useNavigate } from 'react-router-dom';
-import '../../../css/Post.css';
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import { useParams, useNavigate } from "react-router-dom";
+import "../../../css/Post.css";
+
 const PostView = () => {
   const [data, setData] = useState(null);
+  const [answer, setAnswer] = useState(null);
+  const [comment, setComment] = useState("");
   const { noticeId } = useParams();
   const navigate = useNavigate();
 
@@ -13,11 +16,11 @@ const PostView = () => {
         const response = await axios.get(
           `${process.env.REACT_APP_URL}/notice/fullPosts?noticeId=${noticeId}`,
           {
-            headers: { Authorization: localStorage.getItem('token') || '' },
+            headers: { Authorization: localStorage.getItem("token") || "" },
           }
         );
-        console.log(response.data.notic)
-        setData(response.data.notic); // Set the response data to your state variable
+        setData(response.data.notic);
+        setAnswer(response.data.answer);
       } catch (error) {
         console.error(error);
       }
@@ -26,38 +29,65 @@ const PostView = () => {
     fetchData();
   }, [noticeId]);
 
+  // Function to handle comment submission
+  const handleCommentSubmit = async (e) => {
+    e.preventDefault();
+
+    // Call API to add comment
+
+    // After adding the comment reset the input field and fetch data again to update comments list.
+    setComment("");
+  };
+
+  // 시간 포맷팅 함수
+  const formatTime = (isoDateString) => {
+    const date = new Date(isoDateString);
+    return `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(
+      2,
+      "0"
+    )}-${String(date.getDate()).padStart(2, "0")} ${String(
+      date.getHours()
+    ).padStart(2, "0")}:${String(date.getMinutes()).padStart(2, "0")}`;
+  };
+
+  if (!data) return <div>Loading...</div>;
+
   return (
-    <div className="post-view-wrapper">
-      <h2 align="center">게시글 상세정보</h2>
-      {data ? (
-        <>
-          <div className="post-view-row">
-            <label>게시글 번호</label>
-            <label>{data.noticeId}</label>
+    <div className="post-back-ground">
+      <div className="top-section">
+        <div className="info">
+          <div>No: {data.noticeId}</div>
+          <div>공지 날짜: {formatTime(data.createdAt)}</div>
+          <div>조회 횟수: {data.readCount}</div>
+        </div>
+        <h1>{data.title}</h1>
+      </div>
+      <hr />
+      <div className="content-section">
+        <h3>공지사항:</h3>
+        <p>{data.title}</p>
+      </div>
+      <hr />
+      <div className="comment-section">
+        <h3>댓글:</h3>
+        {(answer || []).map((answer) => (
+          <div className="comment" key={answer.answerId}>
+            <strong>{answer.User.name}:</strong>
+            <p>{answer.content}</p>
+            <p>{formatTime(answer.createdAt)}</p>
           </div>
-          <div className="post-view-row">
-            <label>제목</label>
-            <label>{data.title}</label>
-          </div>
-          <div className="post-view-row">
-            <label>작성일</label>
-            <label>{data.createDate}</label>
-          </div>
-          <div className="post-view-row">
-            <label>조회수</label>
-            <label>{data.readCount}</label>
-          </div>
-          <div className="post-view-row">
-            <label>내용</label>
-            <div>{data.content}</div>
-          </div>
-        </>
-      ) : (
-        '해당 게시글을 찾을 수 없습니다.'
-      )}
-      <button className="post-view-go-list-btn" onClick={() => navigate(-1)}>
-        목록으로 돌아가기
-      </button>
+        ))}
+        {/* Add a Comment */}
+        <form onSubmit={handleCommentSubmit}>
+          <label>댓글달기:</label>
+          <input
+            type="text"
+            value={comment}
+            onChange={(e) => setComment(e.target.value)}
+          />
+          <button type="submit">Submit</button>
+        </form>
+      </div>
     </div>
   );
 };
