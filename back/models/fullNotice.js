@@ -27,7 +27,7 @@ class FullNotice extends Sequelize.Model {
         timestamps: true,
         underscored: false,
         modelName: "FullNotice",
-        tableName: "fullNotices",
+        tableName: "fullnotices",
         paranoid: true,
         charset: "utf8",
         collate: "utf8_general_ci",
@@ -41,14 +41,6 @@ class FullNotice extends Sequelize.Model {
         name: "userId",
         onDelete: "CASCADE",
         as: "User",
-      },
-    });
-    // 전체공지는 전체공지권한을 가진 사용자에 의해 작성
-    db.FullNotice.belongsTo(db.FullNoticeAuthority, {
-      foreignKey: {
-        name: "fnauthorityId",
-        onDelete: "SET NULL",
-        as: "FullNoticeAuthority",
       },
     });
     //전체공지엔 여러 답글이 달린다
