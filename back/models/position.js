@@ -11,7 +11,13 @@ class Position extends Sequelize.Model {
         },
         role: {
           type: Sequelize.STRING(5),
+          defaultValue: "일반",
           allowNull: false,
+        },
+        fullNoticeAuthority: {
+          type: Sequelize.BOOLEAN,
+          allowNull: false,
+          defaultValue: false,
         },
       },
       {
@@ -31,12 +37,6 @@ class Position extends Sequelize.Model {
         onDelete: "SET NULL",
         as: "User",
       },
-    });
-    //여러 직급(사장, 매니저)은 전체공지권한이 있다
-    db.Position.hasMany(db.FullNoticeAuthority, {
-      foreignKey: "positionId",
-      onDelete: "CASCADE",
-      as: "FullNoticeAuthorities",
     });
   }
 }

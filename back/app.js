@@ -11,6 +11,8 @@ const { sequelize } = require("./models/index");
 const passportConfig = require("./passport/passport");
 const authRouter = require("./router/authRouter");
 const positionRouter = require("./router/positionRouter");
+const fullNoticeRouter = require("./router/fullNoticeRouter");
+const answerRouter = require("./router/answerRouter");
 const cors = require("cors");
 const app = express();
 
@@ -53,10 +55,9 @@ const allowedOrigins = [
   "http://192.168.219.101:3000",
   "http://172.30.1.17:3000",
   "http://localhost:3000",
-
   // "http://192.168.0.88:3000",
-  // "http://192.168.0.28:3000",
-  // "http://192.168.0.28:3001",
+  "http://192.168.0.28:3000",
+  "http://192.168.0.28:3002",
   // "http://192.168.0.43:3000",
 ];
 
@@ -76,6 +77,8 @@ app.use(
 // 라우터
 app.use("/auth", authRouter);
 app.use("/position", positionRouter);
+app.use("/notice", fullNoticeRouter);
+app.use("/answer", answerRouter);
 
 // 에러 핸들링
 app.use((req, res, next) => {

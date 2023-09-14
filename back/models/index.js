@@ -4,7 +4,6 @@ const User = require("./user");
 const Position = require("./position");
 const FullNotice = require("./fullNotice");
 const Answer = require("./answer");
-const FullNoticeAuthority = require("./fnauthority");
 
 dotenv.config();
 
@@ -30,7 +29,6 @@ db.User = User;
 db.FullNotice = FullNotice;
 db.Answer = Answer;
 db.Position = Position;
-db.FullNoticeAuthority = FullNoticeAuthority;
 
 //모델 초기화
 // User.initiate(sequelize);

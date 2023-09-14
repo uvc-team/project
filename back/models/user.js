@@ -49,15 +49,6 @@ class User extends Sequelize.Model {
         as: "Answer",
       },
     });
-
-    //매니저, 사장 두명은 전체공지권한을 가질수 있고, 일반유저는 전체공지 권한이 없다
-    db.User.hasMany(db.FullNoticeAuthority, {
-      foreignKey: {
-        name: "userId",
-        onDelete: "CASCADE",
-        as: "FullNoticeAuthority",
-      },
-    });
     //전체공지 권한이 있는 유저는 여러 전체공지를 할수있다
     db.User.hasMany(db.FullNotice, {
       foreignKey: {
