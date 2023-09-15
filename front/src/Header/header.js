@@ -13,6 +13,11 @@ import Airplay from "@mui/icons-material/Airplay";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import Notice from "../component/notice";
 
+// 페이지 로딩시 로컬스토리지에서 토큰 가져와 사용자 인증 상태를 확인
+function Header({ numValue, setNumValue }) {
+  const [token, setToken] = useState("");
+  const navigate = useNavigate(); // useNavigate 초기화
+
   // 페이지 로딩시 로컬스토리지에서 토큰 가져와 사용자 인증 상태를 확인
   function Header() {
     const [token, setToken] = useState("");
@@ -55,7 +60,7 @@ import Notice from "../component/notice";
       <CssBaseline />
       <AppBar
         position="fixed"
-        style={{ backgroundColor: "transparent", boxShadow: "none"}}
+        style={{ backgroundColor: "transparent", boxShadow: "none" }}
       >
         <Toolbar>
           <Typography variant="h6" sx={{ flexGrow: 1, display:'flex',justifyContent: 'center' }}>
@@ -85,7 +90,6 @@ import Notice from "../component/notice";
                 />
               )}
              
-            
             <Tab
               label="계정"
               icon={<AccountCircleIcon />}
@@ -93,7 +97,6 @@ import Notice from "../component/notice";
               sx={{ color: "white" }}
               
             />
-            
           </Tabs>
           {}
         </Toolbar>
