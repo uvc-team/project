@@ -49,7 +49,7 @@ function WebGL() {
         currentY.current = tag22.value;
       }
     });
-// 화면 비율
+    // 화면 비율
     const canvas = document.querySelector("#webgl");
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(
@@ -121,16 +121,15 @@ function WebGL() {
     const rightElement = document.querySelector(".Right");
 
     // 캔버스 크기 업데이트
-    function updateCanvasSize(){
+    function updateCanvasSize() {
+      const rightWidth = rightElement.clientWidth;
+      const rightHeight = rightElement.clientHeight;
 
-    const rightWidth = rightElement.clientWidth;
-    const rightHeight = rightElement.clientHeight;
-
-    // .Right의 가로와 세로 비율에 맞춰 카메라 비율 조절
-    camera.aspect = rightWidth/rightHeight; 
-    renderer.setSize(rightWidth, rightHeight);
+      // .Right의 가로와 세로 비율에 맞춰 카메라 비율 조절
+      camera.aspect = rightWidth / rightHeight;
+      renderer.setSize(rightWidth, rightHeight);
     }
-    
+
     // 초기 화면 크기 설정
     updateCanvasSize();
 
@@ -160,8 +159,8 @@ function WebGL() {
       camera.updateProjectionMatrix();
 
       if (edukitRef.current && edukitRef.current.loaded) {
-        console.log("-------------------Y", currentY.current);
-        console.log("-------------------X", currentX.current);
+        // console.log("-------------------Y", currentY.current);
+        // console.log("-------------------X", currentX.current);
         edukitRef.current.actionY(yAxisFunc(currentY.current));
         edukitRef.current.actionX(xAxisFunc(currentX.current));
       }
@@ -177,12 +176,12 @@ function WebGL() {
   }, []);
 
   return (
-        <div className="Right" >
-          <canvas id="webgl" 
-              style={{ borderRadius: "30px",
-                        padding: '1%'}}></canvas>
-        </div>
-    
+    <div className="Right">
+      <canvas
+        id="webgl"
+        style={{ borderRadius: "30px", padding: "1%" }}
+      ></canvas>
+    </div>
   );
 }
 
