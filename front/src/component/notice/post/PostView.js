@@ -16,6 +16,10 @@ const PostView = () => {
   const [data, setData] = useState(null);
   const [answer, setAnswer] = useState(null);
   const [comment, setComment] = useState("");
+  const [editMode, setEditMode] = useState(false);
+  const [editedTitle, setEditedTitle] = useState("");
+  const [editedContent, setEditedContent] = useState("");
+  const [showModal, setShowModal] = useState(false); //모달
   const { noticeId } = useParams();
   const navigate = useNavigate();
 
@@ -30,6 +34,9 @@ const PostView = () => {
         );
         setData(response.data.notic);
         setAnswer(response.data.answer);
+
+        setEditedTitle(response.data.notic.title);
+        setEditedContent(response.data.notic.content);
       } catch (error) {
         console.error(error);
       }
@@ -81,6 +88,42 @@ const PostView = () => {
     }
   };
 
+  //공지사항 업데이트
+  const handleUpdateNotice = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await axios.patch(
+        `${process.env.REACT_APP_URL}/notice/updateNotice`,
+        { title: editedTitle, content: editedContent, noticeId },
+        { headers: { Authorization: token } }
+      );
+      if (response.status === 200) {
+        console.log(response);
+        setData({ ...data, title: editedTitle, content: editedContent });
+        setEditMode(false);
+      }
+    } catch (error) {
+      console.error("error", error);
+    }
+  };
+
+  //공지사항 삭제
+  const handleDeleteNotice = async (e) => {
+    e.preventDefault(); // 이벤트의 기본 동작 막기
+    try {
+      const response = await axios.delete(
+        `${process.env.REACT_APP_URL}/notice/deleteNotice`,
+        { data: { noticeId: noticeId }, headers: { Authorization: token } }
+      );
+
+      if (response.status === 200) {
+        navigate("/noticeboard"); // 또는 다른 경로
+      }
+    } catch (error) {
+      console.error("error", error);
+    }
+  };
+
   // 시간 포맷팅 함수
   const formatTime = (isoDateString) => {
     const date = new Date(isoDateString);
@@ -107,7 +150,40 @@ const PostView = () => {
       <hr />
       <div className="content-section">
         <h3>공지사항:</h3>
-        <p>{data.content}</p>
+        {!editMode ? (
+          <>
+            <p>{data.content}</p>
+            <button type="button" onClick={() => setEditMode(true)}>
+              수정하기
+            </button>
+            <button type="button" onClick={() => setShowModal(true)}>
+              삭제하기
+            </button>
+          </>
+        ) : (
+          <form onSubmit={handleUpdateNotice}>
+            <input
+              type="text"
+              value={editedTitle}
+              onChange={(e) => setEditedTitle(e.target.value)}
+            />
+            <textarea
+              value={editedContent}
+              onChange={(e) => setEditedContent(e.target.value)}
+            />
+            <button type="submit">변경</button>
+            <button type="button" onClick={() => setEditMode(false)}>
+              취소
+            </button>
+          </form>
+        )}
+        {showModal && (
+          <div className="modal">
+            <h2> 정말 삭제하시겠습니까?</h2>
+            <button onClick={handleDeleteNotice}>Yes</button>
+            <button onClick={() => setShowModal(false)}>NO</button>
+          </div>
+        )}
       </div>
       <hr />
       <div className="comment-section">

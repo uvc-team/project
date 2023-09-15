@@ -1,10 +1,8 @@
 import React, { useState } from "react";
 import axios from "axios";
-import '../userCss/loginPage.css'
-
+import "../../css/loginPage.css";
 
 const Join = (props) => {
-
   const [formData, setFormData] = useState({
     email: "",
     name: "",
@@ -18,7 +16,6 @@ const Join = (props) => {
       [name]: value,
     });
   };
-  
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -36,31 +33,32 @@ const Join = (props) => {
 
       // 모달 열고 응답 메세지 설정
     } catch (error) {
-
       //모달을 열고 오류 메세지를 설정
     }
   };
 
   return (
-    <form className="joinBox"
-        onSubmit={handleSubmit}>
-      <input className="inputStyle"
-  type="email"
-  id="email"
-  name="email"
-  value={formData.email}
-  onChange={handleChange}
-  placeholder="email"
+    <form className="joinBox" onSubmit={handleSubmit}>
+      <input
+        className="inputStyle"
+        type="email"
+        id="email"
+        name="email"
+        value={formData.email}
+        onChange={handleChange}
+        placeholder="email"
       />
-      <input className="inputStyle"
-            type="name"
-            id="name"
-            name="name"
-            value={formData.nick}
-            onChange={handleChange}
-            placeholder="Name"
-        />
-      <input className="inputStyle"
+      <input
+        className="inputStyle"
+        type="name"
+        id="name"
+        name="name"
+        value={formData.nick}
+        onChange={handleChange}
+        placeholder="Name"
+      />
+      <input
+        className="inputStyle"
         type="password"
         id="password"
         name="password"
@@ -68,12 +66,9 @@ const Join = (props) => {
         onChange={handleChange}
         placeholder="Password"
       />
-      <button className="buttonStyle"
-        type="submit"
-        >
+      <button className="buttonStyle" type="submit">
         회원가입
       </button>
-        
     </form>
   );
 };

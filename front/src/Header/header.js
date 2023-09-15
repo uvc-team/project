@@ -62,7 +62,7 @@ function Header() {
      } else {
       if (location.pathname === "/") {
         setNumValue(0);
-      } else if (location.pathname === "/profile") {
+      } else {
         setNumValue(1);
       }
     }
@@ -184,5 +184,4 @@ function Header() {
     </div>
   );
 }
-
 export default Header;

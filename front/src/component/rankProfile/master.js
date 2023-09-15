@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from "react";
-import axios from 'axios';
+import axios from "axios";
 import Header from "../../Header/header";
-import '../userCss/profile.css';
-import Logout from "../user/Logout";
+
+
 import CompanyProfile from "./companyProfile";
+import "../../css/profile.css";
+
+
 function MasterProfile() {
   const [numValue, setNumValue] = useState(0);
   const [users, setUsers] = useState([]);
@@ -18,7 +21,7 @@ function MasterProfile() {
         const usersData = response.data.user;
         setUsers(usersData);
       })
-      .catch((error) => console.error('Error:', error));
+      .catch((error) => console.error("Error:", error));
   }, []);
 
   const handleButtonClick = (buttonName) => {
@@ -27,20 +30,24 @@ function MasterProfile() {
   };
   const handleRoleChange = (userId, newRole) => {
     axios
-      .post(`${process.env.REACT_APP_URL}/position/roleChange`, {
-        userId: userId,
-        position: newRole,
-      }, {
-        headers: { Authorization: `${localStorage.getItem("token")}` },
-      })
+      .post(
+        `${process.env.REACT_APP_URL}/position/roleChange`,
+        {
+          userId: userId,
+          position: newRole,
+        },
+        {
+          headers: { Authorization: `${localStorage.getItem("token")}` },
+        }
+      )
       .then((response) => {
         console.log(response.data);
       })
-      .catch((error) => console.error('Error:', error));
+      .catch((error) => console.error("Error:", error));
   };
 
   return (
-    <div className='proFileBackground'>
+    <div className="proFileBackground">
       <Header numValue={numValue} setNumValue={setNumValue} />
 
       <div className='profileBox'>
