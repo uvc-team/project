@@ -36,8 +36,9 @@ const Login = (props) => {
 
       if (response.data && response.data.token) {
         localStorage.setItem("token", response.data.token); // 토큰 발행
+        localStorage.setItem("position", response.data.positionId); // 토큰 발행
         console.log("Saved token:", localStorage.getItem("token")); // 확인용
-
+        console.log(response.data.positionId)
         // 예를 들어, 회원 가입이 성공했을 때 MyPage로 이동할 수 있습니다
         const position = response.data.positionId;
 

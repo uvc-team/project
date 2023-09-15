@@ -18,7 +18,7 @@
 }
 
 .userProfile {
-  width: 50%;
+  width: 30%;
   height: 100%;
   border-radius: 0px 5px 5px 0px;
   background: #0097ec;
@@ -50,4 +50,34 @@
   background-color: aliceblue;
   border-radius: 100%;
   margin-bottom: 5%;
+}
+
+
+
+.remainingSpace {
+  display: flex;
+  flex-direction: column;
+}
+
+.remainingSpace .userInfo {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.remainingSpace .userInfo p {
+  margin-right: 10px;
+  color: black; /* 검은색으로 변경 */
+  font-weight: bold;
+  font-family: Inter; /* 글꼴 지정 */
+  font-size: 15px;
+}
+
+.remainingSpace .userInfo .buttonContainer {
+    display:flex;
+    align-items:center;
+
+    button {
+      margin-left: 10px; /* 버튼 사이 간격 조절 */
+    }
 }
