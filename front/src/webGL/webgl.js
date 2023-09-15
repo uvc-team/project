@@ -10,8 +10,6 @@ function WebGL() {
   const [x, setX] = useState(0);
   const [y, setY] = useState(0);
   const [chipOn, setChipOn] = useState();
-  
-  
 
   // Add these lines
   const currentX = useRef(x);
@@ -21,8 +19,7 @@ function WebGL() {
   const edukitRef = useRef(null);
 
   useEffect(() => {
-    const ws = new WebSocket("ws://192.168.0.88:8081");
-
+    const ws = new WebSocket("ws://192.168.0.124:8081");
 
     ws.addEventListener("open", () => {
       console.log("WebSocket connection.");
@@ -33,7 +30,6 @@ function WebGL() {
       // console.log(receivedMessage)
 
       if (receivedMessage.Wrapper) {
-        
         const tag3 = receivedMessage.Wrapper.find((item) => item.tagId === "3");
         const tag4 = receivedMessage.Wrapper.find((item) => item.tagId === "4");
         const tag21 = receivedMessage.Wrapper.find(
@@ -42,14 +38,13 @@ function WebGL() {
         const tag22 = receivedMessage.Wrapper.find(
           (item) => item.tagId === "22"
         );
-       
+
         myObject.NO1 = tag3 && tag3.value ? "#00FF00" : "#FF0000";
         myObject.NO2 = tag4 && tag4.value ? "#00FF00" : "#FF0000";
         myObject.NO3 = tag21 && tag21.value >= 1 ? "#00FF00" : "#FF0000";
         no1.setValue(myObject.NO1);
         no2.setValue(myObject.NO2);
         no3.setValue(myObject.NO3);
-        
 
         setX(tag21.value);
         setY(tag22.value);
@@ -57,7 +52,6 @@ function WebGL() {
         currentX.current = tag21.value;
         currentY.current = tag22.value;
         currentchip.current = tag3.value;
-        
       }
     });
     // 화면 비율
@@ -103,17 +97,16 @@ function WebGL() {
       },
     };
 
-    
     const [minY, maxY] = [0, 18000000];
     const [minX, maxX] = [0, 1030000];
 
-    // yAxisFunc 함수는 num 속성 값을 슬라이더의 높이로 변환하는 함수입니다. 
+    // yAxisFunc 함수는 num 속성 값을 슬라이더의 높이로 변환하는 함수입니다.
     // 해당 슬라이더는 min에서 max 사이의 값을 0에서 7 사이의 값으로 변환합니다.
     const yAxisFunc = (value) => {
       return ((value - minY) / (maxY - minY)) * 7;
     };
-//xAxisFunc 함수는 num2 속성 값을 슬라이더의 각도로 변환하는 함수입니다. 
-//해당 슬라이더는 min에서 max 사이의 값을 0에서 90도 사이의 각도로 변환합니다.
+    //xAxisFunc 함수는 num2 속성 값을 슬라이더의 각도로 변환하는 함수입니다.
+    //해당 슬라이더는 min에서 max 사이의 값을 0에서 90도 사이의 각도로 변환합니다.
     const xAxisFunc = (value) => {
       return ((value - minX) / (maxX - minX)) * THREE.MathUtils.degToRad(90);
     };
@@ -180,8 +173,6 @@ function WebGL() {
         edukitRef.current.actionY(yAxisFunc(currentY.current));
         edukitRef.current.actionX(xAxisFunc(currentX.current));
         edukitRef.current.actionChip(currentchip.current);
-
-
       }
     };
 

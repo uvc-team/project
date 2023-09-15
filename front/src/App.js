@@ -16,24 +16,24 @@ import PostMain from "./component/notice/post/PostMain";
 import CreatePostPage from "./component/notice/CreatePost";
 import { checkSever } from "./component/user/checkServer";
 
-
 function App() {
-  useEffect(()=>{
+  useEffect(() => {
     // 일정 간격으로 서버 상태 확인 1시간
-    const intervalId = setInterval(checkSever,  3600000);
+    const intervalId = setInterval(checkSever, 3600000);
     return () => {
       // 컴포넌트 언마운트시 간격 확인 해제
       clearInterval(intervalId);
     };
-  },[]);
-  
+  }, []);
+
   return (
     <BrowserRouter>
       <div className="App">
-      <Header />
-      <Routes>
+        <Header />
+        <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/dash" element={<Dash />} />
+          <Route path="/noticeboard" element={<NoticeBoard />} />
           <Route path="/chart" element={<GraphComponent />} />
           <Route path="/kakao" element={<KakaoOauth />} />
           <Route path="/loginPage" element={<LoginPage />} />
@@ -45,7 +45,6 @@ function App() {
           <Route path="/postView/:noticeId" element={<PostView />} />
           <Route path="/create-post" element={<CreatePostPage />} />
         </Routes>
-        
       </div>
     </BrowserRouter>
   );
