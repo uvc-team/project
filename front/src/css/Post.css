@@ -1,6 +1,7 @@
 .post-back-ground {
   background-color: black;
   color: white;
+  min-height: 100vh;
 }
 
 .top-section {
