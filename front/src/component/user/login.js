@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 
 const Login = (props) => {
   const navigate = useNavigate(); // useNavigate 초기화
+  const [position,setPosition] = useState();
 
   const [formData, setFormData] = useState({
     email: "",
@@ -42,10 +43,10 @@ const Login = (props) => {
 
         // 예를 들어, 회원 가입이 성공했을 때 MyPage로 이동할 수 있습니다
         const position = response.data.positionId;
+        setPosition(position); // 예시로 상태에 저장하는 방법
         
         if(position === 1){
-          navigate('../master', { state: { id: position } });
-          console.log({state:{id: position}});
+          navigate('../master');
         }
         if(position === 2){
           console.log('매니저입니다.');

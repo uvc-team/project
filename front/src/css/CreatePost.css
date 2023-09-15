@@ -1,0 +1,15 @@
+.post-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .post-label {
+    margin-bottom: 20px; /* label 간격 조정 */
+  }
+  
+  textarea {
+    width: 100%; /* textarea의 너비를 최대로 확장 */
+    height:200px; /* textarea의 높이를 조절 */
+  }
+  

@@ -1,35 +1,38 @@
 .notice {
-    position: relative;
-    padding: 0 40px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    padding: 20px 40px; 
     height: 70px;
-    width: 100%;
     overflow: hidden;
     list-style: none;
-    display: flex;
 }
 
 .notice-content {
-    position: absolute;
-    width: 100%;
+    position: absolute; 
+    width: calc(100% - 40px); /* 패딩에 의해 줄어든 너비를 보상 */
     height: 30px;
-    padding: 20px 0;
-    line-height: 30px;
-    transition-duration: 2s;
-    transition-property: opacity, transform;
-    transform: translateY(100%);
-    opacity: 0;
+	padding-top :20px ;
+	transition-duration : .5s ; 
+	transition-property : opacity, transform ;
+	transform : translateY(-100%);
+	opacity :0 ;
 }
 
-.notice-content.active {
-    transform: translateY(0);
-    opacity: 1;
+.notice-content.active,
+.notice-content:not(.active):last-child { 
+	transform : translateY(0); 
+	opacity :1 ;
 }
 
 .notice-header {
-    font-weight: bold;
-    margin-right: 5px;
+	font-weight:bold ; 
+	margin-right :5px ;
+	font-size :18px ; /* 폰트 사이즈 변경 */
 }
 
-.notice-title {
-    font-weight: normal;
+.notice-title{
+	font-weight:normal ;  
+	font-size :18px ; /* 폰트 사이즈 변경 */
 }

@@ -2,7 +2,6 @@ const bcrypt = require("bcrypt");
 const passport = require("passport");
 const { createToken } = require("../middlewares/index");
 const User = require("../models/user");
-const Position = require("../models/position");
 
 exports.signup = async (req, res, next) => {
   const { email, name, password } = req.body;
@@ -11,10 +10,10 @@ exports.signup = async (req, res, next) => {
       where: { email },
     });
     if (exUser) {
-      return res.status(404).json({ message: "이미 존재하는 이메일 입니다" });
+      return res.status(404).json({ error: "이미 존재하는 이메일 입니다" });
     }
     if (!name) {
-      return res.status(404).json({ message: "이름을 입력해 주세요" });
+      return res.status(404).json({ error: "이름을 입력해 주세요" });
     }
 
     const hash = await bcrypt.hash(password, 12);
@@ -52,16 +51,16 @@ exports.login = (req, res, next) => {
         }
 
         try {
-          //사용자 직급 추가
+          //사용자 직급 정보추가
           const userRole = await User.findOne({
             where: { userId: user.userId },
-            include: [{ model: Position, as: "Position" }],
           });
 
           if (!userRole) {
             return res.status(404).json({ message: "없는 사용자 입니다" });
           }
-          const role = userRole.Position.dataValues.role;
+
+          const positionId = userRole.dataValues.positionId;
 
           // 로그인 성공 후 토큰 생성
           const token = createToken(user);
@@ -69,7 +68,7 @@ exports.login = (req, res, next) => {
           return res.json({
             message: "로그인성공",
             token,
-            role,
+            positionId,
           });
         } catch (error) {
           console.error(error);

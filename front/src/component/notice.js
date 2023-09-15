@@ -1,65 +1,57 @@
 import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import { Link } from 'react-router-dom';
 import './notice.css';
 
 const Notice = () => {
-  const notice = [
-    {
-      "no": 1,
-      "title": "첫번째 게시글입니다.",
-      "content": "첫번째 게시글 내용입니다.",
-      "createDate": "2020-10-25",
-      "readCount": 6
-    },
-    {
-      "no": 2,
-      "title": "두번째 게시글입니다.",
-      "content": "두번째 게시글 내용입니다.",
-      "createDate": "2020-10-25",
-      "readCount": 5
-    },
-    {
-      "no": 3,
-      "title": "세번째 게시글입니다.",
-      "content": "세번째 게시글 내용입니다.",
-      "createDate": "2020-10-25",
-      "readCount": 1
-    },
-    {
-      "no": 4,
-      "title": "네번째 게시글입니다.",
-      "content": "네번째 게시글 내용입니다.",
-      "createDate": "2020-10-25",
-      "readCount": 2
-    },
-    {
-      "no": 5,
-      "title": "다섯번째 게시글입니다.",
-      "content": "다섯번째 게시글 내용입니다.",
-      "createDate": "2020-10-25",
-      "readCount": 4
-    },
-  ];
-
+  const [rollingItems, setRollingItems] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentIndex((prevIndex) => (prevIndex + 1) % notice.length);
-    }, 4000); // 2초마다 변경
+    const fetchNotices = async () => {
+      try {
+        const response = await axios.get(`${process.env.REACT_APP_URL}/notice/fullNotices`, {
+          headers: { Authorization: `${localStorage.getItem("token")}` },
+        });
 
-    return () => clearInterval(interval);
+        // noticeId 기준으로 내림차순 정렬 후 최근 5개만 선택
+        const latestNotices = response.data.notices.sort((a,b) => b.noticeId - a.noticeId).slice(0, 5);
+        
+        setRollingItems(latestNotices);
+      } catch (error) {
+        console.error('Error:', error);
+      }
+    };
+
+    fetchNotices();
   }, []);
 
-  return (
-    <ul className="notice">
-      {notice.map((item, idx) => (
-        <li className={idx === currentIndex ? 'notice-content active' : 'notice-content'} key={idx}>
-          <span className="notice-header">공지사항:</span>
-          <span className="notice-title">{item.title}</span>
-        </li>
-      ))}
-    </ul>
-  );
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentIndex((prevIndex) => (prevIndex + 1) % rollingItems.length);
+    }, 2000);  
+
+    return () => clearInterval(interval);
+}, [rollingItems]);
+
+const nextIndex = (currentIndex + 1) % rollingItems.length;
+
+return (
+<ul className="notice">
+   <li className={`notice-content ${currentIndex === nextIndex ? 'active' : ''}`}>
+     <Link to={`/postView/${rollingItems[currentIndex]?.noticeId}`} style={{ textDecoration: 'none', color: 'inherit' }}>
+       <span className="notice-header">📢공지사항:</span>
+       <span className="notice-title">{rollingItems[currentIndex]?.title}</span>
+     </Link>
+   </li>
+   <li className={`notice-content ${nextIndex === currentIndex ? 'active' : ''}`}>
+     <Link to={`/postView/${rollingItems[nextIndex]?.noticeId}`} style={{ textDecoration: 'none', color: 'inherit' }}>
+       <span className="notice-header">📢공지사항:</span>
+       <span className="notice-title">{rollingItems[nextIndex]?.title}</span>
+     </Link>
+   </li>
+</ul>
+);
 };
 
 export default Notice;

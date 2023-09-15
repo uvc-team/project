@@ -1,7 +1,6 @@
 import React from "react";
 import WebGL from "../webGL/webgl";
 import "../css/dash.css";
-import Header from "../Header/header";
 import GraphComponent from "./Graph";
 import No3 from "./no3";
 import VideoComponent from "./video";
@@ -9,7 +8,6 @@ import VideoComponent from "./video";
 function Dash() {
   return (
     <div>
-      <Header />
       <div className="Dash">
         <div className="DashBoard">
           <WebGL />

@@ -30,13 +30,19 @@ class Answer extends Sequelize.Model {
   static associate(db) {
     //여러댓글은 하나의 유저를 갖는다
     db.Answer.belongsTo(db.User, {
-      foreignKey: "userId",
-      targetKey: "userId",
+      foreignKey: {
+        name: "userId",
+        onDelete: "CASCADE",
+        as: "User",
+      },
     });
     //전체공지엔 여러 댓글이 달린다
     db.Answer.belongsTo(db.FullNotice, {
-      foreignKey: "noticeId",
-      targetKey: "noticeId",
+      foreignKey: {
+        name: "noticeId",
+        onDelete: "CASCADE",
+        as: "FullNotice",
+      },
     });
   }
 }
