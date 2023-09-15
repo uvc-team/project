@@ -5,8 +5,7 @@ exports.answer = async (req, res, next) => {
   const id = req.userId;
   const noticeId = req.query.noticeId;
   const comment = req.body.comment;
-  console.log(comment);
-  console.log(req.body);
+
   try {
     if (!noticeId) {
       return res.status(400).json({ error: "존재하지않는 전체공지 입니다." });
@@ -18,7 +17,7 @@ exports.answer = async (req, res, next) => {
     if (comment.length > 255) {
       return res.status(404).json({ error: "250자 내외로 작성해 주세요" });
     }
-    const NewAnswer = await Answer.create({
+    NewAnswer = await Answer.create({
       content: comment,
       userId: id,
       noticeId: noticeId,
