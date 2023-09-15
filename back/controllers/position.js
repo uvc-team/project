@@ -43,10 +43,10 @@ exports.roleChange = async (req, res, next) => {
       return res.status(400).json({ error: "유저가 존재하지 않습니다." });
     }
     //1 == True 0 ==False
-    if (position === "1") {
+    if (position === "manager") {
       // 매니저 위임
       user.positionId = 2;
-    } else if (position === "0") {
+    } else if (position === "remove") {
       // 매니저 해임
       user.positionId = 3;
     } else {
