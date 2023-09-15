@@ -104,5 +104,5 @@ function Header({ numValue, setNumValue }) {
     </div>
   );
 }
-
+}
 export default Header;
