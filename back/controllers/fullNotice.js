@@ -79,7 +79,7 @@ exports.notify = async (req, res, next) => {
 exports.updateNotice = async (req, res, next) => {
   const newTitle = req.body.title;
   const newContent = req.body.content;
-  const noticeId = req.query.noticeId;
+  const noticeId = req.body.noticeId;
   const userId = req.userId; //수정자
   try {
     if (!newTitle) {
@@ -113,7 +113,7 @@ exports.updateNotice = async (req, res, next) => {
 //전체공지삭제
 exports.deleteNotice = async (req, res, next) => {
   try {
-    const deleteNoticeId = req.query.noticeId;
+    const deleteNoticeId = req.body.noticeId;
 
     if (!deleteNoticeId) {
       return res.status(400).json({ error: "존재하지않는 공지사항입니다." });
