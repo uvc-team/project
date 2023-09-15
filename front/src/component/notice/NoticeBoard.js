@@ -33,6 +33,13 @@ const NoticeBoard = () => {
   // useNavigate 훅을 사용하여 navigate 함수를 가져옵니다.
   const navigate = useNavigate();
 
+
+  const formattedDate = (a) => {
+    const date = new Date(a);
+    return `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`;
+    // ${String(date.getHours()).padStart(2, '0')}:${String(date.getMinutes()).padStart(2, '0')}:${String(date.getSeconds()).padStart(2, '0')}
+  };
+
   useEffect(() => {
     axios
       .get(`${process.env.REACT_APP_URL}/notice/fullNotices`, {
@@ -43,7 +50,7 @@ const NoticeBoard = () => {
         let formattedData = response.data.notices.map((item) => [
           item.noticeId,
           item.title,
-          item.formattedDate,
+          formattedDate(item.createdAt),
           item.readCount,
           () => handleRowClick(item.noticeId),
         ]);
@@ -110,5 +117,34 @@ const NoticeBoard = () => {
     </div>
   );
 };
+if (!data) return <div>Loading...</div>;
+
+return (
+  <div className="post-back-ground ">
+<div style={{ paddingTop: "73px", height: "100vh", width: "100vw" }}>
+<div style={{ textAlign: 'center', margin: '20px 0' }}>
+<h1>공지사항</h1>
+</div>
+
+{/* headersName과 data를 전달하고 내부에서 thead와 tbody를 관리하도록 함 */}
+<CommonTable headersName={headersName} data={data[page - 1]} />
+
+<div style={{ display: 'flex', justifyContent: 'center', marginTop: '100px' }}>
+  <ThemeProvider theme={theme}>
+    <Pagination 
+      count={data.length} 
+      page={page} 
+      onChange={(event, value) => setPage(value)} 
+    />
+  </ThemeProvider>
+</div>
+
+<button onClick={handleCreatePostButtonClick} style={{ position: 'fixed', left: 0, bottom: 0 }}>
+게시물 등록
+</button>
+</div>  
+</div>
+);
+}
 
 export default NoticeBoard;

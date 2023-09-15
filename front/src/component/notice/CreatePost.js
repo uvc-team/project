@@ -1,7 +1,7 @@
-import React, { useState } from "react";
-import axios from "axios";
-import "../../css/CreatePost.css";
-import { useNavigate } from "react-router-dom";
+import React, { useState } from 'react';
+import axios from 'axios';
+import '../../css/CreatePost.css'
+import { useNavigate } from 'react-router-dom';
 
 const CreatePostPage = () => {
   const navigate = useNavigate();
@@ -53,6 +53,7 @@ const CreatePostPage = () => {
       <button type="submit">등록하기</button>
     </div>
   );
+
 };
 
 export default CreatePostPage;

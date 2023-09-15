@@ -39,6 +39,6 @@ router.get("/kakao/callback", (req, res, next) => {
   })(req, res, next);
 });
 
-router.get("/logout", verifyToken, logout);
+router.get("/logout", logout);
 
 module.exports = router;

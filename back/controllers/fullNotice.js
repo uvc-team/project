@@ -31,7 +31,7 @@ exports.getDetailNotice = async (req, res, next) => {
     //해당전체공지의 댓글 추가
     const answer = await Answer.findAll({
       where: { noticeId: noticeId },
-      include: [{ model: User, attributes: ["name"], as: "User" }],
+      include: [{ model: User, attributes: ["name", "userId"], as: "User" }],
     });
 
     return res.status(200).json({ message: "상세조회성공", notic, answer });
@@ -79,7 +79,7 @@ exports.notify = async (req, res, next) => {
 exports.updateNotice = async (req, res, next) => {
   const newTitle = req.body.title;
   const newContent = req.body.content;
-  const noticeId = req.query.noticeId;
+  const noticeId = req.body.noticeId;
   const userId = req.userId; //수정자
   try {
     if (!newTitle) {
@@ -113,7 +113,7 @@ exports.updateNotice = async (req, res, next) => {
 //전체공지삭제
 exports.deleteNotice = async (req, res, next) => {
   try {
-    const deleteNoticeId = req.query.noticeId;
+    const deleteNoticeId = req.body.noticeId;
 
     if (!deleteNoticeId) {
       return res.status(400).json({ error: "존재하지않는 공지사항입니다." });

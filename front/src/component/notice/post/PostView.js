@@ -2,11 +2,24 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useParams, useNavigate } from "react-router-dom";
 import "../../../css/Post.css";
+import jwt_decode from "jwt-decode";
 
 const PostView = () => {
+  const token = localStorage.getItem("token");
+  let userId;
+
+  if (token) {
+    const decodedToken = jwt_decode(token);
+    userId = decodedToken.userId;
+  }
+
   const [data, setData] = useState(null);
   const [answer, setAnswer] = useState(null);
   const [comment, setComment] = useState("");
+  const [editMode, setEditMode] = useState(false);
+  const [editedTitle, setEditedTitle] = useState("");
+  const [editedContent, setEditedContent] = useState("");
+  const [showModal, setShowModal] = useState(false); //모달
   const { noticeId } = useParams();
   const navigate = useNavigate();
 
@@ -16,11 +29,14 @@ const PostView = () => {
         const response = await axios.get(
           `${process.env.REACT_APP_URL}/notice/fullPosts?noticeId=${noticeId}`,
           {
-            headers: { Authorization: localStorage.getItem("token") || "" },
+            headers: { Authorization: token },
           }
         );
         setData(response.data.notic);
         setAnswer(response.data.answer);
+
+        setEditedTitle(response.data.notic.title);
+        setEditedContent(response.data.notic.content);
       } catch (error) {
         console.error(error);
       }
@@ -30,6 +46,7 @@ const PostView = () => {
   }, [noticeId]);
 
   // Function to handle comment submission
+  //댓글달기
   const handleCommentSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -37,11 +54,71 @@ const PostView = () => {
         `${process.env.REACT_APP_URL}/answer/answer?noticeId=${noticeId}`,
         { comment: comment },
         {
-          headers: { Authorization: localStorage.getItem("token") },
+          headers: { Authorization: token },
         }
       );
       setComment("");
       window.location.reload(navigate(`/postView/${noticeId}`));
+    } catch (error) {
+      console.error("error", error);
+    }
+  };
+  //댓글삭제
+  const handleDeleteComment = async (answerId) => {
+    try {
+      const response = await axios.delete(
+        `${process.env.REACT_APP_URL}/answer/deleteAnswer`,
+        {
+          data: { answerId: answerId },
+          headers: { Authorization: token },
+        }
+      );
+      if (response.status === 200) {
+        // answer 상태 업데이트
+        setAnswer(
+          answer.map((item) =>
+            item.answerId === answerId
+              ? { ...item, content: "사용자에 의해 삭제된 댓글입니다." }
+              : item
+          )
+        );
+      }
+    } catch (error) {
+      console.error("error", error);
+    }
+  };
+
+  //공지사항 업데이트
+  const handleUpdateNotice = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await axios.patch(
+        `${process.env.REACT_APP_URL}/notice/updateNotice`,
+        { title: editedTitle, content: editedContent, noticeId },
+        { headers: { Authorization: token } }
+      );
+      if (response.status === 200) {
+        console.log(response);
+        setData({ ...data, title: editedTitle, content: editedContent });
+        setEditMode(false);
+      }
+    } catch (error) {
+      console.error("error", error);
+    }
+  };
+
+  //공지사항 삭제
+  const handleDeleteNotice = async (e) => {
+    e.preventDefault(); // 이벤트의 기본 동작 막기
+    try {
+      const response = await axios.delete(
+        `${process.env.REACT_APP_URL}/notice/deleteNotice`,
+        { data: { noticeId: noticeId }, headers: { Authorization: token } }
+      );
+
+      if (response.status === 200) {
+        navigate("/noticeboard"); // 또는 다른 경로
+      }
     } catch (error) {
       console.error("error", error);
     }
@@ -73,7 +150,40 @@ const PostView = () => {
       <hr />
       <div className="content-section">
         <h3>공지사항:</h3>
-        <p>{data.content}</p>
+        {!editMode ? (
+          <>
+            <p>{data.content}</p>
+            <button type="button" onClick={() => setEditMode(true)}>
+              수정하기
+            </button>
+            <button type="button" onClick={() => setShowModal(true)}>
+              삭제하기
+            </button>
+          </>
+        ) : (
+          <form onSubmit={handleUpdateNotice}>
+            <input
+              type="text"
+              value={editedTitle}
+              onChange={(e) => setEditedTitle(e.target.value)}
+            />
+            <textarea
+              value={editedContent}
+              onChange={(e) => setEditedContent(e.target.value)}
+            />
+            <button type="submit">변경</button>
+            <button type="button" onClick={() => setEditMode(false)}>
+              취소
+            </button>
+          </form>
+        )}
+        {showModal && (
+          <div className="modal">
+            <h2> 정말 삭제하시겠습니까?</h2>
+            <button onClick={handleDeleteNotice}>Yes</button>
+            <button onClick={() => setShowModal(false)}>NO</button>
+          </div>
+        )}
       </div>
       <hr />
       <div className="comment-section">
@@ -82,6 +192,11 @@ const PostView = () => {
             <strong>{answer.User.name}:</strong>
             <p>{answer.content}</p>
             <p>{formatTime(answer.createdAt)}</p>
+            {userId === answer.User.userId && (
+              <button onClick={() => handleDeleteComment(answer.answerId)}>
+                Delete
+              </button>
+            )}
           </div>
         ))}
         {/* Add a Comment */}
