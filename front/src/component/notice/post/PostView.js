@@ -32,11 +32,19 @@ const PostView = () => {
   // Function to handle comment submission
   const handleCommentSubmit = async (e) => {
     e.preventDefault();
-
-    // Call API to add comment
-
-    // After adding the comment reset the input field and fetch data again to update comments list.
-    setComment("");
+    try {
+      const response = await axios.post(
+        `${process.env.REACT_APP_URL}/answer/answer?noticeId=${noticeId}`,
+        { comment: comment },
+        {
+          headers: { Authorization: localStorage.getItem("token") },
+        }
+      );
+      setComment("");
+      window.location.reload(navigate(`/postView/${noticeId}`));
+    } catch (error) {
+      console.error("error", error);
+    }
   };
 
   // 시간 포맷팅 함수
@@ -65,11 +73,10 @@ const PostView = () => {
       <hr />
       <div className="content-section">
         <h3>공지사항:</h3>
-        <p>{data.title}</p>
+        <p>{data.content}</p>
       </div>
       <hr />
       <div className="comment-section">
-        <h3>댓글:</h3>
         {(answer || []).map((answer) => (
           <div className="comment" key={answer.answerId}>
             <strong>{answer.User.name}:</strong>

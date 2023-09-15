@@ -27,6 +27,7 @@ const NoticeBoard = () => {
   const [data, setData] = useState(null);
   const [page, setPage] = useState(1);
 
+
   // useNavigate 훅을 사용하여 navigate 함수를 가져옵니다.
   const navigate = useNavigate();
 
@@ -59,12 +60,15 @@ const NoticeBoard = () => {
     
         setData(pages);
       })
+
       .catch((error) => console.error('Error:', error));
     }, []);
 
-// 각 row가 클릭되면 해당 게시물의 상세 페이지로 네비게이션하는 핸들러
-const handleRowClick = (noticeId) => {
+
+  // 각 row가 클릭되면 해당 게시물의 상세 페이지로 네비게이션하는 핸들러
+  const handleRowClick = (noticeId) => {
     navigate(`/postView/${noticeId}`);
+
 };
 
 const handleCreatePostButtonClick = () => {
@@ -101,4 +105,5 @@ return (
 );
 }
 
-export default NoticeBoard
+
+export default NoticeBoard;
