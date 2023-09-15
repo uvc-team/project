@@ -1,18 +1,16 @@
 import React, { useState } from "react";
-import '../userCss/loginPage.css'
+import "../userCss/loginPage.css";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 const Login = (props) => {
   const navigate = useNavigate(); // useNavigate 초기화
-  const [position,setPosition] = useState();
+  const [position, setPosition] = useState();
 
   const [formData, setFormData] = useState({
     email: "",
     password: "",
   });
-
-  
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -33,7 +31,7 @@ const Login = (props) => {
           withCredentials: true,
         }
       );
-      
+
       // 서버에서 응답을 받으면 원하는 동작을 수행할 수 있습니다.
       console.log("로그인 성공:", response.data);
 
@@ -44,19 +42,16 @@ const Login = (props) => {
         // 예를 들어, 회원 가입이 성공했을 때 MyPage로 이동할 수 있습니다
         const position = response.data.positionId;
         setPosition(position); // 예시로 상태에 저장하는 방법
-        
-        if(position === 1){
-          navigate('../master');
-        }
-        if(position === 2){
-          console.log('매니저입니다.');
-        }
-        if(position === 3){
-          navigate('../profile');
-        }
-        
-        
 
+        if (position === 1) {
+          navigate("../");
+        }
+        if (position === 2) {
+          navigate("../");
+        }
+        if (position === 3) {
+          navigate("../");
+        }
       } else {
         throw new Error("토큰이 없습니다.");
       }
@@ -67,10 +62,9 @@ const Login = (props) => {
   };
 
   return (
-    <form className="loginBox" 
-    onSubmit={handleSubmit}>
+    <form className="loginBox" onSubmit={handleSubmit}>
       <input
-      className="inputStyle"
+        className="inputStyle"
         type="email"
         id="email"
         name="email"
@@ -79,7 +73,7 @@ const Login = (props) => {
         placeholder="email"
       />
       <input
-      className="inputStyle"
+        className="inputStyle"
         type="password"
         id="password"
         name="password"
@@ -87,8 +81,9 @@ const Login = (props) => {
         onChange={handleChange}
         placeholder="password"
       />
-      <button className="buttonStyle" 
-      type="submit">로그인</button>
+      <button className="buttonStyle" type="submit">
+        로그인
+      </button>
     </form>
   );
 };
