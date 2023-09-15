@@ -33,7 +33,7 @@ const CreatePostPage = () => {
   };
 
   return (
-    <div className="post" style={{ backgroundAttachment: "fixed" }}>
+    <div className="post">
       <form onSubmit={handleFormSubmit}>
         <label className="post-label-1">
           제목
@@ -43,12 +43,14 @@ const CreatePostPage = () => {
             onChange={(e) => setTitle(e.target.value)}
           />
         </label>
+      </form>
+      <form onSubmit={handleFormSubmit}>
         <label className="post-label-2">
           내용
           <input value={content} onChange={(e) => setContent(e.target.value)} />
         </label>
-        <button type="submit">등록하기</button>
       </form>
+      <button type="submit">등록하기</button>
     </div>
   );
 
