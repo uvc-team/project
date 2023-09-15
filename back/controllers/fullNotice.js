@@ -31,7 +31,7 @@ exports.getDetailNotice = async (req, res, next) => {
     //해당전체공지의 댓글 추가
     const answer = await Answer.findAll({
       where: { noticeId: noticeId },
-      include: [{ model: User, attributes: ["name"], as: "User" }],
+      include: [{ model: User, attributes: ["name", "userId"], as: "User" }],
     });
 
     return res.status(200).json({ message: "상세조회성공", notic, answer });

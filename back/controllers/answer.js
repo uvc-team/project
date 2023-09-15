@@ -23,12 +23,8 @@ exports.answer = async (req, res, next) => {
       userId: id,
       noticeId: noticeId,
     });
-    //유저이름 포함
-    const userName = await User.findOne({ where: { userId: id } });
 
-    const name = userName.name;
-
-    return res.status(200).json({ message: "댓글달기성공", NewAnswer, name });
+    return res.status(200).json({ message: "댓글달기성공" });
   } catch (error) {
     console.error(error);
     return next(error);
@@ -37,7 +33,7 @@ exports.answer = async (req, res, next) => {
 
 //댓글삭제
 exports.deleteAnswer = async (req, res, next) => {
-  const answerId = req.query.answerId;
+  const answerId = req.body.answerId;
   try {
     if (!answerId) {
       return res.status(400).json({ error: "존재하지 않는 댓글입니다." });
