@@ -3,10 +3,11 @@ import axios from 'axios';
 import Header from "../../Header/header";
 import '../userCss/profile.css';
 import Logout from "../user/Logout";
-
+import CompanyProfile from "./companyProfile";
 function MasterProfile() {
   const [numValue, setNumValue] = useState(0);
   const [users, setUsers] = useState([]);
+  const [selectedButton, setSelectedButton] = useState('button1');
 
   useEffect(() => {
     axios
@@ -14,18 +15,16 @@ function MasterProfile() {
         headers: { Authorization: `${localStorage.getItem("token")}` },
       })
       .then((response) => {
-        // console.log(response); // 전체 응답 출력
         const usersData = response.data.user;
-        console.log(usersData);
-        // const newRole
-        
-        
-        setUsers(usersData); // 사용자 데이터 상태 업데이트
+        setUsers(usersData);
       })
       .catch((error) => console.error('Error:', error));
   }, []);
 
-
+  const handleButtonClick = (buttonName) => {
+    setSelectedButton(buttonName);
+    console.log(`Button ${buttonName} clicked`);
+  };
   const handleRoleChange = (userId, newRole) => {
     axios
       .post(`${process.env.REACT_APP_URL}/position/roleChange`, {
@@ -35,9 +34,7 @@ function MasterProfile() {
         headers: { Authorization: `${localStorage.getItem("token")}` },
       })
       .then((response) => {
-        console.log(response.data); // 성공적으로 직급 변경된 응답 출력
-
-        // 필요한 경우 새로운 상태 업데이트 등 추가 작업 수행
+        console.log(response.data);
       })
       .catch((error) => console.error('Error:', error));
   };
@@ -48,28 +45,41 @@ function MasterProfile() {
 
       <div className='profileBox'>
         <div className='userProfile'>
-          <h2>안녕하세요 OO님</h2>
-          <div className='userImg' />
-          <div className='userTextBox'> {/* 수정된 부분 */}
-            {/* 사용자 정보 표시 */}
-            {users.map(user => (
-              <div key={user.userId}>
-                <p>{user.name},({user.Position.role})</p>
-                {/* ... */}
-                {/* 직급 변경 버튼 */}
-                <button onClick={() => handleRoleChange(user.userId,'manager')}> {/* 수정된 부분 */}
-                  매니저 등록
-                </button>
-                <button onClick={() => handleRoleChange(user.userId,'remove')}> {/* 수정된 부분 */}
-                  직위 박탈
-                </button>
-              </div>
-            ))}
-          </div>
+          <button onClick={() => handleButtonClick('button1')}>버튼1</button>
+          <button onClick={() => handleButtonClick('button2')}>버튼2</button>
+          <button onClick={() => handleButtonClick('button3')}>버튼3</button>
+          <h2>'함 석 준'</h2>
+          <div className='userImg'></div>
+        </div>
+        <div className="remainingSpace">
+          {selectedButton === 'button1' && (
+            <div>
+              {users.map(user => (
+                <div key={user.userId} className="userInfo">
+                  <p>{user.name}, ({user.Position.role})</p>
+                  <div className="buttonContainer">
+                    <button onClick={() => handleRoleChange(user.userId, 'manager')}>
+                      매니저 등록
+                    </button>
+                    <button onClick={() => handleRoleChange(user.userId, 'remove')}>
+                      직위 박탈
+                    </button>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+        {selectedButton === 'button2' && (
+            <CompanyProfile companyName="크로이스" />
+          )}
+          {selectedButton === 'button3' && (
+            // 버튼 3을 눌렀을 때 보여줄 내용
+            <div>버튼 3을 눌렀을 때 보여줄 내용</div>
+          )}
         </div>
       </div>
     </div>
-  );
+  ); 
 }
 
 export default MasterProfile;
