@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Join from "./user/Join";
 import Login from "./user/login";
 
-import "./userCss/loginPage.css";
+import "../css/loginPage.css";
 import "../css/front.css";
 
 const LoginPage = () => {
