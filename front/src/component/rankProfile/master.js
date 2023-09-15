@@ -1,16 +1,12 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import Header from "../../Header/header";
-
 
 import CompanyProfile from "./companyProfile";
 import "../../css/profile.css";
 
-
 function MasterProfile() {
-  const [numValue, setNumValue] = useState(0);
   const [users, setUsers] = useState([]);
-  const [selectedButton, setSelectedButton] = useState('button1');
+  const [selectedButton, setSelectedButton] = useState("button1");
 
   useEffect(() => {
     axios
@@ -48,27 +44,31 @@ function MasterProfile() {
 
   return (
     <div className="proFileBackground">
-      <Header numValue={numValue} setNumValue={setNumValue} />
-
-      <div className='profileBox'>
-        <div className='userProfile'>
-          <button onClick={() => handleButtonClick('button1')}>버튼1</button>
-          <button onClick={() => handleButtonClick('button2')}>버튼2</button>
-          <button onClick={() => handleButtonClick('button3')}>버튼3</button>
+      <div className="profileBox">
+        <div className="userProfile">
+          <button onClick={() => handleButtonClick("button1")}>버튼1</button>
+          <button onClick={() => handleButtonClick("button2")}>버튼2</button>
+          <button onClick={() => handleButtonClick("button3")}>버튼3</button>
           <h2>'함 석 준'</h2>
-          <div className='userImg'></div>
+          <div className="userImg"></div>
         </div>
         <div className="remainingSpace">
-          {selectedButton === 'button1' && (
+          {selectedButton === "button1" && (
             <div>
-              {users.map(user => (
+              {users.map((user) => (
                 <div key={user.userId} className="userInfo">
-                  <p>{user.name}, ({user.Position.role})</p>
+                  <p>
+                    {user.name}, ({user.Position.role})
+                  </p>
                   <div className="buttonContainer">
-                    <button onClick={() => handleRoleChange(user.userId, 'manager')}>
+                    <button
+                      onClick={() => handleRoleChange(user.userId, "manager")}
+                    >
                       매니저 등록
                     </button>
-                    <button onClick={() => handleRoleChange(user.userId, 'remove')}>
+                    <button
+                      onClick={() => handleRoleChange(user.userId, "remove")}
+                    >
                       직위 박탈
                     </button>
                   </div>
@@ -76,17 +76,17 @@ function MasterProfile() {
               ))}
             </div>
           )}
-        {selectedButton === 'button2' && (
+          {selectedButton === "button2" && (
             <CompanyProfile companyName="크로이스" />
           )}
-          {selectedButton === 'button3' && (
+          {selectedButton === "button3" && (
             // 버튼 3을 눌렀을 때 보여줄 내용
             <div>버튼 3을 눌렀을 때 보여줄 내용</div>
           )}
         </div>
       </div>
     </div>
-  ); 
+  );
 }
 
 export default MasterProfile;
