@@ -6,13 +6,15 @@ function No3() {
     labels: [],
     datasets: [
       {
-        label: "MOTOT 1",
+        type: "line",
+        label: "MOTOR 1",
         data: [],
         borderColor: "rgba(75,192,192,1)",
         borderWidth: 2,
         fill: false,
       },
       {
+        type: "line",
         label: "MOTOR 2",
         data: [],
         borderColor: "rgba(192,75,192,1)",
@@ -27,7 +29,11 @@ function No3() {
         display: false,
       },
       y: {
-        beginAtZero: true,
+        ticks: {
+          beginAtZero: true,
+          stepSize: 10,
+          color: "white",
+        },
       },
     },
   };

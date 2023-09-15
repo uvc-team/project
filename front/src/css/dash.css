@@ -42,7 +42,7 @@
 .Dash1 {
   background-color: #232f3e;
   border-radius: 30px;
-  height: 150px;
+  height: 120px;
   width: 100%;
   display: flex;
   align-items: center;
@@ -52,24 +52,22 @@
   background-color: #232f3e;
   border-radius: 30px;
   width: 100%;
-  height: 150px;
+  height: 120px;
   margin-left: 1%;
-}
-
-.Dash1-1 {
   align-items: center;
 }
 
 .item {
-  margin-bottom: 1.5rem;
   color: white;
+  margin-left: 5%;
+  margin-top: 0.7rem;
 }
 
 .Dash2 {
   background-color: #232f3e;
   border-radius: 30px;
   width: 100%;
-  height: 280px;
+  height: 310px;
   display: flex;
   align-items: center;
 }

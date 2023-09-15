@@ -18,11 +18,9 @@ function Dash() {
                 <GraphComponent />
               </div>
               <div className="Dash1-1">
-                <div className="Dash1-11">
-                  <div class="item">흰색 칩 : </div>
-                  <div class="item">빨간색 칩 : </div>
-                  <div class="item">주사위 수 : </div>
-                </div>
+                <div class="item">흰색 칩 : </div>
+                <div class="item">빨간색 칩 : </div>
+                <div class="item">주사위 수 : </div>
               </div>
             </div>
             {/* 중단 */}

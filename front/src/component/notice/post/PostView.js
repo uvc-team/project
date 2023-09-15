@@ -58,7 +58,7 @@ const PostView = () => {
     ).padStart(2, "0")}:${String(date.getMinutes()).padStart(2, "0")}`;
   };
 
-  if (!data) return <div>Loading...</div>;
+  if (!data) return <div>권한없습니다.</div>;
 
   return (
     <div className="post-back-ground">

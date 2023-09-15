@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Bar } from "react-chartjs-2";
-import '../../src/css/dash.css';
+import "../../src/css/dash.css";
 
 import {
   Chart,
@@ -25,7 +25,7 @@ Chart.register(
 
 function GraphComponent() {
   const [chartData, setChartData] = useState({
-    labels: ["지연시간", "1호기", "2호기", "3호기", "빨간색", "하얀색"],
+    labels: ["지연시간", "1호기", "2호기", "3호기"],
     datasets: [
       {
         label: "Data",
@@ -41,11 +41,11 @@ function GraphComponent() {
     indexAxis: "y",
     scales: {
       x: {
-        display: true,
         ticks: {
           callback: function (value, index, values) {
             return index + 1;
           },
+          color: "white",
         },
         grid: {
           display: false,
@@ -53,9 +53,11 @@ function GraphComponent() {
       },
 
       y: {
-        display: true,
         barPercentage: 0.5,
         categoryPercentage: 0.5,
+        ticks: {
+          color: "white",
+        },
         grid: {
           display: false,
         },
@@ -125,7 +127,12 @@ function GraphComponent() {
   }, []);
   return (
     <div>
-      <Bar data={chartData} options={options} style={{ width: '100%'}}/>
+      <Bar
+        data={chartData}
+        options={options}
+        height="120px"
+        style={{ marginLeft: "15px" }}
+      />
     </div>
   );
 }

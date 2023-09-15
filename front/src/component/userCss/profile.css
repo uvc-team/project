@@ -1,54 +1,53 @@
 .proFileBackground {
-    width: 100vw;
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-content: center;
-    justify-content: center;
-    align-items: center;
-    background-color: rgb(225, 225, 225);
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+  background-color: black;
 }
 
 .profileBox {
-    width: 950px;
-    height: 650px;
-    background-color: rgb(255, 255, 255);
-    border-radius: 5px;
-    display: flex;
+  width: 950px;
+  height: 500px;
+  background-color: rgb(255, 255, 255);
+  border-radius: 5px;
+  display: flex;
 }
 
 .userProfile {
-    width: 50%;
-    height: 100%;
-    border-radius: 0px 5px 5px 0px;
-    background: #0097EC;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  width: 50%;
+  height: 100%;
+  border-radius: 0px 5px 5px 0px;
+  background: #0097ec;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .userTextBox {
-    width: 90%;
-    height: 5%;
-    background-color: rgba(35, 85, 64, 0);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-
+  width: 90%;
+  height: 5%;
+  background-color: rgba(35, 85, 64, 0);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
 }
 
 .dataBox {
-    width: 100%;
-    height: 100%;
-    background-color: rgba(248, 248, 248, 0);
-    display: flex;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(248, 248, 248, 0);
+  display: flex;
 }
 
 .userImg {
-    width: 120px;
-    height: 120px;
-    background-color: aliceblue;
-    border-radius: 100%;
-    margin-bottom: 5%;
+  width: 120px;
+  height: 120px;
+  background-color: aliceblue;
+  border-radius: 100%;
+  margin-bottom: 5%;
 }
