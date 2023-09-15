@@ -24,7 +24,7 @@ const CreatePostPage = () => {
     console.log('게시글이 성공적으로 등록되었습니다.');
     
     // 게시글 등록 후 /notice로 이동합니다.
-    navigate('/notice');
+    window.location.reload(navigate("/"));
       })
       .catch(error => console.error('Error:', error));
     
@@ -34,11 +34,11 @@ const CreatePostPage = () => {
 
 return (
   <form onSubmit={handleFormSubmit} className="post-form">
-    <label className="post-label">
+    <label className="post-label" style={{ marginTop: '100px' }}>
       제목:
       <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} />
     </label>
-    <label className="post-label">
+    <label className="post-label" style={{ marginTop: '100px' }}>
       내용:
       <textarea value={content} onChange={(e) => setContent(e.target.value)} />
     </label>
