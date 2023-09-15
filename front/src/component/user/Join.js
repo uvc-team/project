@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
-import "../css/loginPage.css";
+import "../../css/loginPage.css";
 
 const Join = (props) => {
   const [formData, setFormData] = useState({

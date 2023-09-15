@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import "../css/loginPage.css";
+import "../../css/loginPage.css";
 
 const Logout = (props) => {
   const navigate = useNavigate();

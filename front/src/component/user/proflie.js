@@ -1,7 +1,7 @@
 import React from "react";
 import Logout from "./Logout";
 
-import "../css/profile.css";
+import "../../css/profile.css";
 
 export default function Profile() {
   return (
