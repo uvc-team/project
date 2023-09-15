@@ -34,11 +34,12 @@ const CreatePostPage = () => {
 
   return (
     <div className="post">
-      <div className="post-height">
+      <div>
         <form onSubmit={handleSubmit}>
           <label className="post-label-1">
             제목
             <input
+              className="post-height"
               type="text"
               value={title}
               onChange={(e) => setTitle(e.target.value)}
@@ -47,11 +48,14 @@ const CreatePostPage = () => {
           <label className="post-label-2">
             내용
             <input
+              className="post-height"
               value={content}
               onChange={(e) => setContent(e.target.value)}
             />
           </label>
-          <button type="submit">등록하기</button>
+          <div className="button-center">
+            <button type="submit">등록하기</button>
+          </div>
         </form>
       </div>
     </div>

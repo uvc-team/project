@@ -68,3 +68,44 @@ button[type="button"] {
 button[type="button"]:hover {
   background-color: #0056b3;
 }
+
+.update-label-1 {
+  display: flex;
+  color: gray;
+  width: 250px;
+  /* border-radius: 30px; */
+}
+.update-label-2 {
+  display: flex;
+  color: gray;
+  width: 250px;
+  /* border-radius: 30px; */
+  min-height: 50vh;
+}
+.modal {
+  background-color: black;
+  color: black;
+  padding: 20px;
+  width: 200px;
+  text-align: center;
+}
+
+/* 모달 버튼 스타일 */
+.modal-button {
+  margin-top: 10px;
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+}
+
+/* 예 스타일 */
+.yes-button {
+  background-color: white;
+  color: black;
+}
+
+/* 아니요 스타일 */
+.no-button {
+  background-color: white;
+  color: black;
+}

@@ -170,11 +170,13 @@ const PostView = () => {
         ) : (
           <form onSubmit={handleUpdateNotice}>
             <input
+              className="update-label-1"
               type="text"
               value={editedTitle}
               onChange={(e) => setEditedTitle(e.target.value)}
             />
             <textarea
+              className="update-label-2"
               value={editedContent}
               onChange={(e) => setEditedContent(e.target.value)}
             />
@@ -187,8 +189,14 @@ const PostView = () => {
         {showModal && (
           <div className="modal">
             <h2> 정말 삭제하시겠습니까?</h2>
-            <button onClick={handleDeleteNotice}>Yes</button>
-            <button onClick={() => setShowModal(false)}>NO</button>
+            <div className="modal-button">
+              <button className="yes-button" onClick={handleDeleteNotice}>
+                Yes
+              </button>
+              <button className="no-button" onClick={() => setShowModal(false)}>
+                NO
+              </button>
+            </div>
           </div>
         )}
       </div>
