@@ -5,8 +5,7 @@ exports.answer = async (req, res, next) => {
   const id = req.userId;
   const noticeId = req.query.noticeId;
   const comment = req.body.comment;
-  console.log(comment);
-  console.log(req.body);
+
   try {
     if (!noticeId) {
       return res.status(400).json({ error: "존재하지않는 전체공지 입니다." });
@@ -18,17 +17,13 @@ exports.answer = async (req, res, next) => {
     if (comment.length > 255) {
       return res.status(404).json({ error: "250자 내외로 작성해 주세요" });
     }
-    const NewAnswer = await Answer.create({
+    NewAnswer = await Answer.create({
       content: comment,
       userId: id,
       noticeId: noticeId,
     });
-    //유저이름 포함
-    const userName = await User.findOne({ where: { userId: id } });
 
-    const name = userName.name;
-
-    return res.status(200).json({ message: "댓글달기성공", NewAnswer, name });
+    return res.status(200).json({ message: "댓글달기성공" });
   } catch (error) {
     console.error(error);
     return next(error);
@@ -37,7 +32,7 @@ exports.answer = async (req, res, next) => {
 
 //댓글삭제
 exports.deleteAnswer = async (req, res, next) => {
-  const answerId = req.query.answerId;
+  const answerId = req.body.answerId;
   try {
     if (!answerId) {
       return res.status(400).json({ error: "존재하지 않는 댓글입니다." });

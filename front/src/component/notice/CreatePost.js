@@ -1,7 +1,7 @@
-import React, { useState } from "react";
-import axios from "axios";
-import "../../css/CreatePost.css";
-import { useNavigate } from "react-router-dom";
+import React, { useState } from 'react';
+import axios from 'axios';
+import '../../css/CreatePost.css'
+import { useNavigate } from 'react-router-dom';
 
 const CreatePostPage = () => {
   const navigate = useNavigate();
@@ -51,6 +51,7 @@ const CreatePostPage = () => {
       </form>
     </div>
   );
+
 };
 
 export default CreatePostPage;

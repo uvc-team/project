@@ -25,7 +25,7 @@ exports.dataget = async (req, res) => {
     if (plcdata) {
       res.status(200).json(plcdata);
     } else {
-      res.status(404).json({ error: "데이터가 없습니다" });
+      res.status(400).json({ error: "데이터가 없습니다" });
     }
   } catch (error) {
     return res.status(500).json({ error: "데이터 조회 실패" });

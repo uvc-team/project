@@ -39,6 +39,7 @@ h3 {
 }
 
 .comment {
+  display: flex;
   margin-top: 10px;
 }
 
