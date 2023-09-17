@@ -12,6 +12,8 @@ const PostView = () => {
     const decodedToken = jwt_decode(token);
     userId = decodedToken.userId;
   }
+  const position = localStorage.getItem("position");
+  const isAdmin = position !== "3";
 
   const [data, setData] = useState(null);
   const [answer, setAnswer] = useState(null);
@@ -19,7 +21,7 @@ const PostView = () => {
   const [editMode, setEditMode] = useState(false);
   const [editedTitle, setEditedTitle] = useState("");
   const [editedContent, setEditedContent] = useState("");
-  const [showModal, setShowModal] = useState(false); //모달
+  const [showModal, setShowModal] = useState(false); // 모달
   const { noticeId } = useParams();
   const navigate = useNavigate();
 
@@ -46,7 +48,7 @@ const PostView = () => {
   }, [noticeId]);
 
   // Function to handle comment submission
-  //댓글달기
+  // 댓글달기
   const handleCommentSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -63,7 +65,8 @@ const PostView = () => {
       console.error("error", error);
     }
   };
-  //댓글삭제
+
+  // 댓글 삭제
   const handleDeleteComment = async (answerId) => {
     try {
       const response = await axios.delete(
@@ -88,7 +91,7 @@ const PostView = () => {
     }
   };
 
-  //공지사항 업데이트
+  // 공지사항 업데이트
   const handleUpdateNotice = async (e) => {
     e.preventDefault();
     try {
@@ -107,7 +110,7 @@ const PostView = () => {
     }
   };
 
-  //공지사항 삭제
+  // 공지사항 삭제
   const handleDeleteNotice = async (e) => {
     e.preventDefault(); // 이벤트의 기본 동작 막기
     try {
@@ -153,21 +156,27 @@ const PostView = () => {
         {!editMode ? (
           <>
             <p>{data.content}</p>
-            <button type="button" onClick={() => setEditMode(true)}>
-              수정하기
-            </button>
-            <button type="button" onClick={() => setShowModal(true)}>
-              삭제하기
-            </button>
+            {isAdmin && (
+              <>
+                <button type="button" onClick={() => setEditMode(true)}>
+                  수정하기
+                </button>
+                <button type="button" onClick={() => setShowModal(true)}>
+                  삭제하기
+                </button>
+              </>
+            )}
           </>
         ) : (
           <form onSubmit={handleUpdateNotice}>
             <input
+              className="update-label-1"
               type="text"
               value={editedTitle}
               onChange={(e) => setEditedTitle(e.target.value)}
             />
             <textarea
+              className="update-label-2"
               value={editedContent}
               onChange={(e) => setEditedContent(e.target.value)}
             />
@@ -180,8 +189,14 @@ const PostView = () => {
         {showModal && (
           <div className="modal">
             <h2> 정말 삭제하시겠습니까?</h2>
-            <button onClick={handleDeleteNotice}>Yes</button>
-            <button onClick={() => setShowModal(false)}>NO</button>
+            <div className="modal-button">
+              <button className="yes-button" onClick={handleDeleteNotice}>
+                Yes
+              </button>
+              <button className="no-button" onClick={() => setShowModal(false)}>
+                NO
+              </button>
+            </div>
           </div>
         )}
       </div>

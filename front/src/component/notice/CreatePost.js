@@ -1,14 +1,14 @@
-import React, { useState } from 'react';
-import axios from 'axios';
-import '../../css/CreatePost.css'
-import { useNavigate } from 'react-router-dom';
+import React, { useState } from "react";
+import axios from "axios";
+import "../../css/CreatePost.css";
+import { useNavigate } from "react-router-dom";
 
 const CreatePostPage = () => {
   const navigate = useNavigate();
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
 
-  const handleFormSubmit = (event) => {
+  const handleSubmit = (event) => {
     event.preventDefault();
 
     axios
@@ -24,7 +24,7 @@ const CreatePostPage = () => {
       )
       .then((response) => {
         console.log("게시글이 성공적으로 등록되었습니다.");
-        window.location.reload(navigate("/"));
+        navigate("/");
       })
       .catch((error) => console.error("Error:", error));
 
@@ -34,26 +34,32 @@ const CreatePostPage = () => {
 
   return (
     <div className="post">
-      <form onSubmit={handleFormSubmit}>
-        <label className="post-label-1">
-          제목
-          <input
-            type="text"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-          />
-        </label>
-      </form>
-      <form onSubmit={handleFormSubmit}>
-        <label className="post-label-2">
-          내용
-          <input value={content} onChange={(e) => setContent(e.target.value)} />
-        </label>
-      </form>
-      <button type="submit">등록하기</button>
+      <div>
+        <form onSubmit={handleSubmit}>
+          <label className="post-label-1">
+            제목
+            <input
+              className="post-height"
+              type="text"
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+            />
+          </label>
+          <label className="post-label-2">
+            내용
+            <input
+              className="post-height"
+              value={content}
+              onChange={(e) => setContent(e.target.value)}
+            />
+          </label>
+          <div className="button-center">
+            <button type="submit">등록하기</button>
+          </div>
+        </form>
+      </div>
     </div>
   );
-
 };
 
 export default CreatePostPage;
