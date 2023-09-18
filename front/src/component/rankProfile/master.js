@@ -125,7 +125,7 @@ function MasterProfile() {
           )}
         {selectedButton === 'button2' && (
             <CompanyProfile />
-
+        )}
         {selectedButton === 'button3' && (
       <div style={{ width: '120%', maxWidth: '800px', margin: '0 auto' }}>
        <FullCalendar
