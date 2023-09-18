@@ -17,9 +17,43 @@
   display: flex;
 }
 
+.userBox {
+  width: 100%;
+  height: 10%;
+  display: flex;
+  border-bottom: 2px solid #d4d4d4;
+
+  background-color: rgba(240, 248, 255, 0);
+  justify-content: space-around;
+  align-items: flex-end;
+}
+
+.hp {
+  color: black;
+  font-weight: bold;
+  font-family: Inter;
+  /* 글꼴 지정 */
+  font-size: 25px;
+  font-family: 'Pretendard';
+  letter-spacing: normal;
+  font-weight: 10px;
+  margin-bottom: 2%;
+  margin-left: 2%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
 .profileBox h2,
 .profileBox p {
   color: black;
+  font-weight: bold;
+  font-family: Inter;
+  /* 글꼴 지정 */
+  font-size: 15px;
+  font-family: 'Pretendard';
+  letter-spacing: normal;
+  font-weight: normal;
 }
 
 .userProfile {
@@ -30,16 +64,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-}
-
-.userTextBox {
-  width: 90%;
-  height: 5%;
-  background-color: rgba(35, 85, 64, 0);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
+  justify-content: flex-end;
 }
 
 .dataBox {
@@ -54,30 +79,78 @@
 .remainingSpace {
   display: flex;
   flex-direction: column;
+  height: 100%;
+  width: 100%;
+  justify-content: flex-end;
 }
 
 .remainingSpace .userInfo {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  border-bottom: 2px solid #d4d4d4;
+  height: 100%;
+  width: 100%;
 }
 
 .remainingSpace .userInfo p {
-  margin-right: 10px;
   color: black;
   /* 검은색으로 변경 */
   font-weight: bold;
   font-family: Inter;
   /* 글꼴 지정 */
   font-size: 15px;
+  font-family: 'Pretendard';
+  letter-spacing: normal;
+  font-weight: normal;
+  width: 100%;
+
 }
 
-.remainingSpace .userInfo .buttonContainer {
+.userInfo .buttonContainer {
   display: flex;
+  justify-content: space-around;
+  height: 90px;
+  width: 100%;
   align-items: center;
+}
 
-  button {
-    margin-left: 10px;
-    /* 버튼 사이 간격 조절 */
-  }
+.style-buttonM {
+  background-image: url('../../public/iconM.png');
+  align-items: center;
+  background-size: contain;
+  /* 이미지를 딱 맞게 조절합니다. */
+  background-repeat: no-repeat;
+  /* 이미지 반복 없음 */
+  background-position: center center;
+  border: #0097ec;
+  width: 25px;
+  height: 25px;
+  background-color: #0095ec00;
+}
+
+.style-buttonM2 {
+  background-image: url('../../public/iconM2.png');
+  align-items: center;
+  background-size: contain;
+  /* 이미지를 딱 맞게 조절합니다. */
+  background-repeat: no-repeat;
+  /* 이미지 반복 없음 */
+  background-position: center center;
+  border: #0097ec;
+  width: 25px;
+  height: 25px;
+  background-color: #0095ec00;
+}
+
+
+
+.userInfoBox {
+  width: 100%;
+  max-height: 72%;
+
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
 }

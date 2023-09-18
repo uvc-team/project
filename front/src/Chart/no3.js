@@ -38,7 +38,7 @@ function No3() {
     },
   };
   useEffect(() => {
-    const ws = new WebSocket("ws://192.168.0.124:8081");
+    const ws = new WebSocket("ws://192.168.0.88:8081");
 
     ws.addEventListener("message", (event) => {
       const receivedMessage = JSON.parse(event.data);
@@ -46,7 +46,7 @@ function No3() {
       const normalizeValue = (value, minValue, maxValue) => {
         return ((value - minValue) / (maxValue - minValue)) * 100;
       };
-      const [minTag21, maxTag21] = [0, 500000];
+      const [minTag21, maxTag21] = [0, 1200000];
       const [minTag22, maxTag22] = [0, 18000000];
 
       if (receivedMessage.Wrapper) {

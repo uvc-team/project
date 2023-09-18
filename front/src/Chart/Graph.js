@@ -66,7 +66,7 @@ function GraphComponent() {
   };
 
   useEffect(() => {
-    const ws = new WebSocket("ws://192.168.0.124:8081");
+    const ws = new WebSocket("ws://192.168.0.88:8081");
 
     ws.addEventListener("message", (event) => {
       const receivedMessage = JSON.parse(event.data);
