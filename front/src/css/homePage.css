@@ -1,31 +1,41 @@
-.homeBody {
-  width: 100vw;
-  height: 4700px;
-  flex-direction: column;
-  display: flex;
-  align-items: center;
-  background-color: #000;
+.outer {
+  height: 100vh;
+  overflow-y: auto;
+  background-color: black;
+}
 
+.inner {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 100px;
 }
 
 /* 전체 화면 */
 .homePage1Box {
-  width: 100vw;
-  height: 947px;
+  width: 100%;
+  height: 100%;
   background-color: rgba(0, 255, 255, 0);
   display: flex;
 }
 
+.divider {
+  width: 100%;
+  height: 5px;
+  background-color: rgb(0, 0, 0);
+}
+
 .homePage2Box {
-  width: 100vw;
-  height: 750px;
+  width: 100%;
+  height: 100%;
   display: flex;
   flex-direction: column;
 }
 
 .homePage3Box {
-  width: 100vw;
-  height: 700px;
+  width: 100%;
+  height: 100%;
   display: flex;
   margin-top: 20%;
   background-color: #3caca700;
@@ -37,18 +47,18 @@
 }
 
 .homePage4Box {
-  width: 100vw;
-  height: 500px;
+  width: 100%;
+  height: 100%;
   background-color: #564b4b00;
   display: flex;
-  justify-content: flex-end;
+  justify-content: center;
   flex-direction: column;
   align-items: center;
 }
 
 .homePage5Box {
   display: flex;
-  width: 100vw;
+  width: 100%;
   height: 500px;
   align-items: center;
   flex-direction: column;
@@ -56,8 +66,8 @@
 
 .homePage6Box {
   display: flex;
-  width: 100vw;
-  height: 700px;
+  width: 100%;
+  height: 100%;
   align-items: center;
   flex-direction: column;
 }
@@ -65,8 +75,8 @@
 
 /* 배경 밝기 조절 박스 */
 .homeBox1 {
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height: 100%;
   display: flex;
   background-size: cover;
   /* 이미지를 딱 맞게 조절합니다. */
@@ -75,12 +85,11 @@
   background-position: center center;
   background-image: url('../../public/img1Box.png');
   align-items: flex-start;
-  margin-top: 15%;
 }
 
 .homeBox2 {
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height: 100%;
   display: flex;
   background-size: cover;
   /* 이미지를 딱 맞게 조절합니다. */
@@ -95,8 +104,8 @@
 /* 숨겨진 상태에 대한 초기 스타일 화면  */
 .homePage1 {
   display: flex;
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height: 100%;
   opacity: 0;
   transform: translateY(20px);
   transition: opacity 1s ease-in-out, transform 2s ease-in-out;
@@ -110,8 +119,8 @@
 }
 
 .homePage2 {
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height: 100%;
   background-image: url('../../public/img2.jpg');
   background-size: cover;
   /* 이미지를 딱 맞게 조절합니다. */
@@ -119,11 +128,10 @@
   /* 이미지 반복 없음 */
   background-position: center center;
   /* 이미지를 중앙 정렬합니다. */
-  margin-top: 10%;
 }
 
 .homePage3 {
-  width: 100vw;
+  width: 100%;
   height: 222px;
   background-color: #0097EC;
   z-index: 1;
@@ -138,6 +146,7 @@
   width: 30vw;
   background-size: contain;
   margin-left: 8%;
+  margin-top: 15%;
   display: flex;
   /* 이미지를 딱 맞게 조절합니다. */
   background-repeat: no-repeat;
@@ -178,13 +187,12 @@
 .homeBody5Logo {
   background-image: url('../../public/Team.png');
   width: 20vw;
-  height: 30vh;
+  height: 10%;
   background-size: contain;
   /* 이미지를 딱 맞게 조절합니다. */
   background-repeat: no-repeat;
   /* 이미지 반복 없음 */
   background-position: center center;
-  margin-bottom: 5%;
 }
 
 

@@ -16,7 +16,10 @@
   border-radius: 5px;
   display: flex;
 }
-
+.profileBox h2,
+.profileBox p {
+  color: black;
+}
 .userProfile {
   width: 30%;
   height: 100%;

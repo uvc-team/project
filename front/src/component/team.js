@@ -21,7 +21,7 @@ const Team = () => (
       {/* 매니저 1 */}
       <div className="uswer1 profile">
         <li className="team-item">
-          {/* <img src="/kangwoo.jpg" alt="Profile" /> */}
+          <img src="/img03.jpg" alt="Profile" />
           <div className="profile-contents">
             <h2>
               함석준<span>AIOT</span>
@@ -33,7 +33,7 @@ const Team = () => (
       {/* 매니저 2 */}
       <div className="uswer1 profile">
         <li className="team-item">
-          {/* <img src="/kangwoo.jpg" alt="Profile" /> */}
+          <img src="/kangwoo.jpg" alt="Profile" />
           <div className="profile-contents">
             <h2>
               함석준<span>AIOT</span>
@@ -45,7 +45,7 @@ const Team = () => (
       {/* 매니저 3 */}
       <div className="uswer1 profile">
         <li className="team-item">
-          {/* <img src="/img00.jpg" alt="Profile" /> */}
+          <img src="/img00.jpg" alt="Profile" />
           <div className="profile-contents">
             <h2>
               함석준<span>AIOT</span>
