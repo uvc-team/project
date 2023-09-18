@@ -9,6 +9,7 @@ import './calendar.css';
 import { koLocale } from '@fullcalendar/core/locales/ko';
 import CompanyProfile from "./companyProfile";
 import "../../css/profile.css";
+
 import Button from '@mui/material/Button';
 
 function MasterProfile() {
@@ -48,8 +49,9 @@ function MasterProfile() {
   }, []);
 
   const [numValue, setNumValue] = useState(0);
+
   const [users, setUsers] = useState([]);
-  const [selectedButton, setSelectedButton] = useState('button1');
+  const [selectedButton, setSelectedButton] = useState("button1");
 
   useEffect(() => {
     axios
@@ -93,20 +95,27 @@ function MasterProfile() {
         <Button variant="contained" color="secondary" onClick={() => handleButtonClick('button1')}>직위변경</Button>
           <Button variant="contained" color="primary" onClick={() => handleButtonClick('button2')}>협력업체</Button>
           <Button variant="contained" color="primary" onClick={() => handleButtonClick('button3')}>일정달력</Button>
+
           <h2>'함 석 준'</h2>
-          <div className='userImg'></div>
+          <div className="userImg"></div>
         </div>
         <div className="remainingSpace">
-          {selectedButton === 'button1' && (
+          {selectedButton === "button1" && (
             <div>
-              {users.map(user => (
+              {users.map((user) => (
                 <div key={user.userId} className="userInfo">
-                  <p>{user.name}, ({user.Position.role})</p>
+                  <p>
+                    {user.name}, ({user.Position.role})
+                  </p>
                   <div className="buttonContainer">
-                    <button onClick={() => handleRoleChange(user.userId, 'manager')}>
+                    <button
+                      onClick={() => handleRoleChange(user.userId, "manager")}
+                    >
                       매니저 등록
                     </button>
-                    <button onClick={() => handleRoleChange(user.userId, 'remove')}>
+                    <button
+                      onClick={() => handleRoleChange(user.userId, "remove")}
+                    >
                       직위 박탈
                     </button>
                   </div>
@@ -116,7 +125,7 @@ function MasterProfile() {
           )}
         {selectedButton === 'button2' && (
             <CompanyProfile />
-          )}
+
         {selectedButton === 'button3' && (
       <div style={{ width: '120%', maxWidth: '800px', margin: '0 auto' }}>
        <FullCalendar
@@ -142,7 +151,7 @@ function MasterProfile() {
         </div>
       </div>
     </div>
-  ); 
+  );
 }
 
 export default MasterProfile;
