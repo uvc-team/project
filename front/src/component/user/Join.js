@@ -36,7 +36,7 @@ const Join = (props) => {
       );
       console.log(formData);
       console.log(`response: ${response}`);
-      setModalMessage(`회원 가입 성공: ${response}`);
+      setModalMessage("회원 가입 성공");
 
       // 서버에서 응답을 받으면 원하는 동작을 수행할 수 있습니다.
       // console.log("회원 가입 성공:", response.data);
@@ -45,7 +45,7 @@ const Join = (props) => {
       // 모달 열고 응답 메세지 설정
     } catch (error) {
       //모달을 열고 오류 메세지를 설정
-      setModalMessage(`회원 가입 실패: ${error.message}`);
+      setModalMessage("회원 가입 실패");
     }
   };
 

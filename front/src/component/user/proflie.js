@@ -1,5 +1,6 @@
 import React from "react";
 import Logout from "./Logout";
+import FullCalendar from '@fullcalendar/react';
 
 import "../../css/profile.css";
 
@@ -8,9 +9,8 @@ export default function Profile() {
     <div className="proFileBackground">
       <div className="profileBox">
         <div className="userProfile">
-          <h2>안녕하세요 OO님</h2>
-          <div className="userImg" />
-          <p className="userTextBox">
+          <p className="userTextBox"
+          style={{marginTop: '50%'}}>
             <p>사람 </p>
             <p
               style={{
@@ -22,7 +22,7 @@ export default function Profile() {
           </p>
           <Logout />
         </div>
-
+        
         {/* 공지사항 */}
         <div className="dataBox"></div>
       </div>
