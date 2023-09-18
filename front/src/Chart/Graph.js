@@ -29,32 +29,34 @@ function GraphComponent() {
     datasets: [
       {
         label: "Data",
-        data: [0],
-        backgroundColor: ["grey", "blue", "green", "purple", "red", "white"],
+        data: [],
+        backgroundColor: ["grey", "blue", "green", "purple"],
       },
     ],
   });
-  const [colorSensorTrueValue, setColorSensorTrueValue] = useState(0);
-  const [colorSensorFalseValue, setColorSensorFalseValue] = useState(0);
+
+  const [tag15Value, setTag15Value] = useState(0);
 
   const options = {
     indexAxis: "y",
     scales: {
       x: {
+        max: tag15Value,
         ticks: {
-          callback: function (value, index, values) {
-            return index + 1;
+          callback: function (index) {
+            return parseInt(Math.round(index), 10);
           },
           color: "white",
         },
         grid: {
           display: false,
         },
+        startAtZero: true,
       },
 
       y: {
-        barPercentage: 0.5,
-        categoryPercentage: 0.5,
+        barPercentage: 0.3,
+        categoryPercentage: 0.3,
         ticks: {
           color: "white",
         },
@@ -71,53 +73,39 @@ function GraphComponent() {
     ws.addEventListener("message", (event) => {
       const receivedMessage = JSON.parse(event.data);
 
-      if (receivedMessage.Wrapper) {
-        // Get the values for each tagId
-        const tag14Value =
-          receivedMessage.Wrapper.find((item) => item.tagId === "14")?.value ||
-          -1;
-        const tag15Value =
-          receivedMessage.Wrapper.find((item) => item.tagId === "15")?.value ||
-          -1;
-        const tag16Value =
-          receivedMessage.Wrapper.find((item) => item.tagId === "16")?.value ||
-          -1;
-        const tag17Value =
-          receivedMessage.Wrapper.find((item) => item.tagId === "17")?.value ||
-          -1;
+      if (receivedMessage && receivedMessage.Wrapper) {
+        const tag1Value = receivedMessage.Wrapper.find(
+          (item) => item.tagId === "1"
+        );
+        if (tag1Value) {
+          // Get the values for each tagId
+          const tag14 = receivedMessage.Wrapper.find(
+            (item) => item.tagId === "14"
+          )?.value;
 
-        if (
-          receivedMessage.Wrapper.some(
-            (item) => item.tagId === "39" && item.value
-          )
-        )
-          setColorSensorTrueValue((prev) => prev + 1);
+          const tag15 = receivedMessage.Wrapper.find(
+            (item) => item.tagId === "15"
+          )?.value;
+          setTag15Value(tag15);
+          const tag16 = receivedMessage.Wrapper.find(
+            (item) => item.tagId === "16"
+          )?.value;
+          const tag17 = receivedMessage.Wrapper.find(
+            (item) => item.tagId === "17"
+          )?.value;
 
-        if (
-          receivedMessage.Wrapper.some(
-            (item) => item.tagId === "39" && !item.value
-          )
-        )
-          setColorSensorFalseValue((prev) => prev + 1);
-
-        setChartData((prevData) => {
-          return {
-            ...prevData,
-            datasets: [
-              {
-                ...prevData.datasets[0],
-                data: [
-                  tag14Value,
-                  tag15Value,
-                  tag16Value,
-                  tag17Value,
-                  colorSensorTrueValue,
-                  colorSensorFalseValue,
-                ],
-              },
-            ],
-          };
-        });
+          setChartData((prevData) => {
+            return {
+              ...prevData,
+              datasets: [
+                {
+                  ...prevData.datasets[0],
+                  data: [tag14, tag15, tag16, tag17],
+                },
+              ],
+            };
+          });
+        }
       }
     });
 
@@ -131,7 +119,7 @@ function GraphComponent() {
         data={chartData}
         options={options}
         height="120px"
-        style={{ marginLeft: "15px" }}
+        style={{ marginLeft: "15px", marginTop: "7px" }}
       />
     </div>
   );
