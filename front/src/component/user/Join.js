@@ -1,8 +1,17 @@
 import React, { useState } from "react";
 import axios from "axios";
 import "../../css/loginPage.css";
+import Modal from "../modal";
 
 const Join = (props) => {
+  const [isOpneModal, setIsOpneModal] = useState(false);
+  const [modalMessage, setModalMessage] = useState("");
+  const opneModal=() => {
+    setIsOpneModal(true);
+  };
+  const closeModal = () => {
+    setIsOpneModal(false);
+  };
   const [formData, setFormData] = useState({
     email: "",
     name: "",
@@ -27,13 +36,16 @@ const Join = (props) => {
       );
       console.log(formData);
       console.log(`response: ${response}`);
+      setModalMessage(`회원 가입 성공: ${response}`);
 
       // 서버에서 응답을 받으면 원하는 동작을 수행할 수 있습니다.
       // console.log("회원 가입 성공:", response.data);
+      
 
       // 모달 열고 응답 메세지 설정
     } catch (error) {
       //모달을 열고 오류 메세지를 설정
+      setModalMessage(`회원 가입 실패: ${error.message}`);
     }
   };
 
@@ -66,9 +78,13 @@ const Join = (props) => {
         onChange={handleChange}
         placeholder="Password"
       />
-      <button className="buttonStyle" type="submit">
+      <button className="buttonStyle" type="submit" onClick={opneModal}>
         회원가입
       </button>
+      
+        <Modal isOpen={isOpneModal} onClose={closeModal} Message={modalMessage}>
+        </Modal>
+      
     </form>
   );
 };
