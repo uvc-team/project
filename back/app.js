@@ -13,6 +13,7 @@ const authRouter = require("./router/authRouter");
 const positionRouter = require("./router/positionRouter");
 const fullNoticeRouter = require("./router/fullNoticeRouter");
 const answerRouter = require("./router/answerRouter");
+const calendarRouter = require("./router/calendarRouter");
 const cors = require("cors");
 const app = express();
 
@@ -79,6 +80,7 @@ app.use("/auth", authRouter);
 app.use("/position", positionRouter);
 app.use("/notice", fullNoticeRouter);
 app.use("/answer", answerRouter);
+app.use("/calendar", calendarRouter);
 
 // 에러 핸들링
 app.use((req, res, next) => {
