@@ -3,7 +3,9 @@ import "../../css/loginPage.css";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
+
 const Login = (props) => {
+
   const navigate = useNavigate(); // useNavigate 초기화
 
   const [formData, setFormData] = useState({
@@ -42,6 +44,7 @@ const Login = (props) => {
         // 예를 들어, 회원 가입이 성공했을 때 MyPage로 이동할 수 있습니다
         const position = response.data.positionId;
 
+
         if (position === 1) {
           navigate("../");
         }
@@ -57,6 +60,7 @@ const Login = (props) => {
     } catch (error) {
       // 오류 처리
       console.error("error:", error);
+
     }
   };
 

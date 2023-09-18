@@ -4,7 +4,7 @@ const User = require("./user");
 const Position = require("./position");
 const FullNotice = require("./fullNotice");
 const Answer = require("./answer");
-
+const Calendar = require("./Calendar");
 dotenv.config();
 
 const db = {
@@ -29,7 +29,7 @@ db.User = User;
 db.FullNotice = FullNotice;
 db.Answer = Answer;
 db.Position = Position;
-
+db.Calendar = Calendar;
 //모델 초기화
 // User.initiate(sequelize);
 Object.keys(db).forEach((modelName) => {

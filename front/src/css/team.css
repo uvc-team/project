@@ -12,16 +12,16 @@ li {
 
 body {
     background-color: #111;
-    color: #999;
+    color: #99999900;
 }
 
 .wrapper {
     display: flex;
-    height: 100%;
-    width: 100%;
-    justify-content: space-between;
+    height: 90%;
+    width: 90%;
+    justify-content: center;
     align-items: center;
-    /* background-color: #999; */
+    background-color: #99999900;
     flex-direction: column;
 }
 

@@ -17,6 +17,11 @@
   display: flex;
 }
 
+.profileBox h2,
+.profileBox p {
+  color: black;
+}
+
 .userProfile {
   width: 30%;
   height: 100%;
@@ -67,17 +72,20 @@
 
 .remainingSpace .userInfo p {
   margin-right: 10px;
-  color: black; /* 검은색으로 변경 */
+  color: black;
+  /* 검은색으로 변경 */
   font-weight: bold;
-  font-family: Inter; /* 글꼴 지정 */
+  font-family: Inter;
+  /* 글꼴 지정 */
   font-size: 15px;
 }
 
 .remainingSpace .userInfo .buttonContainer {
-    display:flex;
-    align-items:center;
+  display: flex;
+  align-items: center;
 
-    button {
-      margin-left: 10px; /* 버튼 사이 간격 조절 */
-    }
+  button {
+    margin-left: 10px;
+    /* 버튼 사이 간격 조절 */
+  }
 }

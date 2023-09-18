@@ -14,6 +14,8 @@ import Dashboard from "@mui/icons-material/Dashboard";
 import Campaign from "@mui/icons-material/Campaign";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import Notice from "../component/notice";
+import '../Header/header.css';
+import Logout from "../component/user/Logout";
 
 // 페이지 로딩시 로컬스토리지에서 토큰 가져와 사용자 인증 상태를 확인
 function Header() {
@@ -22,12 +24,18 @@ function Header() {
   const location = useLocation(); // useLocation
   const [numValue, setNumValue] = useState(0);
   const [position, setPosition] = useState("");
+  const [isToggleOpen, setIsToggleOpen] = useState(false);
+
+  const toggleHandler =() => {
+    setIsToggleOpen(!isToggleOpen);
+  };
 
   // 페이지 로딩시 로컬스토리지에서 토큰 가져와 사용자 인증 상태를 확인
   useEffect(() => {
     const storedToken = localStorage.getItem("token");
     if (storedToken) {
       setToken(storedToken);
+      console.log(storedToken)
     }
 
     const storedPosition = localStorage.getItem("position");
@@ -125,6 +133,7 @@ function Header() {
                 component={Link}
                 to="/master"
                 sx={{ color: "white" }}
+                onClick={toggleHandler}
               />
             </Tabs>
           )}
@@ -156,8 +165,8 @@ function Header() {
                 label="계정"
                 icon={<AccountCircleIcon />}
                 component={Link}
-                to="/profile"
                 sx={{ color: "white" }}
+                onClick={toggleHandler}
               />
             </Tabs>
           )}
@@ -181,6 +190,13 @@ function Header() {
           )}
         </Toolbar>
       </AppBar>
+      {isToggleOpen && (
+        <div className="headerBody">
+          <p>이름</p>
+          <p>이메일</p>
+            <Logout />
+        </div>
+      )}
     </div>
   );
 }

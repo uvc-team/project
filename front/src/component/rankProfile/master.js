@@ -1,10 +1,55 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 
+import dayGridPlugin from "@fullcalendar/daygrid";
+import timeGridPlugin from "@fullcalendar/timegrid";
+import interactionPlugin from "@fullcalendar/interaction";
+import FullCalendar from '@fullcalendar/react';
+import './calendar.css';
+import { koLocale } from '@fullcalendar/core/locales/ko';
 import CompanyProfile from "./companyProfile";
 import "../../css/profile.css";
 
+import Button from '@mui/material/Button';
+
 function MasterProfile() {
+
+  const [events, setEvents] = useState([]);
+
+  const handleDateClick = (info) => {
+    const title = prompt('일정의 제목을 입력하세요:');
+    if (title) {
+      setEvents([...events, { title: title, date: info.dateStr }]);
+      
+      // POST 요청 보내기
+      axios.post(`${process.env.REACT_APP_URL}/calendar/events`, {
+        title: title,
+        date: info.dateStr
+      }, {
+        headers: { Authorization: `${localStorage.getItem("token")}` }
+      })
+        .then((response) => {
+          console.log(response.data);
+          // 성공적으로 요청이 완료되었을 때 추가 작업 수행 가능
+        })
+        .catch((error) => console.error("Error:", error));
+    }
+  };
+  
+  useEffect(() => {
+    // 서버에서 일정 데이터 가져오기
+    axios.get(`${process.env.REACT_APP_URL}/calendar/events`, {
+      headers: { Authorization: `${localStorage.getItem("token")}` }
+    })
+      .then((response) => {
+        const eventData = response.data.events;
+        setEvents(eventData);
+      })
+      .catch((error) => console.error("Error:", error));
+  }, []);
+
+  const [numValue, setNumValue] = useState(0);
+
   const [users, setUsers] = useState([]);
   const [selectedButton, setSelectedButton] = useState("button1");
 
@@ -44,11 +89,13 @@ function MasterProfile() {
 
   return (
     <div className="proFileBackground">
-      <div className="profileBox">
-        <div className="userProfile">
-          <button onClick={() => handleButtonClick("button1")}>버튼1</button>
-          <button onClick={() => handleButtonClick("button2")}>버튼2</button>
-          <button onClick={() => handleButtonClick("button3")}>버튼3</button>
+
+      <div className='profileBox'>
+        <div className='userProfile'>
+        <Button variant="contained" color="secondary" onClick={() => handleButtonClick('button1')}>직위변경</Button>
+          <Button variant="contained" color="primary" onClick={() => handleButtonClick('button2')}>협력업체</Button>
+          <Button variant="contained" color="primary" onClick={() => handleButtonClick('button3')}>일정달력</Button>
+
           <h2>'함 석 준'</h2>
           <div className="userImg"></div>
         </div>
@@ -76,13 +123,31 @@ function MasterProfile() {
               ))}
             </div>
           )}
-          {selectedButton === "button2" && (
-            <CompanyProfile companyName="크로이스" />
-          )}
-          {selectedButton === "button3" && (
-            // 버튼 3을 눌렀을 때 보여줄 내용
-            <div>버튼 3을 눌렀을 때 보여줄 내용</div>
-          )}
+        {selectedButton === 'button2' && (
+            <CompanyProfile />
+        )}
+        {selectedButton === 'button3' && (
+      <div style={{ width: '120%', maxWidth: '800px', margin: '0 auto' }}>
+       <FullCalendar
+       
+       plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]} 
+        initialView="dayGridMonth"
+        locale="ko"
+        headerToolbar={{
+          left: 'prev,next today',
+          center: 'title',
+          right: 'dayGridMonth,timeGridDay'
+        }}
+        editable={true}
+        selectable={true}
+        
+        height={"60vh"}
+        dateClick={handleDateClick}
+        events={events} // 서버에서 받은 일정 데이터를 전달합니다.
+      />
+    </div>
+    
+      )}
         </div>
       </div>
     </div>
