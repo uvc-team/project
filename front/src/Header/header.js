@@ -120,13 +120,7 @@ function Header() {
                 to="/noticeboard"
                 sx={{ color: "white" }}
               />
-              <Tab
-                label="계정"
-                icon={<AccountCircleIcon />}
-                component={Link}
-                to="/profile"
-                sx={{ color: "white" }}
-              />
+              
               <Tab
                 label="마스터"
                 icon={<AccountCircleIcon />}

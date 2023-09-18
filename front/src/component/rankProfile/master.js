@@ -93,77 +93,103 @@ function MasterProfile() {
 
   return (
     <div className="proFileBackground">
-      <div className="profileBox">
-        <div className="userProfile">
-          <Button
-            variant="contained"
-            color="secondary"
-            style={{ width: "100%" }}
-            onClick={() => handleButtonClick("button1")}
-          >
-            직위변경
-          </Button>
-          <Button
+      <div className='profileBox'>
+        <div className='userProfile'>
+        <Button
+  variant="contained"
+  color="secondary"
+  style={{ width: '100%', height: '15%', transition: 'height 0.2s ease' }}
+  onMouseEnter={(e) => (e.target.style.height = '40%')} // 마우스를 올렸을 때 높이 증가
+  onMouseLeave={(e) => (e.target.style.height = '15%')} // 마우스를 벗어났을 때 높이 감소
+  onClick={() => handleButtonClick('button1')}
+>
+  직위변경
+        </Button>
+        <Button
             variant="contained"
             color="primary"
-            style={{ width: "100%" }}
-            onClick={() => handleButtonClick("button2")}
-          >
+            style={{ width: '100%', height: '15%', transition: 'height 0.2s ease' }}
+            onMouseEnter={(e) => (e.target.style.height = '40%')}
+            onMouseLeave={(e) => (e.target.style.height = '15%')}
+            onClick={() => handleButtonClick('button2')}
+        >
             협력업체
-          </Button>
-          <Button
-            variant="contained"
-            color="primary"
-            style={{ width: "100%" }}
-            onClick={() => handleButtonClick("button3")}
-          >
-            일정달력
-          </Button>
+        </Button>
+<Button
+  variant="contained"
+  color="primary"
+  style={{ width: '100%', height: '15%', transition: 'height 0.2s ease' }}
+  onMouseEnter={(e) => (e.target.style.height = '40%')}
+  onMouseLeave={(e) => (e.target.style.height = '15%')}
+  onClick={() => handleButtonClick('button3')}
+>
+  일정달력
+</Button>
         </div>
         <div className="remainingSpace">
           {selectedButton === "button1" && (
-            <div>
-              {users.map((user) => (
-                <div key={user.userId} className="userInfo">
-                  <p>
-                    {user.name}, ({user.Position.role})
+            <div className="remainingSpace">
+              <h className='hp'>change of position
+              <p>: 사원 관리</p>
+              </h>
+              
+              <div className="userBox">
+                <p>Name</p>
+                <p>Position</p>
+                <p>Management</p>
+              </div>               
+              <div className="userInfoBox">            
+                {users.map((user) => (
+                  <div key={user.userId} className="userInfo">
+                  <p>{user.name} </p>
+                  <p>({user.Position.role})
                   </p>
                   <div className="buttonContainer">
-                    <button
+                    <button className="style-buttonM"
                       onClick={() => handleRoleChange(user.userId, "manager")}
                     >
-                      매니저 등록
+                      
                     </button>
-                    <button
+                    <button className="style-buttonM2"
                       onClick={() => handleRoleChange(user.userId, "remove")}
                     >
-                      직위 박탈
+                      
                     </button>
+
                   </div>
                 </div>
               ))}
             </div>
+
+
+            </div>
+           
           )}
-          {selectedButton === "button2" && <CompanyProfile />}
-          {/* {selectedButton === "button3" && (
-            <div style={{ width: "120%", maxWidth: "800px", margin: "0 auto" }}>
-              <FullCalendar
-                plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
-                initialView="dayGridMonth"
-                locale="ko"
-                headerToolbar={{
-                  left: "prev,next today",
-                  center: "title",
-                  right: "dayGridMonth,timeGridDay",
-                }}
-                editable={true}
-                selectable={true}
-                height={"60vh"}
-                dateClick={handleDateClick}
-                events={events} // 서버에서 받은 일정 데이터를 전달합니다.
-              /> */}
-          {/* </div> */}
-          {/* )} */}
+        {selectedButton === 'button2' && (
+            <CompanyProfile />
+        )}
+        {selectedButton === 'button3' && (
+      <div style={{ width: '95%', height: '95%', marginLeft:'2%'} }>
+       <FullCalendar
+       
+       plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]} 
+        initialView="dayGridMonth"
+        locale="ko"
+        headerToolbar={{
+          left: 'prev,next today',
+          center: 'title',
+          right: 'dayGridMonth,timeGridDay'
+        }}
+        editable={true}
+        selectable={true}
+        
+        height={"100%"}
+        dateClick={handleDateClick}
+        events={events} // 서버에서 받은 일정 데이터를 전달합니다.
+      />
+    </div>
+    
+      )}
         </div>
       </div>
     </div>

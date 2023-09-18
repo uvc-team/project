@@ -4,7 +4,7 @@ const VideoComponent = () => {
   return (
     <div className="Dash2">
       <img
-        src="http://192.168.0.130:8000/video"
+        src="http://192.168.0.88:7000/video"
         alt=""
         height="310px"
         width="100%"
