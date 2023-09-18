@@ -92,12 +92,12 @@ function MasterProfile() {
 
       <div className='profileBox'>
         <div className='userProfile'>
-        <Button variant="contained" color="secondary" onClick={() => handleButtonClick('button1')}>직위변경</Button>
-          <Button variant="contained" color="primary" onClick={() => handleButtonClick('button2')}>협력업체</Button>
-          <Button variant="contained" color="primary" onClick={() => handleButtonClick('button3')}>일정달력</Button>
-
-          <h2>'함 석 준'</h2>
-          <div className="userImg"></div>
+        <Button variant="contained" color="secondary" 
+                style={{width:'100%'}} onClick={() => handleButtonClick('button1')}>직위변경</Button>
+          <Button variant="contained" color="primary"
+                style={{width:'100%'}} onClick={() => handleButtonClick('button2')}>협력업체</Button>
+          <Button variant="contained" color="primary" 
+               style={{width:'100%'}} onClick={() => handleButtonClick('button3')}>일정달력</Button>
         </div>
         <div className="remainingSpace">
           {selectedButton === "button1" && (

@@ -49,14 +49,6 @@
   display: flex;
 }
 
-.userImg {
-  width: 120px;
-  height: 120px;
-  background-color: aliceblue;
-  border-radius: 100%;
-  margin-bottom: 5%;
-}
-
 
 
 .remainingSpace {
