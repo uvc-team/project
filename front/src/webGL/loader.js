@@ -197,6 +197,8 @@ export default class Edukit {
     scene.add(Tray2);
 
     scene.add(newChip);
+    
+    console.log(this.limit);
 
     // const chips = [];
     // for (let i = 0; i < limit; i++) {
@@ -209,13 +211,15 @@ export default class Edukit {
   // 리미트 수량과 no1 생산수량으로 칩 생성하기
 unitOne(count,limit){
   const chips = [];
-  if (String(this.limit) !== limit || count !== 5){
+  if (String(this.limit) !== limit){
     
     this.limit +=1;
-    console.log(this.limit,limit);
+    chips.push(this.limit);
+    //console.log(chips);
+    //console.log(this.limit,limit);
   }
   else{
-   //console.log('같음');
+   console.log('같음');
   }
   //console.log(count,limit);
     // if (count !== limit && this.limit !== limit){  
@@ -240,7 +244,7 @@ start(start, reset){
 actionChip(chip,no3) {
   if (this.Start === true){
     if (chip === true && no3 === false) {
-      this.newChip.position.x += 0.02;
+      this.newChip.position.x += 0.01;
 
     }
     else if(chip === true && no3 === true){
