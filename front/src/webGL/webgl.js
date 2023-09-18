@@ -12,18 +12,17 @@ function WebGL() {
   const [start, setStart] = useState(false); // 시작 정지
   const [reset, setReset] = useState(false); // 리셋
 
-  const [chipOn, setChipOn] = useState(false);//1호기동작
+  const [chipOn, setChipOn] = useState(false); //1호기동작
   const [unit2, setUnit2] = useState(); //2호기 칩 도착
   const [unit3, setUnit3] = useState(); // 3호기 칩 도착
 
   const [color, setColor] = useState(); // 컬러센싱
   const [rememberColor, setRememberColor] = useState(); // 이전 컬러센싱 기억
-  
+
   const [no1Count, setNo1Count] = useState(); //no1 생산량
   const [Limit, setLimit] = useState(); //자제투입 리미트
 
   const [no3Gripper, setGripper] = useState(); // 3호기 그리퍼
-  
 
   // Add these lines
   const currentX = useRef(x);
@@ -43,14 +42,11 @@ function WebGL() {
   const currentLimit = useRef(Limit);
 
   const currentGripper = useRef(no3Gripper);
-  
-  
 
   const edukitRef = useRef(null);
 
   useEffect(() => {
-    const ws = new WebSocket("ws://192.168.0.88:8081");
-
+    const ws = new WebSocket("ws://192.168.0.124:8081");
 
     ws.addEventListener("open", () => {
       console.log("WebSocket connection.");
@@ -58,12 +54,11 @@ function WebGL() {
 
     ws.addEventListener("message", (event) => {
       const receivedMessage = JSON.parse(event.data);
-      // console.log(receivedMessage)
 
       if (receivedMessage.Wrapper) {
         const tag1 = receivedMessage.Wrapper.find((item) => item.tagId === "1"); // 시작
         const tag8 = receivedMessage.Wrapper.find((item) => item.tagId === "8"); // 리셋
-        
+
         const tag3 = receivedMessage.Wrapper.find((item) => item.tagId === "3");
         const tag4 = receivedMessage.Wrapper.find((item) => item.tagId === "4");
 
@@ -97,16 +92,12 @@ function WebGL() {
           (item) => item.tagId === "40"
         );
 
-       
         myObject.NO1 = tag3 && tag3.value ? "#00FF00" : "#FF0000";
         myObject.NO2 = tag4 && tag4.value ? "#00FF00" : "#FF0000";
         myObject.NO3 = tag21 && tag21.value >= 1 ? "#00FF00" : "#FF0000";
         no1.setValue(myObject.NO1);
         no2.setValue(myObject.NO2);
         no3.setValue(myObject.NO3);
-
-       
-        
 
         setX(tag21.value);
         setY(tag22.value);
@@ -125,8 +116,7 @@ function WebGL() {
 
         setUnit3(tag5.value);
         setGripper(tag40.value);
-        
-      
+
         currentX.current = tag21.value;
         currentY.current = tag22.value;
 
@@ -145,10 +135,9 @@ function WebGL() {
         currentLimit.current = tag36.value;
 
         currentGripper.current = tag40.value;
-        
       }
     });
-// 화면 비율
+    // 화면 비율
     const canvas = document.querySelector("#webgl");
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(
@@ -170,7 +159,6 @@ function WebGL() {
 
     const edukit = new Edukit(); // edukit을 한 번만 불러옵니다.
     edukit.fileload(scene);
-    
 
     edukitRef.current = edukit;
 
@@ -192,17 +180,16 @@ function WebGL() {
       },
     };
 
-    
     const [minY, maxY] = [0, 18000000];
-    const [minX, maxX] = [0, 1030000];
+    const [minX, maxX] = [0, 1300000];
 
-    // yAxisFunc 함수는 num 속성 값을 슬라이더의 높이로 변환하는 함수입니다. 
+    // yAxisFunc 함수는 num 속성 값을 슬라이더의 높이로 변환하는 함수입니다.
     // 해당 슬라이더는 min에서 max 사이의 값을 0에서 7 사이의 값으로 변환합니다.
     const yAxisFunc = (value) => {
       return ((value - minY) / (maxY - minY)) * 7;
     };
-//xAxisFunc 함수는 num2 속성 값을 슬라이더의 각도로 변환하는 함수입니다. 
-//해당 슬라이더는 min에서 max 사이의 값을 0에서 90도 사이의 각도로 변환합니다.
+    //xAxisFunc 함수는 num2 속성 값을 슬라이더의 각도로 변환하는 함수입니다.
+    //해당 슬라이더는 min에서 max 사이의 값을 0에서 90도 사이의 각도로 변환합니다.
     const xAxisFunc = (value) => {
       return ((value - minX) / (maxX - minX)) * THREE.MathUtils.degToRad(90);
     };
@@ -226,16 +213,15 @@ function WebGL() {
     const rightElement = document.querySelector(".Right");
 
     // 캔버스 크기 업데이트
-    function updateCanvasSize(){
+    function updateCanvasSize() {
+      const rightWidth = rightElement.clientWidth;
+      const rightHeight = rightElement.clientHeight;
 
-    const rightWidth = rightElement.clientWidth;
-    const rightHeight = rightElement.clientHeight;
-
-    // .Right의 가로와 세로 비율에 맞춰 카메라 비율 조절
-    camera.aspect = rightWidth/rightHeight; 
-    renderer.setSize(rightWidth, rightHeight);
+      // .Right의 가로와 세로 비율에 맞춰 카메라 비율 조절
+      camera.aspect = rightWidth / rightHeight;
+      renderer.setSize(rightWidth, rightHeight);
     }
-    
+
     // 초기 화면 크기 설정
     updateCanvasSize();
 
@@ -265,23 +251,21 @@ function WebGL() {
       camera.updateProjectionMatrix();
 
       if (edukitRef.current && edukitRef.current.loaded) {
-        edukitRef.current.start(currentStart.current,currentReset.current);
-        
+        edukitRef.current.start(currentStart.current, currentReset.current);
 
         edukitRef.current.actionY(yAxisFunc(currentY.current));
         edukitRef.current.actionX(xAxisFunc(currentX.current));
-        edukitRef.current.actionChip(currentchip.current,currentunit3.current);
-        
-        edukitRef.current.unitTwo(crrentunit2.current,currentColor.current);
-        edukitRef.current.unitOne(currentNo1Count.current,currentLimit.current);
+        edukitRef.current.actionChip(currentchip.current, currentunit3.current);
+
+        edukitRef.current.unitTwo(crrentunit2.current, currentColor.current);
+        edukitRef.current.unitOne(
+          currentNo1Count.current,
+          currentLimit.current
+        );
         //console.log(currentColor.current,currentRemeberColor.current);
         //console.log(currentNo1Count,currentNo1Limit);
         //console.log(currentunit3.current);
         //console.log(currentGripper.current);
-        
-        
-        
-
       }
     };
 
@@ -295,12 +279,12 @@ function WebGL() {
   }, []);
 
   return (
-        <div className="Right" >
-          <canvas id="webgl" 
-              style={{ borderRadius: "30px",
-                        padding: '1%'}}></canvas>
-        </div>
-    
+    <div className="Right">
+      <canvas
+        id="webgl"
+        style={{ borderRadius: "30px", padding: "1%" }}
+      ></canvas>
+    </div>
   );
 }
 

@@ -1,33 +1,36 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-
-import dayGridPlugin from "@fullcalendar/daygrid";
-import timeGridPlugin from "@fullcalendar/timegrid";
-import interactionPlugin from "@fullcalendar/interaction";
-import FullCalendar from '@fullcalendar/react';
-import './calendar.css';
-import { koLocale } from '@fullcalendar/core/locales/ko';
+// import dayGridPlugin from "@fullcalendar/daygrid";
+// import timeGridPlugin from "@fullcalendar/timegrid";
+// import interactionPlugin from "@fullcalendar/interaction";
+// import FullCalendar from "@fullcalendar/react"
+// import "./calendar.css";
+// import { koLocale } from "@fullcalendar/core/locales/ko";
 import CompanyProfile from "./companyProfile";
 import "../../css/profile.css";
 
-import Button from '@mui/material/Button';
+import Button from "@mui/material/Button";
 
 function MasterProfile() {
-
   const [events, setEvents] = useState([]);
 
   const handleDateClick = (info) => {
-    const title = prompt('일정의 제목을 입력하세요:');
+    const title = prompt("일정의 제목을 입력하세요:");
     if (title) {
       setEvents([...events, { title: title, date: info.dateStr }]);
-      
+
       // POST 요청 보내기
-      axios.post(`${process.env.REACT_APP_URL}/calendar/events`, {
-        title: title,
-        date: info.dateStr
-      }, {
-        headers: { Authorization: `${localStorage.getItem("token")}` }
-      })
+      axios
+        .post(
+          `${process.env.REACT_APP_URL}/calendar/events`,
+          {
+            title: title,
+            date: info.dateStr,
+          },
+          {
+            headers: { Authorization: `${localStorage.getItem("token")}` },
+          }
+        )
         .then((response) => {
           console.log(response.data);
           // 성공적으로 요청이 완료되었을 때 추가 작업 수행 가능
@@ -35,12 +38,13 @@ function MasterProfile() {
         .catch((error) => console.error("Error:", error));
     }
   };
-  
+
   useEffect(() => {
     // 서버에서 일정 데이터 가져오기
-    axios.get(`${process.env.REACT_APP_URL}/calendar/events`, {
-      headers: { Authorization: `${localStorage.getItem("token")}` }
-    })
+    axios
+      .get(`${process.env.REACT_APP_URL}/calendar/events`, {
+        headers: { Authorization: `${localStorage.getItem("token")}` },
+      })
       .then((response) => {
         const eventData = response.data.events;
         setEvents(eventData);
@@ -89,7 +93,6 @@ function MasterProfile() {
 
   return (
     <div className="proFileBackground">
-
       <div className='profileBox'>
         <div className='userProfile'>
         <Button

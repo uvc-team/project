@@ -42,41 +42,45 @@ function No3() {
 
     ws.addEventListener("message", (event) => {
       const receivedMessage = JSON.parse(event.data);
+      if (receivedMessage && receivedMessage.Wrapper) {
+        const tag1Value = receivedMessage.Wrapper.find(
+          (item) => item.tagId === "1"
+        );
+        if (tag1Value) {
+          const tag21 = receivedMessage.Wrapper.find(
+            (item) => item.tagId === "21"
+          )?.value;
+          const tag22 = receivedMessage.Wrapper.find(
+            (item) => item.tagId === "22"
+          )?.value;
 
-      const normalizeValue = (value, minValue, maxValue) => {
-        return ((value - minValue) / (maxValue - minValue)) * 100;
-      };
-      const [minTag21, maxTag21] = [0, 1200000];
-      const [minTag22, maxTag22] = [0, 18000000];
+          const normalizeValue = (value, minValue, maxValue) => {
+            return ((value - minValue) / (maxValue - minValue)) * 100;
+          };
+          const [minTag21, maxTag21] = [0, 1300000];
+          const [minTag22, maxTag22] = [0, 18000000];
 
-      if (receivedMessage.Wrapper) {
-        const tag21 = receivedMessage.Wrapper.find(
-          (item) => item.tagId === "21"
-        )?.value;
-        const tag22 = receivedMessage.Wrapper.find(
-          (item) => item.tagId === "22"
-        )?.value;
+          const normalizedTag21 = normalizeValue(tag21, minTag21, maxTag21);
+          const normalizedTag22 = normalizeValue(tag22, minTag22, maxTag22);
 
-        const normalizedTag21 = normalizeValue(tag21, minTag21, maxTag21);
-        const normalizedTag22 = normalizeValue(tag22, minTag22, maxTag22);
-
-        if (tag21 >= 1 || tag22 >= 1) {
-          setChartData((prevData) => {
-            return {
-              ...prevData,
-              labels: [...prevData.labels, new Date().toLocaleTimeString()],
-              datasets: [
-                {
-                  ...prevData.datasets[0],
-                  data: [...prevData.datasets[0].data, normalizedTag21],
-                },
-                {
-                  ...prevData.datasets[1],
-                  data: [...prevData.datasets[1].data, normalizedTag22],
-                },
-              ],
-            };
-          });
+          if (tag21 >= 1 && tag22 >= 1) {
+            setChartData((prevData) => {
+              return {
+                ...prevData,
+                labels: [...prevData.labels, new Date().toLocaleTimeString()],
+                datasets: [
+                  {
+                    ...prevData.datasets[0],
+                    data: [...prevData.datasets[0].data, normalizedTag21],
+                  },
+                  {
+                    ...prevData.datasets[1],
+                    data: [...prevData.datasets[1].data, normalizedTag22],
+                  },
+                ],
+              };
+            });
+          }
         }
       }
     });

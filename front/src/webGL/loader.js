@@ -1,19 +1,15 @@
 import { Group, AxesHelper } from "three";
 import { FBXLoader } from "three/examples/jsm/loaders/FBXLoader";
 
-
 export default class Edukit {
-
   // 생성자 메서드: 객체를 생성하면서 초기화
   constructor() {
     this.loader = new FBXLoader();
     this.object = {};
     this.loaded = false;
     this.axes = {};
-    this.Start = false;// 초기화
+    this.Start = false; // 초기화
     this.limit = null;
-
-    
   }
   // 매서드 정의
   async fileload(scene) {
@@ -59,11 +55,11 @@ export default class Edukit {
     // 1호기 밀기
     const RobotPusher1 = (this.object.RobotPusher1 =
       await this.loader.loadAsync("files/Robot_1_Pusher.FBX"));
-   // 2호기 밀기
-      const RobotPusher2 = (this.object.RobotPusher2 =
+    // 2호기 밀기
+    const RobotPusher2 = (this.object.RobotPusher2 =
       await this.loader.loadAsync("files/Robot_2_Pusher.FBX"));
-  // 벨트 움직임  
-      const Belt = (this.object.Belt = await this.loader.loadAsync(
+    // 벨트 움직임
+    const Belt = (this.object.Belt = await this.loader.loadAsync(
       "files/Belt.FBX"
     ));
     const VisionSensor = (this.object.VisionSensor =
@@ -98,7 +94,7 @@ export default class Edukit {
     ));
     const Dice2 = this.object.Dice.clone();
     const Tray2 = this.object.Tray.clone();
-    
+
     const newChip = this.object.Tray.clone();
     this.newChip = newChip;
 
@@ -153,8 +149,8 @@ export default class Edukit {
     group1.add(RobotBody1, RobotPusher1);
     group2.add(RobotBody2, RobotPusher2);
 
-    groupX2.add(mesh1, new AxesHelper(7), );
-    groupX.add(mesh2, groupX2, new AxesHelper(7), );
+    groupX2.add(mesh1, new AxesHelper(7));
+    groupX.add(mesh2, groupX2, new AxesHelper(7));
     groupY.add(groupX, mesh3);
     group3.add(groupY, mesh4);
     groupV.add(VisionSensor);
@@ -175,8 +171,8 @@ export default class Edukit {
     Tray.position.set(-1.6, -3.3, 22.5);
     Tray2.position.set(-1.6, 3.5, 22.5);
 
-      newChip.position.set(-1.2, -3, 27);
-      newChip.scale.set(0.5, 0.5, 0.5);
+    newChip.position.set(-1.2, -3, 27);
+    newChip.scale.set(0.5, 0.5, 0.5);
 
     group3.scale.set(1, 1, 1);
     VisionSensor.scale.set(0.3, 0.3, 0.3);
@@ -226,19 +222,8 @@ unitOne(count,limit){
     //   console.log(this.limit);
     //   this.limit +=1;
     // }
-    
-}
+  }
 
-//  start가 true면 코드가 실행하고 아니면 현재 상태에서 멈춤
-start(start, reset){
-  if (start === true){
-    this.Start = true;
-   // console.log("Start");
-  }
-  else{
-    this.Start = false;
-  }
-}
 
 // 칩 1호기 밀기 on일때,
 actionChip(chip,no3) {
@@ -251,28 +236,38 @@ actionChip(chip,no3) {
       this.newChip.position.set(this.newChip.position.x, this.newChip.position.y);
     }
   }
-  
-}
 
-//2호기 칩 도착
-unitTwo(chip, color){
-  //console.log(color);
-  if(chip === true && color === true){
-    this.newChip.traverse(function(child){
-      if(child.isMesh){
-        child.material.color.set(0xffff);
+  // 칩 1호기 밀기 on일때,
+  actionChip(chip, no3) {
+    if (this.Start === true) {
+      if (chip === true && no3 === false) {
+        this.newChip.position.x += 0.02;
+      } else if (chip === true && no3 === true) {
+        this.newChip.position.set(
+          this.newChip.position.x,
+          this.newChip.position.y
+        );
       }
-    });
-  }else{
-    this.newChip.traverse(function(child){
-      if(child.isMesh){
-        child.material.color.set(0xff0000);
-      }
-    });
+    }
   }
-}
 
-
+  //2호기 칩 도착
+  unitTwo(chip, color) {
+    //console.log(color);
+    if (chip === true && color === true) {
+      this.newChip.traverse(function (child) {
+        if (child.isMesh) {
+          child.material.color.set(0xffff);
+        }
+      });
+    } else {
+      this.newChip.traverse(function (child) {
+        if (child.isMesh) {
+          child.material.color.set(0xff0000);
+        }
+      });
+    }
+  }
 
   actionY(value) {
     const currentY = this.axes.yAxis.position.y;
@@ -294,7 +289,7 @@ unitTwo(chip, color){
     if (typeof value !== "undefined") {
       const fixedValue = parseFloat(value.toFixed(2));
       const fixedCurrentX = parseFloat(currentX.toFixed(2));
-      const deltaXDeg = Math.abs(fixedValue - fixedCurrentX)*0.01; // degree 단위로 차이 계산
+      const deltaXDeg = Math.abs(fixedValue - fixedCurrentX) * 0.01; // degree 단위로 차이 계산
       //const deltaXRad = MathUtils.degToRad(deltaXDeg * 0.01); // 비례 상수를 조절하여 세밀함을 결정
 
       if (fixedValue < fixedCurrentX) {

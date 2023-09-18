@@ -3,8 +3,8 @@ const http = require("http");
 const WebSocket = require("ws");
 const mongoose = require("mongoose");
 const dotenv = require("dotenv");
-const mqttRouter = require("./router/mqttRouter"); // 라우터 추가
-//test
+const mqttRouter = require("./router/mqttRouter");
+const diceRouter = require("./router/diceRouter");
 dotenv.config();
 
 const cors = require("cors");
@@ -77,6 +77,7 @@ wss.on("connection", function connection(ws) {
 });
 
 app.use("/mqtt", mqttRouter);
+app.use("/dice", diceRouter);
 
 server.listen(8081, function () {
   console.log("Server is listening on port 8081");
