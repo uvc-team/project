@@ -97,21 +97,23 @@ const NoticeBoard = () => {
         <CommonTable headersName={headersName} data={data[page - 1]} />
 
         <div className="butp">
-          <ThemeProvider theme={theme}>
-            <Pagination
-              count={data.length}
-              page={page}
-              onChange={(event, value) => setPage(value)}
-            />
-          </ThemeProvider>
-        </div>
-        <div className="bt">
-          <button
-            onClick={handleCreatePostButtonClick}
-            style={{ backgroundColor: "#0056b3", color: "white" }}
-          >
-            게시물 등록
-          </button>
+          <div className="pg">
+            <ThemeProvider theme={theme}>
+              <Pagination
+                count={data.length}
+                page={page}
+                onChange={(event, value) => setPage(value)}
+              />
+            </ThemeProvider>
+          </div>
+          <div className="bt">
+            <button
+              onClick={handleCreatePostButtonClick}
+              style={{ backgroundColor: "#0056b3", color: "white" }}
+            >
+              게시물 등록
+            </button>
+          </div>
         </div>
       </div>
     </div>

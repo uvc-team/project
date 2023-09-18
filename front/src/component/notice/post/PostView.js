@@ -59,6 +59,7 @@ const PostView = () => {
           headers: { Authorization: token },
         }
       );
+
       setComment("");
       window.location.reload(navigate(`/postView/${noticeId}`));
     } catch (error) {
@@ -77,14 +78,8 @@ const PostView = () => {
         }
       );
       if (response.status === 200) {
-        // answer 상태 업데이트
-        setAnswer(
-          answer.map((item) =>
-            item.answerId === answerId
-              ? { ...item, content: "사용자에 의해 삭제된 댓글입니다." }
-              : item
-          )
-        );
+        // answer 상태 업데이트 전에 댓글을 제거합니다.
+        setAnswer(answer.filter((item) => item.answerId !== answerId));
       }
     } catch (error) {
       console.error("error", error);
