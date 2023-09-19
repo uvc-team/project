@@ -119,9 +119,9 @@ function MasterProfile() {
            
             
           </div>
-        <Button
+        <Button className="B"
             variant="contained"
-            color="secondary"
+            color="primary"
             style={{ width: '100%', height: '15%', transition: 'height 0.2s ease' }}
             onMouseEnter={(e) => (e.target.style.height = '40%')} // 마우스를 올렸을 때 높이 증가
             onMouseLeave={(e) => (e.target.style.height = '15%')} // 마우스를 벗어났을 때 높이 감소

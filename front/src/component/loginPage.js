@@ -54,10 +54,9 @@ const LoginPage = () => {
               className="buttonStyleW"
               onClick={toggleHidden}
               style={{
-                fontWeight: "100",
               }}
             >
-              로그인
+            로그인
             </button>
           </div>
         </div>

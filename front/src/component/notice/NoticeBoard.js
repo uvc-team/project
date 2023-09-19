@@ -107,9 +107,8 @@ const NoticeBoard = () => {
             </ThemeProvider>
           </div>
           <div className="bt">
-            <button
-              onClick={handleCreatePostButtonClick}
-              style={{ backgroundColor: "#0056b3", color: "white" }}
+            <button type="submit"
+              onClick={handleCreatePostButtonClick}  
             >
               게시물 등록
             </button>
