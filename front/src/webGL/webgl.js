@@ -258,7 +258,7 @@ function WebGL() {
       camera.updateProjectionMatrix();
 
       if (edukitRef.current && edukitRef.current.loaded) {
-        edukitRef.current.start(currentStart.current, currentReset.current);
+        //edukitRef.current.start(currentStart.current, currentReset.current);
 
         edukitRef.current.actionY(yAxisFunc(currentY.current));
         edukitRef.current.actionX(xAxisFunc(currentX.current));

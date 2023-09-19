@@ -236,6 +236,7 @@ actionChip(chip,no3) {
       this.newChip.position.set(this.newChip.position.x, this.newChip.position.y);
     }
   }
+}
 
   // 칩 1호기 밀기 on일때,
   actionChip(chip, no3) {
