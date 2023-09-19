@@ -28,24 +28,46 @@ function GraphComponent() {
     labels: ["지연시간", "1호기", "2호기", "3호기"],
     datasets: [
       {
-        label: "Data",
+        type: "bar",
+        label: "지연시간",
         data: [],
-        backgroundColor: ["grey", "blue", "green", "purple"],
+        borderColor: "rgba(75,192,192,1)",
+        borderWidth: 2,
+        fill: false,
+      },
+      {
+        type: "bar",
+        label: "1호기",
+        data: [],
+        borderColor: "rgba(128, 0, 128, 1)",
+        borderWidth: 2,
+        fill: false,
+      },
+      {
+        type: "bar",
+        label: "2호기",
+        data: [],
+        borderColor: "rgba(0, 128, 0, 1)",
+        borderWidth: 2,
+        fill: false,
+      },
+      {
+        type: "bar",
+        label: "3호기",
+        data: [],
+        borderColor: "rgba(128, 128, 128, 1)",
+        borderWidth: 2,
+        fill: false,
       },
     ],
   });
-
-  const [tag15Value, setTag15Value] = useState(0);
 
   const options = {
     indexAxis: "y",
     scales: {
       x: {
-        max: tag15Value,
         ticks: {
-          callback: function (index) {
-            return parseInt(Math.round(index), 10);
-          },
+          stepSize: 1,
           color: "white",
         },
         grid: {
@@ -68,7 +90,7 @@ function GraphComponent() {
   };
 
   useEffect(() => {
-    const ws = new WebSocket("ws://192.168.0.88:8081");
+    const ws = new WebSocket("ws://192.168.0.124:8081");
 
     ws.addEventListener("message", (event) => {
       const receivedMessage = JSON.parse(event.data);
@@ -77,16 +99,14 @@ function GraphComponent() {
         const tag1Value = receivedMessage.Wrapper.find(
           (item) => item.tagId === "1"
         );
+
         if (tag1Value) {
-          // Get the values for each tagId
           const tag14 = receivedMessage.Wrapper.find(
             (item) => item.tagId === "14"
           )?.value;
-
           const tag15 = receivedMessage.Wrapper.find(
             (item) => item.tagId === "15"
           )?.value;
-          setTag15Value(tag15);
           const tag16 = receivedMessage.Wrapper.find(
             (item) => item.tagId === "16"
           )?.value;
@@ -113,6 +133,7 @@ function GraphComponent() {
       ws.close();
     };
   }, []);
+
   return (
     <div>
       <Bar

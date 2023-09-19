@@ -54,11 +54,9 @@ while True:
             try:
                 clientSocket = socket(AF_INET, SOCK_STREAM)
                 clientSocket.connect(ADDR)
-                print('Connection PLC Success!')
                 clientSocket.send(socketTxData + num_little)
                 clientSocket.close()
             except  Exception as e:
                 print("Error" + str(e))
         # cv2.imwrite("After.png", im_with_keypoints)
-        print('close PLC Success!')
         # sleep(1)

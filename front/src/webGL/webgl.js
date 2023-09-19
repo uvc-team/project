@@ -1,4 +1,5 @@
 import { useEffect, useState, useRef } from "react";
+import { useNavigate } from "react-router-dom";
 import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import Edukit from "./loader";
@@ -7,6 +8,8 @@ import "../css/gui.css";
 import "../css/dash.css";
 
 function WebGL() {
+  const navigate = useNavigate();
+
   const [x, setX] = useState(0);
   const [y, setY] = useState(0);
   const [start, setStart] = useState(false); // 시작 정지
@@ -183,6 +186,7 @@ function WebGL() {
       reset: function () {
         const data = JSON.stringify({ tagId: "8", value: "1" });
         ws.send(data);
+        window.location.reload(navigate("/dash"));
       },
     };
 
