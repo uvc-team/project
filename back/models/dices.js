@@ -2,16 +2,16 @@ const mongoose = require("mongoose");
 
 const { Schema } = mongoose;
 
-const Dice_data = new Schema({
-  Number: {
-    type: NumberInt,
+const Dicedata = new Schema({
+  DiceNumber: {
+    type: Number,
     required: true,
   },
 });
 
 const dice = new Schema(
   {
-    Number: Dice_data,
+    Dicenumber: Dicedata,
   },
   { collection: "diceNums" }
 );

@@ -10,6 +10,7 @@ function Dash() {
   const [product, setProduct] = useState(0);
   const [goodproduct, setGoodproduct] = useState(0);
   const [goodrate, setGoodrate] = useState(0);
+  const [dicenum, setDicenum] = useState(0);
 
   useEffect(() => {
     const ws = new WebSocket("ws://192.168.0.124:8081");
@@ -25,39 +26,47 @@ function Dash() {
         const tag1Value = receivedMessage.Wrapper.find(
           (item) => item.tagId === "1"
         );
+
         if (tag1Value) {
           const tag15 = receivedMessage.Wrapper.find(
             (item) => item.tagId === "15"
           )?.value;
           setProduct(tag15);
+
           const tag16 = receivedMessage.Wrapper.find(
             (item) => item.tagId === "16"
           )?.value;
           setGoodproduct(tag16);
 
           const v = ((parseInt(tag16) / parseFloat(tag15)) * 100).toFixed(1);
-
           if (v === "NaN") {
             setGoodrate(tag15);
           } else {
             setGoodrate(v);
           }
+
+          if (tag16) {
+            function fetchData() {
+              axios
+                .get(`http://192.168.0.124:8081/dice/diceData`)
+                .then((response) => {
+                  if (response.data[0].DiceNumber !== 0) {
+                    setDicenum(response.data[0].DiceNumber);
+                  }
+                })
+                .catch((error) => {
+                  console.error(error);
+                });
+            }
+            // 2초마다 fetchData 함수 호출
+            setInterval(fetchData, 2000);
+          } else {
+            setDicenum(0);
+          }
         }
       }
     });
 
-    axios
-      .get(`http://192.168.0.124:8081/dice/diceData`)
-      .then((response) => {
-        // 응답 처리
-        console.log(response.data); // 받아온 데이터 출력
-
-        // 원하는 값 추출 및 처리
-      })
-      .catch((error) => {
-        // 오류 처리
-        console.error(error);
-      });
     return () => {
       ws.close();
     };
@@ -81,7 +90,7 @@ function Dash() {
                   <div class="item">양품률 : {goodrate} %</div>
                 </div>
                 <div className="Dash1-12">
-                  <div class="item">주사위 : </div>
+                  <div class="item">주사위 : {dicenum}</div>
                 </div>
               </div>
             </div>

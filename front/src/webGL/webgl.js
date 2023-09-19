@@ -92,12 +92,17 @@ function WebGL() {
           (item) => item.tagId === "40"
         );
 
+        const tag43 = receivedMessage.Wrapper.find(
+          (item) => item.tagId === "43"
+        );
         myObject.NO1 = tag3 && tag3.value ? "#00FF00" : "#FF0000";
         myObject.NO2 = tag4 && tag4.value ? "#00FF00" : "#FF0000";
         myObject.NO3 = tag21 && tag21.value >= 1 ? "#00FF00" : "#FF0000";
+        myObject.BELT = tag43 && tag43.value >= 1 ? "#00FF00" : "#FF0000";
         no1.setValue(myObject.NO1);
         no2.setValue(myObject.NO2);
         no3.setValue(myObject.NO3);
+        belt.setValue(myObject.BELT);
 
         setX(tag21.value);
         setY(tag22.value);
@@ -174,6 +179,7 @@ function WebGL() {
       NO1: "#FF0000",
       NO2: "#FF0000",
       NO3: "#FF0000",
+      BELT: "#FF0000",
       reset: function () {
         const data = JSON.stringify({ tagId: "8", value: "1" });
         ws.send(data);
@@ -199,6 +205,7 @@ function WebGL() {
     const no1 = gui.addColor(myObject, "NO1");
     const no2 = gui.addColor(myObject, "NO2");
     const no3 = gui.addColor(myObject, "NO3");
+    const belt = gui.addColor(myObject, "BELT");
     gui.add(myObject, "reset");
 
     const renderer = new THREE.WebGLRenderer({
