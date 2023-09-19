@@ -24,7 +24,7 @@ const CreatePostPage = () => {
       )
       .then((response) => {
         console.log("게시글이 성공적으로 등록되었습니다.");
-        navigate("/");
+        navigate("/noticeboard");
       })
       .catch((error) => console.error("Error:", error));
 
