@@ -12,7 +12,7 @@ import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import Airplay from "@mui/icons-material/Airplay";
 import Dashboard from "@mui/icons-material/Dashboard";
 import Campaign from "@mui/icons-material/Campaign";
-import { Link, useNavigate, useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import Notice from "../component/notice";
 import "../Header/header.css";
 import Logout from "../component/user/Logout";
@@ -20,8 +20,7 @@ import Logout from "../component/user/Logout";
 // 페이지 로딩시 로컬스토리지에서 토큰 가져와 사용자 인증 상태를 확인
 function Header() {
   const [token, setToken] = useState("");
-  const navigate = useNavigate(); // useNavigate 초기화
-  const location = useLocation(); // useLocation
+  const location = useLocation();
   const [numValue, setNumValue] = useState(0);
   const [position, setPosition] = useState("");
   const [isToggleOpen, setIsToggleOpen] = useState(false);
