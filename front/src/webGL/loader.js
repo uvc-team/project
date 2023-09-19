@@ -193,6 +193,8 @@ export default class Edukit {
     scene.add(Tray2);
 
     scene.add(newChip);
+    
+    console.log(this.limit);
 
     // const chips = [];
     // for (let i = 0; i < limit; i++) {
@@ -203,28 +205,35 @@ export default class Edukit {
     this.loaded = true;
   }
   // 리미트 수량과 no1 생산수량으로 칩 생성하기
-  unitOne(count, limit) {
-    const chips = [];
-    if (String(this.limit) !== limit || count !== 5) {
-      this.limit += 1;
-      //console.log(this.limit, limit);
-    } else {
-      //console.log('같음');
-    }
-    //console.log(count,limit);
-    // if (count !== limit && this.limit !== limit){
+unitOne(count,limit){
+  const chips = [];
+  if (String(this.limit) !== limit){
+    
+    this.limit +=1;
+    chips.push(this.limit);
+    //console.log(chips);
+    //console.log(this.limit,limit);
+  }
+  else{
+   console.log('같음');
+  }
+  //console.log(count,limit);
+    // if (count !== limit && this.limit !== limit){  
     //   console.log(this.limit);
     //   this.limit +=1;
     // }
   }
 
-  //  start가 true면 코드가 실행하고 아니면 현재 상태에서 멈춤
-  start(start, reset) {
-    if (start === true) {
-      this.Start = true;
-      // console.log("Start");
-    } else {
-      this.Start = false;
+
+// 칩 1호기 밀기 on일때,
+actionChip(chip,no3) {
+  if (this.Start === true){
+    if (chip === true && no3 === false) {
+      this.newChip.position.x += 0.01;
+
+    }
+    else if(chip === true && no3 === true){
+      this.newChip.position.set(this.newChip.position.x, this.newChip.position.y);
     }
   }
 

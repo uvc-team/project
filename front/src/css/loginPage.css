@@ -27,7 +27,7 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(255, 255, 255, 0.07);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -185,10 +185,6 @@
 .buttonStyleW:hover {
   background-color: #d0eeff;
   color: #0f2836;
-}
-
-.buttonStyleW:active {
-  background-color: #0f2836;
 }
 
 .hidden {
