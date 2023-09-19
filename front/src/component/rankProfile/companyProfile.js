@@ -37,15 +37,14 @@ const companies = [
 function CompanyProfile() {
   const [selectedCompany, setSelectedCompany] = useState(null);
 
-  const handleCompanyClick = (company) => {
-    setSelectedCompany(company);
+  const handleCompanyClick = (companyName) => {
+    const selectedCompany = companies.find((c) => c.name === companyName);
+    setSelectedCompany(selectedCompany);
   };
 
   return (
-    <div>
-      <div>
-        <h2>협력회사 정보</h2>
-        <ul>
+    <div className="companyBackground">
+        <ul className="companyHeader">
           {companies.map((company, index) => (
             <li key={index}>
               <button onClick={() => handleCompanyClick(company.name)}>
@@ -54,19 +53,18 @@ function CompanyProfile() {
             </li>
           ))}
         </ul>
-      </div>
-      <div>
         {selectedCompany && (
-          <div>
-            <h3 className="companyName">{selectedCompany}</h3>
-            <p className="companyInfo">홈페이지: {companies.find((c) => c.name === selectedCompany).homepage}</p>
-            <p className="companyInfo">회사 정보: {companies.find((c) => c.name === selectedCompany).companyInfo}</p>
+          <div className="companyBody">
             {/* 추가된 부분: 회사 정보 링크 */}
-            <p className="companyInfo">회사 정보 링크: {companies.find((c) => c.name === selectedCompany).companyInfoLink}</p>
+            <iframe
+              src={selectedCompany.homepage}
+              title="Company Homepage"
+              width="100%"
+              height='100%'
+              style={{border: 'none'}}></iframe>
           </div>
         )}
       </div>
-    </div>
   );
 }
 

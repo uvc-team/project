@@ -127,7 +127,6 @@ function Header() {
                 component={Link}
                 to="/master"
                 sx={{ color: "white" }}
-                onClick={toggleHandler}
               />
             </Tabs>
           )}
