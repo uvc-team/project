@@ -55,12 +55,22 @@
   height: 120px;
   margin-left: 1%;
   align-items: center;
+  display: flex;
+}
+
+.Dash1-11 {
+  width: 200px;
+  margin-left: 3%;
+}
+
+.Dash1-12 {
+  width: 200px;
 }
 
 .item {
   color: white;
   margin-left: 5%;
-  margin-top: 0.7rem;
+  margin-top: 0.3rem;
 }
 
 .Dash2 {
