@@ -23,6 +23,7 @@ function No3() {
       },
     ],
   });
+
   const options = {
     scales: {
       x: {
@@ -38,14 +39,16 @@ function No3() {
     },
   };
   useEffect(() => {
-    const ws = new WebSocket("ws://192.168.0.88:8081");
+    const ws = new WebSocket("ws://192.168.0.124:8081");
 
     ws.addEventListener("message", (event) => {
       const receivedMessage = JSON.parse(event.data);
+
       if (receivedMessage && receivedMessage.Wrapper) {
         const tag1Value = receivedMessage.Wrapper.find(
           (item) => item.tagId === "1"
         );
+
         if (tag1Value) {
           const tag21 = receivedMessage.Wrapper.find(
             (item) => item.tagId === "21"
@@ -63,7 +66,7 @@ function No3() {
           const normalizedTag21 = normalizeValue(tag21, minTag21, maxTag21);
           const normalizedTag22 = normalizeValue(tag22, minTag22, maxTag22);
 
-          if (tag21 >= 1 && tag22 >= 1) {
+          if (normalizedTag21 > 0 || normalizedTag22 > 0) {
             setChartData((prevData) => {
               return {
                 ...prevData,

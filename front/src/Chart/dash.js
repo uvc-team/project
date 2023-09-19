@@ -4,13 +4,12 @@ import "../css/dash.css";
 import GraphComponent from "./Graph";
 import No3 from "./no3";
 import VideoComponent from "./video";
-import axios from "axios";
+import DiceNumber from "./dice";
 
 function Dash() {
   const [product, setProduct] = useState(0);
   const [goodproduct, setGoodproduct] = useState(0);
   const [goodrate, setGoodrate] = useState(0);
-  const [dicenum, setDicenum] = useState(0);
 
   useEffect(() => {
     const ws = new WebSocket("ws://192.168.0.124:8081");
@@ -25,7 +24,7 @@ function Dash() {
       if (receivedMessage && receivedMessage.Wrapper) {
         const tag1Value = receivedMessage.Wrapper.find(
           (item) => item.tagId === "1"
-        );
+        )?.value;
 
         if (tag1Value) {
           const tag15 = receivedMessage.Wrapper.find(
@@ -43,25 +42,6 @@ function Dash() {
             setGoodrate(tag15);
           } else {
             setGoodrate(v);
-          }
-
-          if (tag16) {
-            function fetchData() {
-              axios
-                .get(`http://192.168.0.124:8081/dice/diceData`)
-                .then((response) => {
-                  if (response.data[0].DiceNumber !== 0) {
-                    setDicenum(response.data[0].DiceNumber);
-                  }
-                })
-                .catch((error) => {
-                  console.error(error);
-                });
-            }
-            // 2초마다 fetchData 함수 호출
-            setInterval(fetchData, 2000);
-          } else {
-            setDicenum(0);
           }
         }
       }
@@ -90,7 +70,7 @@ function Dash() {
                   <div class="item">양품률 : {goodrate} %</div>
                 </div>
                 <div className="Dash1-12">
-                  <div class="item">주사위 : {dicenum}</div>
+                  <DiceNumber />
                 </div>
               </div>
             </div>
