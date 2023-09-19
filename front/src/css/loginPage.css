@@ -167,6 +167,7 @@
 
 .buttonStyleW {
   margin-top: 10px;
+  display: flex;
   width: 60px;
   height: 20px;
   color: #fff;
@@ -179,6 +180,8 @@
   background: rgba(217, 217, 217, 0);
   cursor: pointer;
   transition: background-color 0.3s, color 0.3s;
+  align-items: center;
+  justify-content: center;
   /* 색상 변화에 대한 전환 효과 추가 */
 }
 

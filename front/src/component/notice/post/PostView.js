@@ -138,32 +138,59 @@ const PostView = () => {
   return (
     <div className="post-back-ground">
       <div className="top-section">
-        <div className="info">
-          <div>No: {data.noticeId}</div>
-          <div>공지 날짜: {formatTime(data.createdAt)}</div>
-          <div>조회 횟수: {data.readCount}</div>
-        </div>
-        <h1>{data.title}</h1>
       </div>
-      <hr />
-      <div className="content-section">
-        <h3>공지사항:</h3>
-        {!editMode ? (
-          <>
-            <p>{data.content}</p>
-            {isAdmin && (
-              <>
-                <button type="button" onClick={() => setEditMode(true)}>
-                  수정하기
+      <div className="content-sectionBox">
+      <h3>{data.title}</h3>
+      {isAdmin && (
+              <div className="changeButton">
+                <button type="butto" onClick={() => setEditMode(true)}>
+                  수정
                 </button>
-                <button type="button" onClick={() => setShowModal(true)}>
-                  삭제하기
+                <button type="butto" onClick={() => setShowModal(true)}>
+                  삭제
                 </button>
-              </>
+                
+              </div>
             )}
-          </>
+            {showModal && (
+          <div className="modal">
+            <p> 삭제하시겠습니까?</p>
+            <div className="modal-button">
+              <button type="butto" onClick={handleDeleteNotice}>
+                Yes
+              </button>
+              <button type="butto" onClick={() => setShowModal(false)}>
+                NO
+              </button>
+            </div>
+          </div>
+        )}
+      <div className="content-section">
+      <div className="info">
+          <p>No: {data.noticeId}</p>
+          <p>공지 날짜: {formatTime(data.createdAt)}</p>
+          <p>조회 횟수: {data.readCount}</p>
+          
+        </div>
+        {!editMode ? (
+        <div style={{display:'flex', height:'100%', justifyContent:'space-between',flexDirection:'column'}}>
+            <p>{data.content}</p>
+      {/* Add a Comment */}
+          <form className="commentTxt" onSubmit={handleCommentSubmit}>
+          <label>댓글달기:</label>
+          <input
+            type="text"
+            value={comment}
+            onChange={(e) => setComment(e.target.value)}
+          />
+          <button type="submit">Submit</button>
+        </form>
+        </div>
+          
         ) : (
-          <form onSubmit={handleUpdateNotice}>
+         <form 
+         style={{height: '100%'}}
+         onSubmit={handleUpdateNotice}>
             <input
               className="update-label-1"
               type="text"
@@ -175,51 +202,37 @@ const PostView = () => {
               value={editedContent}
               onChange={(e) => setEditedContent(e.target.value)}
             />
-            <button type="submit">변경</button>
-            <button type="button" onClick={() => setEditMode(false)}>
+            <div className="changeButton">
+            <button type="butto">변경</button>
+            <button type="butto" onClick={() => setEditMode(false)}>
               취소
             </button>
+            </div>
+           
           </form>
         )}
-        {showModal && (
-          <div className="modal">
-            <h2> 정말 삭제하시겠습니까?</h2>
-            <div className="modal-button">
-              <button className="yes-button" onClick={handleDeleteNotice}>
-                Yes
-              </button>
-              <button className="no-button" onClick={() => setShowModal(false)}>
-                NO
-              </button>
-            </div>
-          </div>
-        )}
+        
+
+      
       </div>
-      <hr />
+
       <div className="comment-section">
+        {/* 댓글 */}
         {(answer || []).map((answer) => (
           <div className="comment" key={answer.answerId}>
             <strong>{answer.User.name}:</strong>
             <p>{answer.content}</p>
             <p>{formatTime(answer.createdAt)}</p>
             {userId === answer.User.userId && (
-              <button onClick={() => handleDeleteComment(answer.answerId)}>
-                Delete
-              </button>
+              <button onClick={() => handleDeleteComment(answer.answerId)} />
             )}
           </div>
         ))}
-        {/* Add a Comment */}
-        <form onSubmit={handleCommentSubmit}>
-          <label>댓글달기:</label>
-          <input
-            type="text"
-            value={comment}
-            onChange={(e) => setComment(e.target.value)}
-          />
-          <button type="submit">Submit</button>
-        </form>
+        
       </div>
+      </div>
+      
+      
     </div>
   );
 };
