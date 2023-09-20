@@ -7,7 +7,7 @@ const Team = () => (
     {/* 사장 */}
     <div className="uswer1 profile">
       <li className="team-item">
-        {/* <img src="/kangwoo.jpg" alt="Profile" /> */}
+        <img src="/hsj.jpg" alt="Profile" />
         <div className="profile-contents">
           <h2>
             함석준<span>AIOT</span>

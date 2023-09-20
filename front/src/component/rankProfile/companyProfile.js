@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./companyProfile.css";
 const companies = [
   {
@@ -33,9 +33,13 @@ const companies = [
   },
 ];
 
-
 function CompanyProfile() {
   const [selectedCompany, setSelectedCompany] = useState(null);
+
+  // Use useEffect to set selectedCompany to the first company's data initially
+  useEffect(() => {
+    setSelectedCompany(companies[0]);
+  }, []);
 
   const handleCompanyClick = (companyName) => {
     const selectedCompany = companies.find((c) => c.name === companyName);
@@ -44,29 +48,29 @@ function CompanyProfile() {
 
   return (
     <div className="companyBackground">
-        <ul className="companyHeader">
-          {companies.map((company, index) => (
-            <li key={index}>
-              <button onClick={() => handleCompanyClick(company.name)}>
-                {company.name}
-              </button>
-            </li>
-          ))}
-        </ul>
-        {selectedCompany && (
-          <div className="companyBody">
-            {/* 추가된 부분: 회사 정보 링크 */}
-            <iframe
-              src={selectedCompany.homepage}
-              title="Company Homepage"
-              width="100%"
-              height='100%'
-              style={{border: 'none'}}></iframe>
-          </div>
-        )}
-      </div>
+      <ul className="companyHeader">
+        {companies.map((company, index) => (
+          <li key={index}>
+            <button onClick={() => handleCompanyClick(company.name)}>
+              {company.name}
+            </button>
+          </li>
+        ))}
+      </ul>
+      {selectedCompany && (
+        <div className="companyBody">
+          {/* 추가된 부분: 회사 정보 링크 */}
+          <iframe
+            src={selectedCompany.homepage}
+            title="Company Homepage"
+            width="100%"
+            height="100%"
+            style={{ border: "none" }}
+          ></iframe>
+        </div>
+      )}
+    </div>
   );
 }
-
 
 export default CompanyProfile;

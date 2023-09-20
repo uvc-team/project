@@ -79,8 +79,15 @@ function Dash() {
               <VideoComponent />
             </div>
             {/* 하단 */}
-            <div className="Dash3">
-              <No3 />
+            <div className="Dash3-B">
+              <h5 className="item1">3호기</h5>
+              <h5 className="item2">MOTOR1</h5>
+              <div className="item2-1"></div>
+              <h5 className="item3">MOTOR2</h5>
+              <div className="item3-1"></div>
+              <div className="Dash3">
+                <No3 />
+              </div>
             </div>
           </div>
         </div>
