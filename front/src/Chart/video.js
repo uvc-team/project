@@ -38,13 +38,13 @@ function App() {
 
   // 컴포넌트가 마운트되면 setInterval을 설정하고, 언마운트되면 clearInterval을 호출합니다.
   useEffect(() => {
-    const intervalId = setInterval(refreshImage, 50); // 갱신 간격은 밀리초 단위입니다. 여기서는 1초에 한 번 갱신합니다.
+    const intervalId = setInterval(refreshImage, 1000); // 갱신 간격은 밀리초 단위입니다. 여기서는 1초에 한 번 갱신합니다.
 
     return () => clearInterval(intervalId); // 컴포넌트가 언마운트되는 시점에 타이머를 제거합니다.
   }, []);
 
   return (
-    <div>
+    <div style={{ width: "100%", height: "100%" }}>
       <img src={`data:image/jpeg;base64,${imgSrc}`} alt="YOLO detections" />
     </div>
   );
