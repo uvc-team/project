@@ -1,9 +1,10 @@
 // 저장 test
 const express = require("express");
 const router = express.Router();
-const { dataget } = require("../controllers/dice");
+const { saveDiceData, dataget } = require("../controllers/dice");
 
-//chart.js 전송
+router.post("/diceSave", saveDiceData);
+
 router.get("/diceData", dataget);
 
 module.exports = router;

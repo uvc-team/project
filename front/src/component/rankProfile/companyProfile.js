@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import "./companyProfile.css";
+import "../../css/companyProfile.css";
 const companies = [
   {
     name: "유비씨",

@@ -1,6 +1,6 @@
 import React from "react";
 import "../css/team.css";
-import "../../src/css/homePage.css";
+import "../css/homePage.css";
 
 const Team = () => (
   <div className="wrapper">

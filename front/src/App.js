@@ -1,18 +1,18 @@
 import React, { useEffect } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import GraphComponent from "./Chart/Graph";
-import Dash from "./Chart/dash";
+import GraphComponent from "./component/Chart/Graph";
+import Dash from "./component/Chart/dash";
 import KakaoOauth from "./component/user/kakao";
 import HomePage from "./component/HomePage";
 import LoginPage from "./component/loginPage";
 import Profile from "./component/user/proflie";
 import MasterProfile from "./component/rankProfile/master";
-import "../src/css/App.css";
-import Notice from "./component/notice";
-import Header from "./Header/header";
+import "./css/App.css";
+import Notice from "./component/notice/notice";
+import Header from "./component/Header/header";
 import NoticeBoard from "./component/notice/NoticeBoard";
-import PostView from "./component/notice/post/PostView";
-import PostMain from "./component/notice/post/PostMain";
+import PostView from "./component/post/PostView";
+import PostMain from "./component/post/PostMain";
 import CreatePostPage from "./component/notice/CreatePost";
 import { checkSever } from "./component/user/checkServer";
 
