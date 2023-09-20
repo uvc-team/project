@@ -50,10 +50,8 @@ function Header() {
         setNumValue(1);
       } else if (location.pathname === "/noticeboard") {
         setNumValue(2);
-      } else if (location.pathname === "/profile") {
+      } else if (location.pathname === "/master") {
         setNumValue(3);
-      } else {
-        setNumValue(4);
       }
 
       // 토큰이 있고, 포지션 값이 '2' 또는 '3'일 때

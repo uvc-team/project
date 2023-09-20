@@ -6,6 +6,7 @@ import Edukit from "./loader";
 import GUI from "lil-gui";
 import "../css/gui.css";
 import "../css/dash.css";
+import axios from "axios";
 
 function WebGL() {
   const navigate = useNavigate();
@@ -47,6 +48,22 @@ function WebGL() {
   const currentGripper = useRef(no3Gripper);
 
   const edukitRef = useRef(null);
+
+  const data = {
+    DiceNumber: 0,
+  };
+
+  const fetchData = () => {
+    axios
+      .post(`http://192.168.0.124:8081/dice/diceSave`, data)
+      .then((response) => {
+        console.log(response.data);
+        console.log(1);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
 
   useEffect(() => {
     const ws = new WebSocket("ws://192.168.0.124:8081");
@@ -184,6 +201,7 @@ function WebGL() {
       NO3: "#FF0000",
       BELT: "#FF0000",
       reset: function () {
+        fetchData();
         const data = JSON.stringify({ tagId: "8", value: "1" });
         ws.send(data);
         window.location.reload(navigate("/dash"));

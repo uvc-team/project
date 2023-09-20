@@ -26,11 +26,12 @@ function DiceNumber() {
       const receivedMessage = JSON.parse(event.data);
 
       if (receivedMessage && receivedMessage.Wrapper) {
-        const tag16Value = receivedMessage.Wrapper.find(
-          (item) => item.tagId === "16"
+        const tag1Value = receivedMessage.Wrapper.find(
+          (item) => item.tagId === "1"
         )?.value;
 
-        if (tag16Value > 1) {
+        if (tag1Value) {
+          console.log(1);
           fetchData();
         }
       }

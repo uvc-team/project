@@ -8,16 +8,16 @@ function No3() {
       {
         type: "line",
         label: "MOTOR 1",
-        data: [],
         borderColor: "rgba(75,192,192,1)",
+        data: [],
         borderWidth: 2,
         fill: false,
       },
       {
         type: "line",
         label: "MOTOR 2",
-        data: [],
         borderColor: "rgba(192,75,192,1)",
+        data: [],
         borderWidth: 2,
         fill: false,
       },
@@ -38,6 +38,7 @@ function No3() {
       },
     },
   };
+
   useEffect(() => {
     const ws = new WebSocket("ws://192.168.0.124:8081");
 
@@ -47,7 +48,7 @@ function No3() {
       if (receivedMessage && receivedMessage.Wrapper) {
         const tag1Value = receivedMessage.Wrapper.find(
           (item) => item.tagId === "1"
-        );
+        ).value;
 
         if (tag1Value) {
           const tag21 = receivedMessage.Wrapper.find(
@@ -57,33 +58,32 @@ function No3() {
             (item) => item.tagId === "22"
           )?.value;
 
+          const [minTag21, maxTag21] = [0, 1300000];
+          const [minTag22, maxTag22] = [0, 18000000];
+
           const normalizeValue = (value, minValue, maxValue) => {
             return ((value - minValue) / (maxValue - minValue)) * 100;
           };
-          const [minTag21, maxTag21] = [0, 1300000];
-          const [minTag22, maxTag22] = [0, 18000000];
 
           const normalizedTag21 = normalizeValue(tag21, minTag21, maxTag21);
           const normalizedTag22 = normalizeValue(tag22, minTag22, maxTag22);
 
-          if (normalizedTag21 > 0 || normalizedTag22 > 0) {
-            setChartData((prevData) => {
-              return {
-                ...prevData,
-                labels: [...prevData.labels, new Date().toLocaleTimeString()],
-                datasets: [
-                  {
-                    ...prevData.datasets[0],
-                    data: [...prevData.datasets[0].data, normalizedTag21],
-                  },
-                  {
-                    ...prevData.datasets[1],
-                    data: [...prevData.datasets[1].data, normalizedTag22],
-                  },
-                ],
-              };
-            });
-          }
+          setChartData((prevData) => {
+            return {
+              ...prevData,
+              labels: [...prevData.labels, new Date().toLocaleTimeString()],
+              datasets: [
+                {
+                  ...prevData.datasets[0],
+                  data: [...prevData.datasets[0].data, normalizedTag21],
+                },
+                {
+                  ...prevData.datasets[1],
+                  data: [...prevData.datasets[1].data, normalizedTag22],
+                },
+              ],
+            };
+          });
         }
       }
     });

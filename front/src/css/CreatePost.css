@@ -1,6 +1,6 @@
 .post {
   background-color: black;
-  width: 100vw;
+  width: 100%;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -9,21 +9,38 @@
   color: white; /* 텍스트 색상 변경 */
 }
 .post-height {
-  display: flex;
   width: 100%;
+  border-radius: 30px;
 }
+
+.title {
+  width: 45px;
+  font-size: 20px;
+  margin-left: 10rem;
+}
+
 .post-label-1 {
   display: flex;
   color: white;
-  border-radius: 30px;
+  margin: 10px 0;
+  margin-left: 10rem;
+  margin-right: 10rem;
 }
+
+.content {
+  width: 45px;
+  font-size: 20px;
+  margin-left: 10rem;
+}
+
 .post-label-2 {
   display: flex;
-  color: white;
-  border-radius: 30px;
   min-height: 50vh;
+  margin-left: 10rem;
+  margin-right: 10rem;
 }
 
 .button-center {
   text-align: center;
+  margin-top: 2rem;
 }

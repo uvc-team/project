@@ -21,11 +21,12 @@
   display: flex;
   flex-direction: column;
   align-items: flex-end;
+  font-size: 20px;
 }
 
 .info p {
   color: #ffffff;
-  font-family: 'Pretendard';
+  font-family: "Pretendard";
   letter-spacing: normal;
   font-weight: normal;
   font-size: 9px;
@@ -52,6 +53,10 @@
   justify-content: space-between;
 }
 
+.post-content {
+  font-size: 26px;
+  align-items: center;
+}
 
 .commentTxt {
   width: 100%;
@@ -63,7 +68,7 @@
 
 h3 {
   color: #ffffff;
-  font-family: 'Pretendard';
+  font-family: "Pretendard";
   letter-spacing: normal;
   font-weight: normal;
   font-size: 45px;
@@ -103,7 +108,6 @@ button[type="submit"] {
   border: 2px solid #ffffff;
   padding: 5px 10px;
   border-radius: 5px;
-
 }
 
 button[type="submit"]:hover {
@@ -150,7 +154,6 @@ button[type="butto"]:hover {
   flex-direction: column;
   border: 2px solid rgb(255, 255, 255);
   border-radius: 5px;
-
 }
 
 /* 모달 버튼 스타일 */
@@ -164,15 +167,14 @@ button[type="butto"]:hover {
 .modal p {
   color: #ffffff;
   text-align: center;
-  font-family: 'Pretendard';
+  font-family: "Pretendard";
   padding: 5%;
   font-weight: normal;
   font-size: 15px;
 }
 
-
 .comment button {
-  background-image: url('../../public/icon5.png');
+  background-image: url("../../public/icon5.png");
   background-size: cover;
   /* 이미지를 딱 맞게 조절합니다. */
   background-repeat: no-repeat;
