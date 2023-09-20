@@ -13,9 +13,9 @@ import Airplay from "@mui/icons-material/Airplay";
 import Dashboard from "@mui/icons-material/Dashboard";
 import Campaign from "@mui/icons-material/Campaign";
 import { Link, useLocation } from "react-router-dom";
-import Notice from "../component/notice";
-import "../Header/header.css";
-import Logout from "../component/user/Logout";
+import Notice from "../notice/notice";
+import "../../css/header.css";
+import Logout from "../user/Logout";
 
 // 페이지 로딩시 로컬스토리지에서 토큰 가져와 사용자 인증 상태를 확인
 function Header() {

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import WebGL from "../webGL/webgl";
-import "../css/dash.css";
+import WebGL from "../../webGL/webgl";
+import "../../css/dash.css";
 import GraphComponent from "./Graph";
 import No3 from "./no3";
 import VideoComponent from "./video";
@@ -65,9 +65,9 @@ function Dash() {
               </div>
               <div className="Dash1-1">
                 <div className="Dash1-11">
-                  <div class="item">생산량 : {product}</div>
-                  <div class="item">양품 수 : {goodproduct}</div>
-                  <div class="item">양품률 : {goodrate} %</div>
+                  <div class="item">생산량 {product}</div>
+                  <div class="item">양품 수 {goodproduct}</div>
+                  <div class="item">양품률 {goodrate} %</div>
                 </div>
                 <div className="Dash1-12">
                   <DiceNumber />

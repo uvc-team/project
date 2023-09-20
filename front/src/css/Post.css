@@ -54,7 +54,7 @@
 }
 
 .post-content {
-  font-size: 26px;
+  /* font-size: 26px; */
   align-items: center;
 }
 
@@ -91,11 +91,11 @@ label {
   margin-right: 10px;
 }
 
-input {
+/* input {
   width: 60%;
   padding: 5px;
   margin-right: 10px;
-}
+} */
 
 .changeButton {
   width: 20%;

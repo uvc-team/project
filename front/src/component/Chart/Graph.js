@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Bar } from "react-chartjs-2";
-import "../../src/css/dash.css";
+import "../../css/dash.css";
 
 import {
   Chart,

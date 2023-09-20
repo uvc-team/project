@@ -182,6 +182,18 @@ function WebGL() {
     const gui = new GUI({ autoPlace: false });
     guiContainer.appendChild(gui.domElement);
 
+    const controlsElement = document.querySelector(".title");
+    controlsElement.textContent = "에듀킷 상태 및 제어";
+
+    const lilGuiElement = document.querySelector(".lil-gui");
+    lilGuiElement.style.setProperty("--background-color", "#112a4a");
+    lilGuiElement.style.setProperty("--title-background-color", "#0f2d51");
+    lilGuiElement.style.setProperty("--widget-color", "#25526f");
+    lilGuiElement.style.setProperty("--hover-color", "#25526f50");
+
+    lilGuiElement.style.setProperty("--font-size", "14px");
+    lilGuiElement.style.setProperty("--name-width", "25%");
+
     const edukit = new Edukit(); // edukit을 한 번만 불러옵니다.
     edukit.fileload(scene);
 
@@ -255,7 +267,7 @@ function WebGL() {
     updateCanvasSize();
 
     renderer.shadowMap.enabled = true;
-    renderer.setClearColor(0x1c2631);
+    renderer.setClearColor(0x112a4a);
 
     // 윈도우 크기가 변경될 때마다 크기 업데이트
     window.addEventListener("resize", () => {

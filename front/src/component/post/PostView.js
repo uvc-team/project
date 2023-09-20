@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useParams, useNavigate } from "react-router-dom";
-import "../../../css/Post.css";
+import "../../css/Post.css";
 import jwt_decode from "jwt-decode";
 
 const PostView = () => {

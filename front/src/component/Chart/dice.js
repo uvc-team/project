@@ -42,7 +42,7 @@ function DiceNumber() {
     };
   }, []);
 
-  return <div class="item">주사위 : {dicenum}</div>;
+  return <div class="item">주사위 {dicenum}</div>;
 }
 
 export default DiceNumber;
