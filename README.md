@@ -56,14 +56,14 @@ KAKAO_ID={{yourid}}
 ### IoT 설정
 터미널에서 다음과 같이 입력하세요:
 
-bash
+```bash
 Copy code
 cd iot
 npm install # 또는 pip install (환경에 따라 다름)
 cap = cv2.VideoCapture({{비전 센서 포트 번호}})를 본인의 설정에 맞게 수정하세요.
 
 YOLO GUI를 실행한 후, 웹 브라우저에서 localhost:5000/detection을 엽니다. 이 URL은 React 애플리케이션 내에서 사용할 수 있습니다.
-
+```
 
 
 
