@@ -36,7 +36,7 @@ const CreatePostPage = () => {
     <div className="post">
       <div>
         <form onSubmit={handleSubmit}>
-          <div className="title">제목</div>
+          <div className="title-1">제목</div>
           <label className="post-label-1">
             <input
               className="post-height"

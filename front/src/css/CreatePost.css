@@ -13,25 +13,31 @@
   border-radius: 30px;
 }
 
+.title-1 {
+  width: 45px;
+  font-size: 20px;
+  margin-left: 20rem;
+}
+
 .post-label-1 {
   display: flex;
   color: white;
   margin: 10px 0;
-  margin-left: 10rem;
-  margin-right: 10rem;
+  margin-left: 20rem;
+  margin-right: 20rem;
 }
 
 .content {
   width: 45px;
   font-size: 20px;
-  margin-left: 10rem;
+  margin-left: 20rem;
 }
 
 .post-label-2 {
   display: flex;
   min-height: 50vh;
-  margin-left: 10rem;
-  margin-right: 10rem;
+  margin-left: 20rem;
+  margin-right: 20rem;
 }
 
 .button-center {

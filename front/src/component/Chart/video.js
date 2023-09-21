@@ -1,21 +1,3 @@
-// import React from "react";
-
-// const VideoComponent = () => {
-//   return (
-//     <div className="Dash2">
-//       <img
-//         src="http://192.168.0.130:8000/video"
-//         alt=""
-//         height="310px"
-//         width="100%"
-//         style={{ borderRadius: "30px" }}
-//       />
-//     </div>
-//   );
-// };
-
-// export default VideoComponent;
-
 import React, { useState, useEffect } from "react";
 
 function App() {
@@ -23,7 +5,7 @@ function App() {
 
   // 이미지 URL을 갱신하는 함수
   const refreshImage = () => {
-    fetch("http://192.168.0.198:5000/detection")
+    fetch("http://192.168.0.33:5000/detection")
       .then((response) => {
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
@@ -38,14 +20,16 @@ function App() {
 
   // 컴포넌트가 마운트되면 setInterval을 설정하고, 언마운트되면 clearInterval을 호출합니다.
   useEffect(() => {
-    const intervalId = setInterval(refreshImage, 300); // 갱신 간격은 밀리초 단위입니다. 여기서는 1초에 한 번 갱신합니다.
+    const intervalId = setInterval(refreshImage, 50); // 갱신 간격은 밀리초 단위입니다. 여기서는 1초에 한 번 갱신합니다.
 
     return () => clearInterval(intervalId); // 컴포넌트가 언마운트되는 시점에 타이머를 제거합니다.
   }, []);
 
   return (
     <div style={{ marginLeft: "5rem", width: "100%", height: "100%" }}>
-      <img src={`data:image/jpeg;base64,${imgSrc}`} alt="YOLO detections" />
+      {imgSrc && (
+        <img src={`data:image/jpeg;base64,${imgSrc}`} alt="YOLO detections" />
+      )}
     </div>
   );
 }
