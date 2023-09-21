@@ -181,13 +181,15 @@ const PostView = () => {
               <div className="post-content">{data.content}</div>
               {/* Add a Comment */}
               <form className="commentTxt" onSubmit={handleCommentSubmit}>
-                <label>댓글달기:</label>
+                <label>댓글달기</label>
                 <input
                   type="text"
                   value={comment}
                   onChange={(e) => setComment(e.target.value)}
                 />
-                <button type="submit">Submit</button>
+                <button type="submit" style={{ marginLeft: "1.5rem" }}>
+                  Submit
+                </button>
               </form>
             </div>
           ) : (
