@@ -13,7 +13,7 @@
 ### 프론트엔드 설정
 터미널에서 다음과 같이 입력하세요:
 
-bash
+```bash
 Copy code
 cd front
 npm install
@@ -23,7 +23,7 @@ bash
 Copy code
 REACT_APP_KAKAO_ID={{your KAKAO_ID}}
 REACT_APP_URL=http://{{your IP}}:8080 => mysql port
-
+```
 
 
 
@@ -50,7 +50,7 @@ DB_DIALECT=mysql
 MONGO_URL="mongodb+srv://{{your MONGODB url}}"
 COOKIE_SECRET=secretkey
 KAKAO_ID={{yourid}}
-
+```
 
 
 ### IoT 설정
