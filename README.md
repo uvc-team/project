@@ -21,8 +21,8 @@ npm install
 
 bash
 Copy code
-REACT_APP_KAKAO_ID=f5b823a4808328ce00e4fc24677286b6
-REACT_APP_URL=http://192.168.0.124:8080
+REACT_APP_KAKAO_ID={{your KAKAO_ID}}
+REACT_APP_URL=http://{{your IP}}:8080 => mysql port
 
 
 
@@ -30,7 +30,7 @@ REACT_APP_URL=http://192.168.0.124:8080
 ### 백엔드 설정
 터미널에서 다음과 같이 입력하세요:
 
-bash
+```bash
 Copy code
 cd back
 npm install
