@@ -6,7 +6,7 @@ const {
   verifyToken,
 } = require("../middlewares/index");
 
-const { signup, login, logout } = require("../controllers/auth");
+const { signup, login, logout, getUserInfo } = require("../controllers/auth");
 
 const router = express.Router();
 
@@ -15,6 +15,9 @@ router.post("/signup", isNotLoggedIn, signup);
 router.post("/login", isNotLoggedIn, login);
 
 router.get("/kakao", passport.authenticate("kakao"));
+
+//userinfo추가
+router.get("/info", isLoggedIn, getUserInfo);
 
 router.get("/kakao/callback", (req, res, next) => {
   passport.authenticate("kakao", (err, user, info) => {

@@ -2,7 +2,6 @@ const DiceData = require("../models/dices");
 
 exports.saveDiceData = async (req, res) => {
   try {
-    console.log(req);
     const data = req.body;
     if (!data) {
       return res.status(400).json({ error: "데이터가 없습니다." });
