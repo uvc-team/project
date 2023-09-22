@@ -2,18 +2,14 @@ const mongoose = require("mongoose");
 
 const { Schema } = mongoose;
 
-const Dice_data = new Schema({
-  Number: {
-    type: NumberInt,
-    required: true,
-  },
-});
-
-const dice = new Schema(
+const diceSchema = new Schema(
   {
-    Number: Dice_data,
+    DiceNumber: {
+      type: Number, // 숫자 타입으로 변경
+      required: true,
+    },
   },
   { collection: "diceNums" }
 );
 
-module.exports = mongoose.model("test", dice);
+module.exports = mongoose.model("test", diceSchema);

@@ -1,10 +1,29 @@
+const DiceData = require("../models/dices");
+
+exports.saveDiceData = async (req, res) => {
+  try {
+    const data = req.body;
+    // console.log(data.DiceNumber);
+    if (!data) {
+      return res.status(400).json({ error: "데이터가 없습니다." });
+    }
+    console.log(data);
+    const saveData = await DiceData.create(data);
+    // return res.status(201).json({ message: "저장성공" }, saveData);
+    return res.status(201).json({ message: "저장성공", data: saveData });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ error: "데이터 저장 실패" });
+  }
+};
+
 // MQTT 데이터를 조회하는 컨트롤러
 exports.dataget = async (req, res) => {
   try {
-    const dicedata = await MqttData.aggregate([
-      { $unwind: "$Number" },
+    const dicedata = await DiceData.aggregate([
+      { $unwind: "$DiceNumber" },
       { $sort: { _id: -1 } },
-    ]).limit(1);
+    ]).limit(30);
     if (dicedata) {
       res.status(200).json(dicedata);
     } else {
