@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import "./companyProfile.css";
+import React, { useState, useEffect } from "react";
+import "../../css/companyProfile.css";
 const companies = [
   {
     name: "유비씨",
@@ -33,42 +33,44 @@ const companies = [
   },
 ];
 
-
 function CompanyProfile() {
   const [selectedCompany, setSelectedCompany] = useState(null);
 
-  const handleCompanyClick = (company) => {
-    setSelectedCompany(company);
+  // Use useEffect to set selectedCompany to the first company's data initially
+  useEffect(() => {
+    setSelectedCompany(companies[0]);
+  }, []);
+
+  const handleCompanyClick = (companyName) => {
+    const selectedCompany = companies.find((c) => c.name === companyName);
+    setSelectedCompany(selectedCompany);
   };
 
   return (
-    <div>
-      <div>
-        <h2>협력회사 정보</h2>
-        <ul>
-          {companies.map((company, index) => (
-            <li key={index}>
-              <button onClick={() => handleCompanyClick(company.name)}>
-                {company.name}
-              </button>
-            </li>
-          ))}
-        </ul>
-      </div>
-      <div>
-        {selectedCompany && (
-          <div>
-            <h3 className="companyName">{selectedCompany}</h3>
-            <p className="companyInfo">홈페이지: {companies.find((c) => c.name === selectedCompany).homepage}</p>
-            <p className="companyInfo">회사 정보: {companies.find((c) => c.name === selectedCompany).companyInfo}</p>
-            {/* 추가된 부분: 회사 정보 링크 */}
-            <p className="companyInfo">회사 정보 링크: {companies.find((c) => c.name === selectedCompany).companyInfoLink}</p>
-          </div>
-        )}
-      </div>
+    <div className="companyBackground">
+      <ul className="companyHeader">
+        {companies.map((company, index) => (
+          <li key={index}>
+            <button onClick={() => handleCompanyClick(company.name)}>
+              {company.name}
+            </button>
+          </li>
+        ))}
+      </ul>
+      {selectedCompany && (
+        <div className="companyBody">
+          {/* 추가된 부분: 회사 정보 링크 */}
+          <iframe
+            src={selectedCompany.homepage}
+            title="Company Homepage"
+            width="100%"
+            height="100%"
+            style={{ border: "none" }}
+          ></iframe>
+        </div>
+      )}
     </div>
   );
 }
-
 
 export default CompanyProfile;

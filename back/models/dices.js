@@ -2,14 +2,14 @@ const mongoose = require("mongoose");
 
 const { Schema } = mongoose;
 
-const diceSchema = new Schema(
+const Dicedata = new Schema(
   {
     DiceNumber: {
-      type: Number, // 숫자 타입으로 변경
+      type: Number,
       required: true,
     },
   },
   { collection: "diceNums" }
 );
 
-module.exports = mongoose.model("test", diceSchema);
+module.exports = mongoose.model("test", Dicedata);

@@ -12,6 +12,6 @@ def insert_data(payload):
 
 def insert_number(num):
     data = {
-        "Number": num
+        "DiceNumber": num
     }
     db.diceNums.insert_one(data)

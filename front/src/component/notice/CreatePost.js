@@ -24,7 +24,7 @@ const CreatePostPage = () => {
       )
       .then((response) => {
         console.log("게시글이 성공적으로 등록되었습니다.");
-        navigate("/");
+        navigate("/noticeboard");
       })
       .catch((error) => console.error("Error:", error));
 
@@ -36,8 +36,8 @@ const CreatePostPage = () => {
     <div className="post">
       <div>
         <form onSubmit={handleSubmit}>
+          <div className="title-1">제목</div>
           <label className="post-label-1">
-            제목
             <input
               className="post-height"
               type="text"
@@ -45,8 +45,8 @@ const CreatePostPage = () => {
               onChange={(e) => setTitle(e.target.value)}
             />
           </label>
+          <div className="content">내용</div>
           <label className="post-label-2">
-            내용
             <input
               className="post-height"
               value={content}

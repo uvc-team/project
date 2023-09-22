@@ -37,7 +37,6 @@ while True:
 
     keypoints = detector.detect(frame_canny)
     num = len(keypoints)
-    mongoConnect.insert_number(num)
     readings.append(num)
 
     if readings[-1] == readings[-2] == readings[-3] == readings[-4] == readings[-5] == readings[-6]:
@@ -50,15 +49,14 @@ while True:
         num_little = num.to_bytes(2, 'little')
 
         if num != 0:
+            mongoConnect.insert_number(num)
             print("num is " + str(num))
             try:
                 clientSocket = socket(AF_INET, SOCK_STREAM)
                 clientSocket.connect(ADDR)
-                print('Connection PLC Success!')
                 clientSocket.send(socketTxData + num_little)
                 clientSocket.close()
             except  Exception as e:
                 print("Error" + str(e))
         # cv2.imwrite("After.png", im_with_keypoints)
-        print('close PLC Success!')
-        sleep(1)
+        # sleep(1)

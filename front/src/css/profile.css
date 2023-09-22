@@ -9,9 +9,10 @@
   background-color: black;
 }
 
+
 .profileBox {
-  width: 950px;
-  height: 500px;
+  width: 1000px;
+  height: 600px;
   background-color: rgb(255, 255, 255);
   border-radius: 5px;
   display: flex;
@@ -70,11 +71,30 @@
 .dataBox {
   width: 100%;
   height: 100%;
-  background-color: rgba(248, 248, 248, 0);
   display: flex;
 }
 
 
+.infoBox {
+  width: 100%;
+  height: 30%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+
+.logoimg {
+  width: 100%;
+  height: 50%;
+  display: flex;
+  background-size: contain;
+  /* 이미지를 딱 맞게 조절합니다. */
+  background-repeat: no-repeat;
+  /* 이미지 반복 없음 */
+  background-position: center center;
+  background-image: url('../../public/hamLogo.png');
+}
 
 .remainingSpace {
   display: flex;
@@ -116,31 +136,31 @@
 }
 
 .style-buttonM {
-  background-image: url('../../public/iconM.png');
+
   align-items: center;
-  background-size: contain;
-  /* 이미지를 딱 맞게 조절합니다. */
-  background-repeat: no-repeat;
-  /* 이미지 반복 없음 */
-  background-position: center center;
-  border: #0097ec;
-  width: 25px;
+  width: 60px;
   height: 25px;
-  background-color: #0095ec00;
+  border: 2px solid #0097ec;
+  background: rgba(217, 217, 217, 0.00);
+  border-radius: 10px;
 }
 
+.style-buttonM:hover {
+  background-color: #0097ec;
+}
+
+
 .style-buttonM2 {
-  background-image: url('../../public/iconM2.png');
   align-items: center;
-  background-size: contain;
-  /* 이미지를 딱 맞게 조절합니다. */
-  background-repeat: no-repeat;
-  /* 이미지 반복 없음 */
-  background-position: center center;
-  border: #0097ec;
-  width: 25px;
+  width: 60px;
   height: 25px;
-  background-color: #0095ec00;
+  border: 2px solid #ec0000;
+  background: rgba(217, 217, 217, 0.00);
+  border-radius: 10px;
+}
+
+.style-buttonM2:hover {
+  background-color: #ec0000;
 }
 
 

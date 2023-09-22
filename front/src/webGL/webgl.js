@@ -1,12 +1,16 @@
 import { useEffect, useState, useRef } from "react";
+import { useNavigate } from "react-router-dom";
 import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import Edukit from "./loader";
 import GUI from "lil-gui";
 import "../css/gui.css";
 import "../css/dash.css";
+import axios from "axios";
 
 function WebGL() {
+  const navigate = useNavigate();
+
   const [x, setX] = useState(0);
   const [y, setY] = useState(0);
   const [start, setStart] = useState(false); // 시작 정지
@@ -44,6 +48,22 @@ function WebGL() {
   const currentGripper = useRef(no3Gripper);
 
   const edukitRef = useRef(null);
+
+  const data = {
+    DiceNumber: 0,
+  };
+
+  const fetchData = () => {
+    axios
+      .post(`http://192.168.0.124:8081/dice/diceSave`, data)
+      .then((response) => {
+        console.log(response.data);
+        console.log(1);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
 
   useEffect(() => {
     const ws = new WebSocket("ws://192.168.0.124:8081");
@@ -92,12 +112,17 @@ function WebGL() {
           (item) => item.tagId === "40"
         );
 
+        const tag43 = receivedMessage.Wrapper.find(
+          (item) => item.tagId === "43"
+        );
         myObject.NO1 = tag3 && tag3.value ? "#00FF00" : "#FF0000";
         myObject.NO2 = tag4 && tag4.value ? "#00FF00" : "#FF0000";
         myObject.NO3 = tag21 && tag21.value >= 1 ? "#00FF00" : "#FF0000";
+        myObject.BELT = tag43 && tag43.value >= 1 ? "#00FF00" : "#FF0000";
         no1.setValue(myObject.NO1);
         no2.setValue(myObject.NO2);
         no3.setValue(myObject.NO3);
+        belt.setValue(myObject.BELT);
 
         setX(tag21.value);
         setY(tag22.value);
@@ -157,6 +182,18 @@ function WebGL() {
     const gui = new GUI({ autoPlace: false });
     guiContainer.appendChild(gui.domElement);
 
+    const controlsElement = document.querySelector(".title");
+    controlsElement.textContent = "에듀킷 상태 및 제어";
+
+    const lilGuiElement = document.querySelector(".lil-gui");
+    lilGuiElement.style.setProperty("--background-color", "#112a4a");
+    lilGuiElement.style.setProperty("--title-background-color", "#0f2d51");
+    lilGuiElement.style.setProperty("--widget-color", "#25526f");
+    lilGuiElement.style.setProperty("--hover-color", "#25526f50");
+
+    lilGuiElement.style.setProperty("--font-size", "14px");
+    lilGuiElement.style.setProperty("--name-width", "25%");
+
     const edukit = new Edukit(); // edukit을 한 번만 불러옵니다.
     edukit.fileload(scene);
 
@@ -174,9 +211,12 @@ function WebGL() {
       NO1: "#FF0000",
       NO2: "#FF0000",
       NO3: "#FF0000",
+      BELT: "#FF0000",
       reset: function () {
+        fetchData();
         const data = JSON.stringify({ tagId: "8", value: "1" });
         ws.send(data);
+        window.location.reload(navigate("/dash"));
       },
     };
 
@@ -199,6 +239,7 @@ function WebGL() {
     const no1 = gui.addColor(myObject, "NO1");
     const no2 = gui.addColor(myObject, "NO2");
     const no3 = gui.addColor(myObject, "NO3");
+    const belt = gui.addColor(myObject, "BELT");
     gui.add(myObject, "reset");
 
     const renderer = new THREE.WebGLRenderer({
@@ -226,7 +267,7 @@ function WebGL() {
     updateCanvasSize();
 
     renderer.shadowMap.enabled = true;
-    renderer.setClearColor(0x1c2631);
+    renderer.setClearColor(0x112a4a);
 
     // 윈도우 크기가 변경될 때마다 크기 업데이트
     window.addEventListener("resize", () => {
@@ -251,7 +292,7 @@ function WebGL() {
       camera.updateProjectionMatrix();
 
       if (edukitRef.current && edukitRef.current.loaded) {
-        edukitRef.current.start(currentStart.current, currentReset.current);
+        //edukitRef.current.start(currentStart.current, currentReset.current);
 
         edukitRef.current.actionY(yAxisFunc(currentY.current));
         edukitRef.current.actionX(xAxisFunc(currentX.current));

@@ -1,18 +1,18 @@
 import React from "react";
 import "../css/team.css";
-import "../../src/css/homePage.css";
+import "../css/homePage.css";
 
 const Team = () => (
   <div className="wrapper">
     {/* 사장 */}
     <div className="uswer1 profile">
       <li className="team-item">
-        {/* <img src="/kangwoo.jpg" alt="Profile" /> */}
+        <img src="/hsj.jpg" alt="Profile" />
         <div className="profile-contents">
           <h2>
-            함석준<span>AIOT</span>
+            함석준<span>관리자</span>
           </h2>
-          <p>AI, IOT, 기획, 스마트팩토리</p>
+          <p>AI / IOT / PM / Back-End</p>
         </div>
       </li>
     </div>
@@ -24,9 +24,9 @@ const Team = () => (
           <img src="/img03.jpg" alt="Profile" />
           <div className="profile-contents">
             <h2>
-              함석준<span>AIOT</span>
+              오현우<span>매니저</span>
             </h2>
-            <p>AI, IOT, 기획, 스마트팩토리</p>
+            <p>Back-End / DB /Front-End</p>
           </div>
         </li>
       </div>
@@ -36,9 +36,9 @@ const Team = () => (
           <img src="/kangwoo.jpg" alt="Profile" />
           <div className="profile-contents">
             <h2>
-              함석준<span>AIOT</span>
+              이강우<span>매니저</span>
             </h2>
-            <p>AI, IOT, 기획, 스마트팩토리</p>
+            <p>PM / Front-End / Back-End</p>
           </div>
         </li>
       </div>
@@ -48,9 +48,9 @@ const Team = () => (
           <img src="/img00.jpg" alt="Profile" />
           <div className="profile-contents">
             <h2>
-              함석준<span>AIOT</span>
+              박주영<span>매니저</span>
             </h2>
-            <p>AI, IOT, 기획, 스마트팩토리</p>
+            <p>Front-End/ WebDesign/ PLC</p>
           </div>
         </li>
       </div>
